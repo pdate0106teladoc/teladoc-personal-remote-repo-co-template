@@ -1,0 +1,47 @@
+.template-general-settings {
+  padding-top: 16px;
+
+  .detail-section {
+    background-color: $table-header-color;
+    border-radius: 6px;
+    padding: 12px 16px 8px;
+    margin-bottom: 12px;
+
+    h3 {
+      font-size: $font-size-small;
+      font-weight: $font-weight-semi-bold;
+      color: $primary-black;
+      margin: 0 0 10px;
+    }
+  }
+
+  .overview-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 40px;
+  }
+
+  .detail-grid {
+    margin: 0;
+
+    .detail-pair {
+      display: grid;
+      grid-template-columns: minmax(140px, 48%) 1fr;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 8px;
+    }
+
+    dt {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-regular;
+      color: $color-grey;
+    }
+
+    dd {
+      margin: 0;
+      font-size: $font-size-xs;
+      color: $primary-black;
+    }
+  }
+}

@@ -7,6 +7,7 @@ import {
   ORG_DETAIL_PATH,
   RESULT_PATH,
   TASKS_DASHBOARD_PATH,
+  TEMPLATE_PATH,
 } from "./routes";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { getUserRoles, getHighestPriorityRole } from "@/utils";
@@ -25,6 +26,7 @@ const GeneralSettingGrp = lazy(
   () => import("@/pages/grp-detail/pages/GeneralSetting"),
 );
 const DashboardPage = lazy(() => import("@/pages/dashboard/Dashboard"));
+const TemplatePage = lazy(() => import("@/pages/template/TemplatePage"));
 const ResultPage = lazy(() => import("@/pages/search-results/SearchResults"));
 import { FailSafePage, Loader } from "@ucc/common-ui";
 import Contacts from "@/pages/grp-detail/pages/Contacts";
@@ -72,6 +74,7 @@ export default function Router() {
               <DashboardPage role={role} />
             }
           />
+          <Route path={`${TEMPLATE_PATH}/*`} element={<TemplatePage />} />
           <Route path={RESULT_PATH} element={<ResultPage />} />
           <Route path={`${ORG_DETAIL_PATH}/:id`} element={<OrgConfigLayout />}>
             <Route index element={<Navigate to="general-settings" replace />} />
