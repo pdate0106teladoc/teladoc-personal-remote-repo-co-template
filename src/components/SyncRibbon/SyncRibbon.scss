@@ -1,0 +1,73 @@
+.sync-ribbon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: $primary-black;
+
+    &.prompt {
+        background: $warning-bg-color;
+        border-top: 1px solid $warning-border-color;
+        border-bottom: 1px solid $warning-border-color;
+        padding-right: 12px;
+
+        .message {
+            svg {
+                fill: $warning-error-color;
+            }
+        }
+    }
+
+    &.inprogress,
+    &.success {
+        background: $neutral-background-hover;
+        border-top: 1px solid $table-bordercolor;
+        border-bottom: 1px solid $table-bordercolor;
+        padding-right: 12px;
+        font-weight: bold;
+    }
+
+    .message {
+        width: 100%;
+        padding: 8px 14px;
+        font-size: $font-size-xs;
+
+        svg {
+            margin-right: 10px;
+            width: 16px;
+            height: 15px;
+        }
+    }
+
+    .btn-sync {
+        border: 1px solid $btn-border-color;
+        background: $color-white;
+        width: max-content;
+        font-size: $font-size-14px;
+        border-radius: 4px;
+        color: $primary-black;
+        font-weight: bold;
+
+        svg {
+            margin-right: 6px;
+        }
+
+        &:hover {
+            background-color: $neutral-background-hover;
+            border: 1px solid $pill-hover-color;
+        }
+
+        &:hover:active {
+            background-color: $table-bordercolor;
+            border: 1px solid $btn-dft-pressed-bdr-color;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            pointer-events: none;
+            color: $pagination-arrow-disabled;
+            background-color: $neutral-background-hover; 
+            border-color: $btn-border-color; 
+        }
+    }
+}

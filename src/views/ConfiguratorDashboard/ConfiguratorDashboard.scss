@@ -1,0 +1,276 @@
+.configurator {
+    padding: 16px;
+    $priorities: (
+        "high": $priority-high-dot,
+        "urgent": $priority-urgent-dot,
+        "normal": $priority-normal-dot,
+    );
+
+// Priority colors mapping
+.priority {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    display: inline-block;
+
+    @each $name, $color in $priorities {
+        &--#{$name} {
+            background: $color;
+        }
+    }
+}
+
+.contact-text-black {
+    .person-chip .person-name {
+        color: $primary-black;
+    }
+}
+
+.person-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+
+    .avatar-circle {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        border-radius: 50%;
+        background-color: $table-bordercolor;
+        color: $neutral-stroke;
+        font-size: $font-base-size;
+        font-weight: $font-weight-semi-bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        user-select: none;
+    }
+
+    .person-name {
+        color: $link-color;
+        font-weight: $font-weight-regular;
+        font-size: $font-size-small;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        word-break: break-all;
+        min-width: 100px;
+    }
+}
+
+$button-types: (
+    "draft": ($neutral-stroke, $grey-94, $table-bordercolor ),
+    "pending": ($status-rejected, $status-bg-pending, $status-border-pending),
+    "inprogress": ($link-color, $status-bg-inprogress, $status-border-inprogress),
+    "processing": ($link-color, $status-bg-inprogress, $status-border-inprogress),
+    "approved": ($success-toast-color, $color-white, $success-toast-color),
+    "scheduled": ($colorCompoundBrandStroke, $color-white, $colorCompoundBrandStroke),
+    "completed": ($success-toast-color, $validate-success-bg, $validate-success-border),
+    "rejected": ($color-white, $status-rejected, $status-rejected),
+    "cancelled": ($neutral-stroke, $color-white, $table-bordercolor),
+    "archived": ($primary-black, $color-white, $table-bordercolor),
+    "error": ($priority-high, $color-white, $priority-high),
+    "overdue": ($color-white, $priority-high, $priority-high),
+    "onhold": ($neutral-stroke, $color-white, $table-bordercolor),
+);
+
+.status {
+    // Common properties
+    padding: 3px 14px;
+    font-size: $font-base-size;
+    font-weight: 600;
+    line-height: 14px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    height: 20px;
+    width: max-content;
+
+    // Generate button variants
+    @each $name, $colors in $button-types {
+        $text-color: nth($colors, 1);
+        $bg-color: nth($colors, 2);
+        $border-color: nth($colors, 3);
+
+        &--#{$name} {
+            color: $text-color;
+            background-color: $bg-color;
+            border: 1px solid $border-color;
+
+            &:hover {
+                background-color: darken($bg-color, 10%);
+                border-color: darken($border-color, 10%);
+            }
+        }
+    }
+}
+
+.ucc-table {
+    th.status-col,
+    td.status-col-cell {
+        max-width: none;
+        min-width: 240px;
+    }
+
+    th.name-col,
+    td.name-col-cell {
+        max-width: 200px;
+    }
+
+    th.type-of-edit-col,
+    td.type-of-edit-col-cell {
+        max-width: 150px;
+    }
+}
+
+.status-age {
+    font-size: $font-size-xs;
+    color: $primary-black;
+
+    &.status-age-error-text,
+    &-launch-soon {
+        color: $warning-error-color;
+        font-weight: $font-weight-semi-bold;
+    }
+
+    &-overdue {
+        color: $error-icon-color;
+        font-weight: $font-weight-semi-bold;
+    }
+}
+
+.configurator {
+    margin: 16px;
+
+    .header-message {
+        margin-left: 8px;
+        text-align: left;
+        margin-bottom: 22px;
+    }
+}
+
+.table-section {
+    margin: 16px 0;
+    background-color: $color-white;
+    padding: 16px;
+    border-radius: 3px;
+    position: relative;
+
+    .btn-download {
+        height: 24px;
+        font-size: $font-size-xs;
+        line-height: 16px;
+        padding: 2px 8px;
+        border: 1px solid $btn-border-color;
+        background-color: $color-white;
+        border-radius: 4px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+
+        svg {
+            margin-right: 8px;
+        }
+    }
+
+    .custom-table-wrapper {
+        margin-top: 20px;
+    }
+}
+
+.mr-tooltip {
+    .tooltip-inner {
+        left: 35%;
+        position: relative;
+    }
+}
+
+%active-tab {
+    color: $primary-black;
+    font-weight: $font-weight-semi-bold;
+    border: 0;
+    position: relative;
+
+    &::after {
+        content: "";
+        display: block;
+        border-radius: 20px;
+        width: calc(100% - 20px);
+        height: 3px;
+        background-color: $btn-primary-color;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -3px;
+    }
+}
+
+#parent-tab {
+    border-bottom: none;
+
+    .nav-link.active,
+    .nav-link.active:hover {
+        @extend %active-tab;
+        background-color: $table-header-color !important;
+    }
+}
+
+#child-tab {
+    border-bottom: none;
+
+    .nav-link.active,
+    .nav-link.active:hover {
+        @extend %active-tab;
+    }
+}
+
+
+.nav-link {
+    border: 0px !important;
+    color: $btn-back-color;
+}
+
+.nav-link:hover {
+    color: $btn-back-color;
+    border: 0px;
+    position: relative;
+
+    &::after {
+        content: "";
+        display: block;
+        border-radius: 20px;
+        width: calc(100% - 20px);
+        height: 3px;
+        background-color: $pill-hover-color;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -3px;
+    }
+}
+
+#uncontrolled-tab-example {
+    border: 0px;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    background-color: $table-header-color;
+    border-color: $table-header-color;
+}
+
+.dropdown-label {
+    font-size: $font-size-16;
+    font-weight: $font-weight-semi-bold;
+}
+
+.role-dropdown {
+    width: 280px;
+}
+
+.navigate-field {
+    color: $link-color;
+    cursor: pointer;
+}
+}

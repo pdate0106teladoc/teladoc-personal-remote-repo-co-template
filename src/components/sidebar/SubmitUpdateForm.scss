@@ -1,0 +1,334 @@
+.right-modal-basics {
+    .basic-form-content {
+        gap: 24px;
+        padding-bottom: 50px;
+    }
+
+    .error-message {
+        color: $warning-error-color;
+        font-size: $font-size-xs;
+        display: block;
+    }
+
+    .launch-option-section {
+        .launch-option-label {
+            font-size: $font-size-xs;
+            font-weight: $font-weight-regular;
+            margin-bottom: 0;
+            display: block;
+
+            .required {
+                color: $btn-danger-color;
+            }
+        }
+
+        .custom-radio-toggle {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .launch-option-text {
+            font-size: 12px;
+            color: $primary-black;
+        }
+    }
+
+    .doc-des-label {
+        font-size: 12px;
+        font-weight: 400;
+        color: $primary-black;
+
+        .required {
+            color: $btn-danger-color;
+        }
+    }
+
+    .doc-des-sublabel {
+        font-size: 12px;
+        font-weight: 400;
+        color: $neutral-stroke;
+        margin-bottom: 10px;
+    }
+
+    .request-form-container {
+        padding: 20px;
+    }
+
+    .input-w-150 {
+        max-width: 150px;
+
+        .custom-dropdown-label {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .required-label {
+            color: $btn-danger-color;
+            font-size: $font-size-xs;
+            padding-left: 4px;
+        }
+    }
+
+    .multi-drop {
+        span {
+            font-weight: 400;
+        }
+    }
+
+    .view-more-link {
+        color: $link-color;
+        text-decoration: none;
+        font-size: $font-size-small;
+        font-weight: $font-weight-regular;
+        line-height: $font-size-2rem;
+        padding: 0.5rem 0;
+        background: none;
+        border: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .request-header {
+        position: sticky;
+        top: 0;
+        background-color: $color-white;
+        z-index: 999;
+    }
+
+    .request-change-footer {
+        margin-top: 16px;
+        background-color: $color-white;
+        border-top: 1px solid $grey-94;
+        padding: 20px;
+    }
+
+    .continue-button {
+        height: fit-content;
+        width: fit-content;
+        font-size: $font-size-small;
+        line-height: 20px;
+        font-weight: $font-weight-semi-bold;
+        align-items: center;
+        padding: 6px 12px 6px 12px;
+    }
+
+    .back-button {
+        background-color: $color-white;
+        color: $primary-black;
+        border: 1px solid $btn-border-color;
+        border-radius: 4px;
+        height: fit-content;
+        width: fit-content;
+        font-size: $font-size-small;
+        line-height: 20px;
+        font-weight: $font-weight-semi-bold;
+        align-items: center;
+        padding: 6px 12px 6px 12px;
+        margin-bottom: 0px;
+
+        &:hover {
+            background-color: $neutral-strole-1;
+        }
+    }
+
+    .label {
+        font-size: 12px;
+        font-weight: $font-weight-regular;
+        color: $primary-black;
+    }
+
+    .sublabel {
+        font-size: 12px;
+        font-weight: $font-weight-regular;
+        color: $neutral-stroke;
+    }
+
+    .offcanvas-body {
+        margin-bottom: 55px;
+        padding-left: 0px;
+    }
+
+    .info-text {
+        height: 16px;
+        gap: 4px;
+
+        .required {
+            color: $btn-danger-color;
+            font-size: $font-size-xs;
+        }
+
+        .required-label {
+            color: $neutral-stroke;
+            font-size: $font-size-xs;
+            font-weight: $font-weight-regular;
+            font-style: italic;
+            line-height: 16px;
+        }
+    }
+
+    .info-box {
+        border: 1px solid $validate-success-border;
+        color: $primary-black;
+        background-color: $validate-success-bg;
+        border-radius: 4px;
+        padding: 8px 12px;
+        margin: 6px 0px 0px 0px;
+        width: 100%;
+        gap: 16px;
+        align-items: center;
+
+        .bold-text {
+            font-size: $font-size-xs;
+            font-weight: $font-weight-semi-bold;
+            color: $primary-black;
+        }
+
+        .regular-text {
+            font-size: $font-size-xs;
+            font-weight: $font-weight-regular;
+            color: $primary-black;
+        }
+
+    }
+
+    .check-label {
+        color: $neutral-stroke;
+        font-size: 12px;
+        font-weight: $font-weight-regular;
+    }
+
+    .Additional-details-table {
+        padding: 16px;
+        border-radius: 8px;
+
+        .changed-fields-empty{
+            font-size: $font-size-xs;
+            color: $neutral-stroke;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table-title {
+            font-size: $font-size-reg;
+            font-weight: $font-weight-semi-bold;
+            color: $primary-black;
+            margin-bottom: 10px;
+        }
+
+        thead {
+            border-bottom: 1px solid $grey-94;
+            font-size: $font-size-small;
+            font-weight: $font-weight-semi-bold;
+            color: $color-grey;
+
+            th {
+                padding: 6px;
+            }
+        }
+
+        tbody {
+            font-size: $font-size-xs;
+            font-weight: $font-weight-regular;
+            color: $primary-black;
+        }
+
+        tbody,
+        tbody tr,
+        tbody td {
+            background-color: inherit !important;
+            border: none !important;
+        }
+
+        #field-name {
+            font-size: $font-size-small;
+            font-weight: $font-weight-semi-bold;
+            color: $color-grey;
+        }
+    }
+    .array-change-section {
+        margin-top: 16px;
+
+        .array-change-item {
+            margin-bottom: 16px;
+            background-color: $table-header-color;
+            border-radius: 8px;
+            padding: 16px;
+
+            .array-change-item-header {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 12px;
+
+                .array-change-item-id {
+                    font-size: $font-size-reg;
+                    font-weight: $font-weight-semi-bold;
+                    color: $breadcrumb-item;
+                }
+            }
+
+            td {
+                white-space: pre-line;
+            }
+        }
+    }
+
+
+    .datepicker-wrapper {
+        margin-bottom: 30px;
+    }
+
+    label {
+        display: flex;
+        flex-direction: row;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-regular;
+        margin-bottom: 4px;
+    }
+
+    .input-w {
+        &-190 {
+            max-width: 190px;
+        }
+
+        &-280 {
+            max-width: 280px;
+        }
+
+        .custom-dropdown-label {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .required-label {
+            color: $btn-danger-color;
+            font-size: $font-size-xs;
+            padding-left: 4px;
+        }
+    }
+
+}
+
+.request-change-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.input-container {
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.date-picker-later{
+    margin-left: 23px;
+}

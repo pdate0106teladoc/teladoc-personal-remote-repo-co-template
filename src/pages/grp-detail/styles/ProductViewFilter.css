@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 92vh;
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+
+    .date-range {
+      margin-bottom: 1rem;
+    }
+
+    .date-range-inputs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .date-range-inputs input {
+      flex: 1;
+    }
+
+    .date-range-inputs span {
+      margin: 0 0.5rem;
+    }
+    .label {
+      margin-bottom: 4px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .subContent {
+      padding: 16px;
+      .form-control {
+        width: 20%;
+        height: 32px;
+      }
+      .input {
+        border: 1px solid #d1d1d1;
+        border-bottom: 2px solid #616161;
+      }
+    }
+  }
+
+  .footer {
+    flex-shrink: 0;
+    padding: 1rem;
+    text-align: center;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      width: revert;
+    }
+  }
+}
+
+.inactive-tab {
+  .bundle-title {
+    color: #616161 !important;
+  }
+  .product-title {
+    color: #616161 !important;
+  }
+}

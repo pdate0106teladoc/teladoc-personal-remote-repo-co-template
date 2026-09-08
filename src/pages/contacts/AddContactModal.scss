@@ -1,0 +1,98 @@
+.add-contact-modal {
+    .modal-header {
+        padding: 20px 24px 16px;
+        border-bottom: none;
+    }
+
+    .modal-body {
+        padding: 0 24px 8px;
+
+        .searching-spinner-container {
+            height: 0px;
+            padding-top: 25px;
+        }
+    }
+
+    .modal-footer {
+        padding: 12px 24px 20px;
+        border-top: none;
+        justify-content: flex-end;
+    }
+
+    .checkbox-label {
+        font-size: $font-size-small;
+        font-weight: $font-weight-regular;
+        color: $color-black;
+        margin-right: 8px;
+    }
+
+    .input-label {
+        display: inline-block;
+        font-size: $font-size-small;
+        font-weight: $font-weight-regular;
+        margin-bottom: 4px;
+
+        .required {
+            color: $btn-danger-color;
+        }
+    }
+
+    .associate-searchbar-wrapper {
+        margin-bottom: 100px;
+    }
+}
+
+body:has(.add-contact-modal.modal-dialog) .overlay-container {
+    z-index: 1060;
+    max-width: 550px;
+}
+
+.add-contact-duplicate-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: $validate-error-bg;
+    border: 1px solid $validate-error-border;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+
+    .add-contact-duplicate-icon {
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        margin-top: 1px;
+        color: $error-icon-color;
+    }
+
+    span {
+        font-size: $font-size-small;
+        color: $primary-black;
+        line-height: 1.5;
+
+        strong {
+            font-weight: $font-weight-semi-bold;
+            display: block;
+        }
+    }
+}
+
+.add-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.add-contact-footer {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.add-contact-description {
+    font-size: $font-size-small;
+    color: $primary-black;
+    line-height: 1.6;
+    margin: 0;
+}

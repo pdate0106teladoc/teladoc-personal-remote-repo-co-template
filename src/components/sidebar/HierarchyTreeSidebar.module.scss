@@ -1,0 +1,18 @@
+.sidebar {
+    width: 500px !important;
+}
+
+.title {
+    font-size: $font-size-2rem;
+    line-height: $font-size-28;
+    color: $primary-black;
+    padding-left: 16px;
+}
+
+.content {
+    padding: 16px;
+
+    .section {
+        margin-bottom: 24px;
+    }
+}

@@ -1,0 +1,44 @@
+.contents {
+  border: 1px solid rgba(255, 255, 255, 0);
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  margin-top: 24px;
+  .standalone-products {
+    margin-left: 10px;
+    padding-left: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+.button-with-icon {
+  height: 26px;
+  font-size: 12px;
+  padding: 2px 8px;
+  font-weight: 400;
+  .icon {
+    margin-right: 6px;
+  }
+}
+
+.product-card {
+  width: 50%;
+  margin-bottom: 8px;
+}
+
+.tab-containers {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+  gap: 8px;
+  align-items: center;
+  .filter-button-style{
+    height: 32px;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
+  }
+  .product-search{
+    margin: 0px;
+    margin-top: 5px !important;
+  }
+}

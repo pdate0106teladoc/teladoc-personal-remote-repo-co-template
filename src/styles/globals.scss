@@ -1,0 +1,180 @@
+// Fonts
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  --font-primary: system-ui,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --font-size-base: 16px;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  margin: 0;
+  padding: 0;
+  background-color: $app-bg-color;
+  color: $primary-black;
+  height: 100%;
+}
+
+.container-fluid {
+  max-width: calc(100% - 48px) !important;
+  margin: 12px 24px !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+a {
+  color: $link-color;
+}
+
+.mr-10px {
+  margin-right: 10px;
+}
+
+.ml-5px {
+  margin-left: 5px;
+}
+
+.ml-10px {
+  margin-left: 10px;
+}
+
+.ml-20px {
+  margin-left: 20px;
+}
+
+.relative {
+  position: relative;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.toast-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  line-height: 14px;
+  color: $link-color !important;
+}
+
+.searching-spinner {
+  color: $brand-stroke-2-contrast !important;
+  border-right-color: $primary-color; // override Bootstrap's border color
+  margin-right: 10px;
+}
+
+.display-value-link {
+  word-break: break-word;
+  flex: 1;
+  font-weight: $font-weight-regular;
+  text-align: left;
+  color: $link-color;
+  text-decoration: none;
+  padding-right: 20px;
+  white-space: pre-line;
+
+  &:hover {
+    color: $btn-primary-pressed-color;
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: $link-pressed-color;
+    text-decoration: underline;
+  }
+}
+
+.offcanvas {
+  min-width: 620px;
+  max-width: 50%;
+
+  .offcanvas-header {
+    align-items: center;
+    justify-content: space-between;
+
+    .offcanvas-title {
+      font-size: $font-size-28;
+      line-height: $font-size-xl;
+      color: $primary-black;
+      font-weight: 600;
+      padding-left: 10px;
+    }
+
+    .btn-link {
+      color: $btn-back-color;
+    }
+  }
+
+  .offcanvas-body {
+    padding-top: 0;
+    margin-top: 10px;
+
+    .opportunity-details {
+      padding: 0 10px;
+
+      .row {
+        display: flex;
+        font-size: $font-size-xs;
+        line-height: $font-size-reg;
+        color: $primary-black;
+        min-height: 44px;
+        border-bottom: 1px solid $table-bordercolor;
+        align-items: center;
+
+        .label {
+          width: 35%;
+          font-weight: 600;
+        }
+
+        .value {
+          width: 65%;
+        }
+      }
+    }
+  }
+}
+
+.agr-egr-card .custom-card-body {
+  overflow: visible;
+}
+
+.no-wrap {
+  text-wrap: initial;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.link-field {
+  cursor: pointer;
+  color: $link-color;
+
+  &:hover {
+    text-decoration: underline;
+    color: $btn-primary-pressed-color;
+  }
+}
+
+.anchor-style {
+  text-decoration: none;
+}
+
+.tab-content {
+  padding: 8px;
+}

@@ -1,0 +1,11 @@
+.table-container {
+  margin-top: 20px;
+  border-top: 1px solid $grey-94;
+  padding: 20px 12px;
+  .label {
+    font-weight: $font-weight-semi-bold;
+    font-size: $font-size-xs;
+    line-height: 16px;
+    margin-bottom: 16px;
+  }
+}

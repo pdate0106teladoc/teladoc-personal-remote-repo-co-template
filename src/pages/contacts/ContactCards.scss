@@ -1,0 +1,194 @@
+.remove-contact-modal {
+    .modal-body{
+        padding: 8px 24px;
+    }
+
+    .remove-contact-warning {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background-color: $status-bg-pending;
+        border: 1px solid $status-border-pending;
+        border-radius: 6px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+
+        span {
+            font-size: $font-size-xs;
+            color: $primary-black;
+            font-weight: $font-weight-semi-bold;
+        }
+    }
+
+    .remove-contact-description {
+        font-size: $font-size-small;
+        font-weight: $font-weight-regular;
+        color: $primary-black;
+        margin: 0;
+    }
+}
+
+.remove-contact-footer {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    width: 100%;
+
+    .remove-contact-delete-btn {
+        background-color: $btn-danger-color;
+        border-color: $btn-danger-color;
+        color: $color-white;
+        display: inline-flex;
+        align-items: center;
+
+        &:hover:not(:disabled),
+        &:focus:not(:disabled) {
+            background-color: $btn-danger-hover;
+            border-color: $btn-danger-hover;
+            color: $color-white;
+        }
+
+        svg,
+        svg path {
+            fill: $color-white;
+        }
+    }
+}
+
+.contact-summary-card {
+    position: relative;
+    border: 1px solid $card-border;
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    background-color: $color-white;
+    margin-top: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 16px;
+
+    .contact-action-btns {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        display: flex;
+        gap: 6px;
+    }
+
+    .contact-edit-btn,
+    .contact-delete-btn {
+        background: none;
+        border: 1px solid $card-border;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        font-size: $font-size-small;
+        font-weight: $font-weight-semi-bold;
+    }
+
+    &.editting-mode {
+        background-color: $table-header-color;
+    }
+
+    .left-section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 30%;
+        flex: 0 0 30%;
+        min-width: 0;
+        border-right: 1px solid $table-bordercolor;
+        padding-right: 16px;
+
+        .title-section {
+            .contact-name {
+                font-weight: 600;
+                font-size: 14px;
+                color: $contact-name;
+                margin: 0;
+                cursor: pointer;
+            }
+
+            .contact-title {
+                font-size: 12px;
+                color: $contact-title;
+            }
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            .info-item {
+                display: flex;
+                gap: 6px;
+                min-width: 0;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    flex-shrink: 0;
+                }
+
+                .mail-link {
+                    word-break: break-all;
+                    overflow-wrap: anywhere;
+                    color: $link-color;
+                    text-decoration: none;
+                    font-size: 12px;
+                }
+
+                span {
+                    color: $primary-black;
+                    font-size: $font-size-xs;
+                    font-weight: $font-weight-regular;
+                }
+            }
+        }
+    }
+
+    .right-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1 1 auto;
+        min-width: 0;
+        width: 75%;
+        flex: 1 1 auto;
+        min-width: 0;
+        gap: 8px;
+
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            font-size: $font-size-xs;
+            min-width: 0;
+            min-width: 0;
+
+            .detail-label {
+                width: 100px;
+                flex: 0 0 100px;
+                color: $neutral-stroke;
+                font-weight: $font-weight-semi-bold;
+            }
+
+            .detail-value {
+                flex: 1 1 auto;
+                min-width: 0;
+                color: $primary-black;
+                font-weight: $font-weight-regular;
+                white-space: normal;
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+
+            .more-text {
+                color: $link-color;
+                cursor: pointer;
+                margin-left: 4px;
+                white-space: nowrap;
+            }
+        }
+    }
+}

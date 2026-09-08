@@ -1,0 +1,241 @@
+
+.org-config-content.review-mode {
+  overflow: hidden;
+  min-height: 0;
+  padding: 0;
+
+  > .config-review {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+}
+
+.config-review {
+  display: flex;
+  flex: 1 1 auto;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background-color: $table-header-color;
+
+  &__main {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+  }
+
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    min-width: 200px;
+    padding: 1rem 0;
+    border-right: 1px solid $card-border;
+    background-color: $color-white;
+    overflow-y: auto;
+  }
+
+  &__sidebar-item {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-left: 3px solid transparent;
+    background: none;
+    text-align: left;
+    font-size: $font-size-small;
+    font-weight: $font-weight-regular;
+    color: $breadcrumb-item;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s;
+
+    &:hover {
+      background-color: $table-header-color;
+    }
+
+    &--active {
+      border-left-color: $btn-primary-color;
+      font-weight: $font-weight-semi-bold;
+      color: $btn-primary-color;
+      background-color: $table-header-color;
+    }
+
+  }
+
+  &__sidebar-divider {
+    height: 1px;
+    background-color: $card-border;
+    margin: 0.8rem 1rem;
+  }
+
+  &__sidebar-heading {
+    display: block;
+    padding: 0.4rem 1.6rem 0.6rem;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $contact-title;
+    text-transform: none;
+  }
+
+  &__sidebar-footer {
+    margin-top: auto;
+    padding: 0.8rem 1.6rem;
+    border-top: 1px solid $card-border;
+  }
+
+  &__content {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: $color-white;
+  }
+
+  &__tab-content {
+    padding-top: 1rem;
+  }
+
+  &__array-section {
+    margin-top: 1rem;
+  }
+
+  &__array-item {
+    margin-bottom: 1rem;
+  }
+
+  &__array-item-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 0;
+  }
+
+  &__array-item-id {
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    color: $breadcrumb-item;
+  }
+
+  &__rejection-summary {
+    background-color: $table-header-color;
+    border: 1px solid $card-border;
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__rejection-summary-message {
+    font-size: $font-size-small;
+    font-weight: $font-weight-semi-bold;
+    color: $primary-black;
+    margin: 0 0 0.6rem 0;
+  }
+
+  &__rejection-summary-detail {
+    font-size: $font-size-small;
+    color: $breadcrumb-item;
+    margin: 0.25rem 0 0;
+  }
+
+  &__rejection-summary-label {
+    font-weight: $font-weight-medium;
+    color: $neutral-stroke;
+  }
+
+  &__content--empty {
+    padding: 2rem;
+    color: $breadcrumb-item;
+  }
+}
+
+// Section card (non-collapsible, matching ExpandCollapse card style)
+.review-section-card {
+  background-color: $table-header-color;
+  border-radius: 6px;
+  padding: 1.2rem 1.6rem;
+  margin-bottom: 1.2rem;
+
+  &__title {
+    font-size: $font-size-reg;
+    font-weight: $font-weight-semi-bold;
+    color: $primary-black;
+    margin: 0 0 1rem 0;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &__th {
+    font-size: $font-size-small;
+    font-weight: $font-weight-semi-bold;
+    color: $neutral-stroke;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid $card-border;
+
+    &--fail {
+      text-align: right;
+      width: 120px;
+    }
+  }
+
+  &__row {
+    border-bottom: 1px solid $card-border;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__td {
+    font-size: $font-size-small;
+    color: $primary-black;
+    font-weight: $font-weight-regular;
+    padding: 0.8rem 1rem;
+    vertical-align: middle;
+
+    &--field {
+      font-weight: $font-weight-semi-bold;
+      color: $neutral-stroke;
+    }
+
+    &--fail {
+      text-align: right;
+      width: 120px;
+    }
+  }
+
+  &__checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: $font-size-small;
+    font-weight: $font-weight-regular;
+    color: $neutral-stroke;
+    cursor: pointer;
+    margin: 0;
+
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: $btn-primary-color;
+      cursor: pointer;
+    }
+  }
+}
+
+.review-rebuttal-section {
+  &__fields {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.review-marketing-site-user .display-label{
+  flex: 1 !important;
+}

@@ -1,0 +1,61 @@
+.create-contact-drawer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &__content {
+        flex: 1;
+        overflow-y: auto;
+        padding-bottom: 8px;
+    }
+
+    &__footer {
+        flex-shrink: 0;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        gap: 12px;
+        padding-top: 16px;
+        border-top: 1px solid $filter-border;
+    }
+}
+
+.mb-24 {
+    margin-bottom: 24px;
+}
+
+.contact-types-placeholder {
+    font-size: $font-size-small;
+    color: $contact-title;
+    padding: 24px 0;
+    text-align: center;
+}
+
+.contact-basic-form {
+    .custom-input-label,
+    .custom-dropdown-label,
+    .dropdown-label,
+    .toggle-label {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-regular;
+    }
+
+    .editable-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        margin-bottom: 0;
+
+        .editable-label {
+            flex: none;
+            padding-top: 0;
+            font-size: $font-size-xs;
+            font-weight: $font-weight-regular;
+        }
+
+        .editable-value {
+            flex: none;
+            width: 100%;
+        }
+    }
+}

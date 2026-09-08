@@ -1,0 +1,65 @@
+.broker-content-container {
+    .table-container {
+        margin-top: 20px;
+        border-top: 0px;
+        padding: 0px 4px;
+
+        .label {
+            font-weight: $font-weight-semi-bold;
+            font-size: $font-size-xs;
+            line-height: 16px;
+            margin-bottom: 16px;
+        }
+    }
+
+    .table-header {
+        font-weight: $font-weight-semi-bold;
+        font-size: $font-size-xs;
+        line-height: 12px;
+        margin-bottom: 8px;
+    }
+
+    #dropdown-basic-button {
+        width: 100%;
+    }
+
+    .dropdown-label {
+        font-size: $font-size-12px;
+        margin-bottom: 6px;
+    }
+
+    .details-sidebar-content {
+        padding: 8px;
+        border-radius: 8px;
+        background-color: $table-header-color;
+        margin-top: 12px;
+        &.normal-div {
+            background-color: transparent;
+            margin-top: 0px;
+            padding: 0px;
+        }
+    }
+
+    .broker-sidebar-dropdown-menu{
+        width: 100%;
+    }
+
+    .nav-link.active,
+    .nav-link.active:hover {
+        background-color: $color-white !important;
+
+    }
+
+    .info-box {
+        background-color: $neutral-background-hover;
+        border: 1px solid $btn-border-color;
+        border-radius: 4px;
+        padding: 10px 12px;
+        margin: 0px;
+        .bold-text {
+            font-size: $font-size-xs;
+            font-weight: $font-weight-semi-bold;
+            color: $primary-black;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+@import "@/styles/variables.scss";
+
+.config-header-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.editing-indicator-text {
+  font-size: $font-size-reg;
+  font-weight: $font-weight-semi-bold;
+  line-height: 2.2rem;
+  color: $primary-black;
+}
+
+.reviewing-indicator-label {
+  font-size: $font-size-reg;
+  font-weight: $font-weight-semi-bold;
+  line-height: 2.2rem;
+  color: $primary-black;
+}
+
+.reviewing-indicator-task {
+  font-size: $font-size-reg;
+  font-weight: $font-weight-regular;
+  line-height: 2.2rem;
+  color: $color-grey;
+}

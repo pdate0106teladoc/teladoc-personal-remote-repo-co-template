@@ -1,0 +1,139 @@
+@import "@/styles/variables.scss";
+
+.editable-group-recipients {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  gap: 16px;
+
+  .recipients-label {
+    flex: 0;
+    font-weight: $font-weight-semi-bold;
+    font-size: $font-size-small;
+    line-height: 20px;
+    color: $neutral-stroke;
+    padding-top: 8px;
+  }
+
+  .recipients-value {
+    flex: 1;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-small;
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+}
+
+.editable-report-recipients {
+  display: flex;
+  flex-direction: column;
+
+  .error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  .recipients-multi-select .dropdown-menu:has(.option-item)::before {
+    content: "Matching contacts";
+    display: block;
+    position: sticky;
+    top: 0;
+    background-color: $color-white;
+    padding: 4px 12px 8px;
+    font-size: $font-size-14px;
+    font-weight: $font-weight-semi-bold;
+    color: $neutral-stroke;
+    line-height: 20px;
+  }
+}
+
+.recipients-multi-select {
+  &.multi-search-input {
+    margin-bottom: 0;
+  }
+
+  // Library applies the box border to the Bootstrap dropdown toggle button
+  // (ID selector → high specificity). Scope under our customClass to win.
+  #dropdown-basic-button {
+    border: none !important;
+    border-bottom: 1px solid $neutral-stroke !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    &:hover,
+    &:focus {
+      border: none !important;
+      border-bottom: 1px solid $colorCompoundBrandStroke !important;
+      box-shadow: none !important;
+      background-color: transparent !important;
+    }
+  }
+
+  // Inner text input where the user types — has a default white browser bg
+  .custom-input {
+    background-color: transparent !important;
+  }
+
+  .multi-search-footer {
+    text-align: start;
+  }
+
+}
+
+.recipients-error-ribbon {
+  margin-top: 8px;
+
+  // Library lays the ribbon title and message out on one row — stack them
+  .ribbon-container {
+    align-items: flex-start;
+
+    > svg {
+      flex-shrink: 0;
+    }
+
+    .ribbon-content > .d-flex {
+      flex-direction: column;
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
+    }
+  }
+}
+
+.recipient-option {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+
+  .recipient-option-name {
+    font-size: $font-size-16;
+    font-weight: $font-weight-regular;
+  }
+
+  .recipient-option-email {
+    font-size: $font-size-14px;
+    color: $neutral-stroke;
+  }
+}
+
+// Two actions inside the library's single footer row (drafted report only).
+.recipients-footer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .recipients-footer-action {
+    color: $link-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

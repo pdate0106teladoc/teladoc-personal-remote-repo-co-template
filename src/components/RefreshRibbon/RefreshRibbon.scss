@@ -1,0 +1,56 @@
+.refresh-ribbon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: $primary-black;
+    padding-right: 12px;
+    background: $warning-background-color;
+    border-top: 1px solid $warning-border-color;
+    border-bottom: 1px solid $warning-border-color;
+
+    .message {
+        width: 100%;
+        padding: 8px 14px;
+        font-size: $font-size-xs;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .view-details {
+        cursor: pointer;
+        padding: 0;
+        color: $link-color;
+        font-size: $font-size-12px;
+        padding-left: 8px;
+        text-decoration: underline;
+    }
+
+    .btn-refresh {
+        display: flex;
+        align-items: center;
+        border: 1px solid $btn-border-color;
+        background: $color-white;
+        width: max-content;
+        white-space: nowrap;
+        font-size: $font-size-14px;
+        border-radius: 4px;
+        color: $primary-black;
+        font-weight: $font-weight-semi-bold;
+
+        &:hover:not(:disabled) {
+            background-color: $neutral-background-hover;
+            border: 1px solid $btn-border-color;
+        }
+
+        &:hover:active:not(:disabled) {
+            background-color: $table-bordercolor;
+        }
+
+        &:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+    }
+}

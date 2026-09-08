@@ -1,0 +1,223 @@
+/* Main Container */
+.workflow-history {
+  padding: 16px;
+  max-width: 900px;
+
+
+}
+
+.workflow-list {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.workflow-item {
+  display: grid;
+  grid-template-columns: 150px 50px 1fr;
+  gap: 0;
+  position: relative;
+  min-height: 80px;
+}
+
+.workflow-time {
+  text-align: right;
+  padding-right: 24px;
+  padding-top: 10px;
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.workflow-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.workflow-dot {
+  width: 32px;
+  height: 30px;
+  border-radius: 50%;
+  background: #eef2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+
+.workflow-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: #e5e7eb;
+  z-index: 0;
+}
+
+.workflow-line-isLast {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: #e5e7eb;
+  z-index: 0;
+  height: 60%;
+}
+
+.person-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+
+  .avatar-circle {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    border-radius: 50%;
+    background-color: $table-bordercolor;
+    color: $neutral-stroke;
+    font-size: $font-base-size;
+    font-weight: $font-weight-semi-bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  .person-name {
+    color: $link-color;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-small;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    word-break: break-all;
+    min-width: 100px;
+  }
+}
+
+
+/* 3. CONTENT COLUMN */
+.workflow-content {
+  padding-left: 19px;
+  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+
+  .actor-name {
+    .person-name {
+      color: #111827;
+    }
+
+  }
+}
+
+.workflow-status {
+  padding-top: 10px;
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+  margin-bottom: 27px;
+}
+
+.workflow-status strong {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Actor Row */
+.workflow-actor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+/* The Horizontal Line Connector */
+.workflow-actor::before {
+  content: '';
+  position: absolute;
+
+  right: 100%;
+  margin-right: -5px;
+  /* Slight overlap to tuck behind indicator */
+  width: 50px;
+  /* 45px gap + 5px overlap */
+  height: 2px;
+  background: #e5e7eb;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+/* Small Circle Indicator */
+.actor-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid $link-color;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Avatar Image */
+.actor-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+}
+
+/* Avatar Fallback */
+.workflow-avatar-fallback {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e0e7ff;
+  color: #4338ca;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+}
+
+.actor-name {
+  font-size: 14px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.comment-box {
+  padding: 16px;
+  background-color: $table-header-color;
+  border-radius: 8px;
+  gap: 10px;
+  min-width: 90%;
+
+  .field-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: $btn-back-color;
+  }
+
+  .comment-value {
+    font-size: 12px;
+    color: $primary-black;
+  }
+}

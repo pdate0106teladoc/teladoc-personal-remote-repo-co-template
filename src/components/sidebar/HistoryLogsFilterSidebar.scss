@@ -1,0 +1,89 @@
+.history-logs-filter-container {
+    .content {
+        gap: 24px;
+        padding: 10px;
+        padding-bottom: 80px;
+        display: flex;
+        flex-direction: column;
+
+        .filter-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .filter-section-title {
+                font-weight: $font-weight-semi-bold;
+                color: $breadcrumb-item;
+                margin: 0;
+                font-size: 14px;
+            }
+
+            .date-range-inputs {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                justify-content: space-between;
+
+                .history-date-picker-wrapper{
+                    width: 100%;
+                }
+
+                .date-input {
+                    flex: 1;
+                    min-width: 0;
+                }
+
+                .date-separator {
+                    color: $grey-94;
+                    margin: 0 4px;
+                }
+            }
+
+            .date-range-warning {
+                color: $priority-urgent;
+                font-size: 12px;
+                line-height: 16px;
+            }
+        }
+
+        .checkbox-group-wrapper {
+            &.filter-check {
+                padding: 0px;
+
+                .checkbox-group-title {
+                    font-weight: $font-weight-semi-bold;
+                    color: $breadcrumb-item;
+                    font-size: 14px;
+                }
+
+                .checkbox-list {
+                    &.checkbox-list--vertical {
+                        padding: 8px 0px 0px 8px;
+                    }
+                }
+            }
+        }
+
+        .custom-input-wrapper {
+            margin-bottom: 0;
+        }
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        flex-shrink: 0;
+        padding: 2rem;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        background-color: $color-white;
+        border-top: 1px solid $grey-94;
+
+        button {
+            width: revert;
+        }
+    }
+}

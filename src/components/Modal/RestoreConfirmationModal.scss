@@ -1,0 +1,27 @@
+.restore-confirmation-modal {
+    .modal-header {
+        padding: 20px;
+    }
+
+    .modal-body {
+        padding: 24px;
+
+        .modal-content {
+            border: 0px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            font-weight: $font-weight-regular;
+            font-size: $font-size-xs;
+
+            .restore-label {
+                color: $color-black;
+            }
+
+            .check-label {
+                color: $color-grey;
+            }
+        }
+    }
+
+}

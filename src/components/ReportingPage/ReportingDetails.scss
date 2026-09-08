@@ -1,0 +1,41 @@
+.add-report-action {
+  display: flex;
+  margin: 16px 0;
+}
+
+// The recipients card and the settings card are stacked to read as one card; with
+// a footer below them the settings card gives up its bottom margin and radius so
+// the footer closes the card off instead.
+.reporting-card.has-remove-footer {
+  .report-settings {
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.remove-report-footer {
+  background-color: $table-header-color;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 0 16px 16px;
+  margin-bottom: 16px;
+}
+
+.remove-report-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  font-size: $font-size-small;
+  font-weight: $font-weight-regular;
+  color: $primary-black;
+  cursor: pointer;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}

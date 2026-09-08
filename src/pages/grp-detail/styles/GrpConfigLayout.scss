@@ -1,0 +1,20 @@
+.draft-save {
+  font-size: $font-size-small;
+  font-weight: $font-weight-regular;
+  line-height: 20px;
+  color: $neutral-stroke;
+}
+.saving-spinner {
+  height: 16px;
+  width: 16px;
+  border-width: 1px;
+}
+.content-area-loader {
+  height: 100%;
+}
+
+.action-button-dark-items {
+  .dropdown-menu .dropdown-item {
+    color: $btn-back-color;
+  }
+}

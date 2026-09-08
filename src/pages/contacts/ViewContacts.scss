@@ -1,0 +1,44 @@
+.view-contact-sec {
+    background-color: $color-white;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 8px 24px;
+
+    .contact-header {
+        font-size: $font-size-reg;
+        font-weight: $font-weight-semi-bold;
+    }
+
+    .fbb-clear {
+        min-width: fit-content;
+    }
+
+    .fbb-chip {
+        color: $colorCompoundBrandStroke
+    }
+
+    .searchbar-row {
+        justify-content: space-between;
+        margin-top: 8px;
+        height: 33px;
+
+        .signin-button {
+            margin-left: auto;
+        }
+    }
+
+    .filter-button-wrapper {
+        align-self: center;
+    }
+
+    .filter-button-style {
+        height: 24px;
+        width: max-content;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-regular;
+    }
+
+    .find-contact {
+        min-width: 360px;
+    }
+}

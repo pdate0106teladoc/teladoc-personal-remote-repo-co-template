@@ -1,0 +1,19 @@
+.edit-files-container {
+    display: flex;
+    flex-direction: row;
+
+    .edit-files-content {
+        flex: 3;
+        padding: 20px;
+        background-color: transparent;
+    }
+
+    .custom-table-wrapper {
+        background-color: $color-white;
+
+        .text-blue {
+            cursor: pointer;
+            color: $link-color;
+        }
+    }
+}

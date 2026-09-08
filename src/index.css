@@ -1,0 +1,11 @@
+/* Base styles for Nirvana MFE */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* Remove default Vite styles that conflict with shell */
+* {
+  box-sizing: border-box;
+}

@@ -1,0 +1,431 @@
+.lcrm-telemed-slider {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: $font-size-small;
+  color: $primary-black;
+  padding: 10px;
+
+  .required-note {
+    font-size: $font-size-xs;
+    color: $color-grey;
+    margin: 8px 0 12px;
+
+    .mandatory-asterisk {
+      color: $error-icon-color;
+      margin-left: 2px;
+    }
+  }
+
+  .lcrm-slider-body {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  .lcrm-info-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    background-color: $neutral-background-hover;
+    border: 1px solid $btn-border-color;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-size: $font-size-xs;
+
+    .banner-header {
+      color: $primary-black;
+      font-weight: $font-weight-semi-bold;
+      font-size: $font-size-xs;
+    }
+
+    .banner-subheading {
+      color: $primary-black;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-regular;
+    }
+
+    .lcrm-info-icon {
+      color: $neutral-stroke;
+      font-size: $font-size-reg;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: $font-size-small;
+    }
+
+    p {
+      margin: 0;
+      color: $btn-back-color;
+    }
+  }
+
+  .lcrm-section {
+    margin-bottom: 16px;
+  }
+
+  .lcrm-field-label {
+    display: block;
+    font-weight: $font-weight-semi-bold;
+    font-size: $font-size-xs;
+    margin-bottom: 8px;
+    color: $neutral-stroke;
+
+    .mandatory-asterisk {
+      color: $error-icon-color;
+      margin-left: 2px;
+    }
+  }
+
+  .lcrm-radio-card {
+    display: block;
+    border: 1px solid $table-bordercolor;
+    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+
+    &:hover:not(.disabled) {
+      border-color: $btn-primary-color;
+    }
+
+    &.selected {
+      border: 2px solid $btn-primary-color;
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      background-color: $grey-94;
+    }
+
+    .lcrm-radio-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+
+      .lcrm-radio-input {
+        accent-color: $btn-primary-color;
+        cursor: pointer;
+      }
+
+      .lcrm-radio-title {
+        font-weight: $font-weight-semi-bold;
+        font-size: $font-size-xs;
+        color: $btn-back-color;
+      }
+    }
+
+    .lcrm-radio-description {
+      margin: 0 0 0 22px;
+      color: $btn-back-color;
+      font-size: $font-size-xs;
+      line-height: 1.5;
+    }
+  }
+
+  .lcrm-warning-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background-color: $warning-bg-color;
+    border: 1px solid $warning-border-color;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: $font-size-xs;
+
+    .lcrm-warning-icon {
+      color: $warning-icon-color;
+      flex-shrink: 0;
+    }
+  }
+
+  .lcrm-search-wrapper {
+    position: relative;
+
+    .lcrm-search-input-row {
+      display: flex;
+      align-items: center;
+      border: 1px solid $neutral-strole-1;
+      border-radius: 4px;
+      padding: 6px 10px;
+      background: $color-white;
+      gap: 6px;
+
+      .lcrm-search-icon {
+        color: $color-grey;
+        font-size: $font-size-reg;
+        flex-shrink: 0;
+      }
+
+      .lcrm-search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: $font-size-small;
+        color: $primary-black;
+        background: transparent;
+
+        &::placeholder {
+          color: $color-grey;
+        }
+      }
+
+      .lcrm-clear-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: $color-grey;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        font-size: $font-size-reg;
+
+        &:hover {
+          color: $primary-black;
+        }
+      }
+    }
+
+    .lcrm-search-dropdown {
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      right: 0;
+      background: $color-white;
+      border: 1px solid $table-bordercolor;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px $border-shadow-color;
+      z-index: 100;
+      overflow: hidden;
+
+      .lcrm-dropdown-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 8px 12px;
+        border-bottom: 1px solid $table-bordercolor;
+        background: $table-bordercolor;
+
+        span {
+          font-size: $font-size-xs;
+          font-weight: $font-weight-semi-bold;
+          color: $color-grey;
+        }
+      }
+
+      .lcrm-search-dropdown-item {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 12px;
+        cursor: pointer;
+        gap: 12px;
+
+        &:hover {
+          background-color: $neutral-background-hover;
+        }
+
+        &.has-divider {
+          border-bottom: 1px solid $table-bordercolor;
+        }
+
+        .lcrm-result-left {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .lcrm-result-right {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .lcrm-result-name-row {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          flex-wrap: wrap;
+        }
+
+        .lcrm-dropdown-verified-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 3px;
+          padding: 2px 8px;
+          background-color: $validate-success-bg;
+          color: $success-text-color;
+          border-radius: 999px;
+          font-size: $font-size-xs;
+          font-weight: $font-weight-medium;
+          border: 1px solid $validate-success-border;
+          white-space: nowrap;
+
+          .lcrm-verified-icon {
+            font-size: $font-size-small;
+          }
+        }
+
+        .lcrm-dropdown-not-verified-badge {
+          display: inline-flex;
+          align-items: center;
+          padding: 2px 8px;
+          background-color: $neutral-stroke;
+          color: $color-white;
+          border-radius: 999px;
+          font-size: $font-size-xs;
+          font-weight: $font-weight-medium;
+          white-space: nowrap;
+        }
+
+        .lcrm-result-name {
+          font-weight: $font-weight-semi-bold;
+          font-size: $font-size-small;
+          color: $primary-black;
+        }
+
+        .lcrm-result-guid {
+          font-size: $font-size-xs;
+          color: $color-grey;
+        }
+
+        .lcrm-result-created {
+          font-size: $font-size-xs;
+          font-weight: $font-weight-semi-bold;
+          color: $primary-black;
+        }
+
+        .lcrm-result-date {
+          font-size: $font-size-xs;
+          font-weight: $font-weight-semi-bold;
+          color: $success-toast-color;
+        }
+
+        .lcrm-result-rev-date {
+          font-size: $font-size-xs;
+          color: $color-grey;
+        }
+
+        .lcrm-result-opportunity {
+          font-size: $font-size-xs;
+          color: $primary-black;
+        }
+      }
+    }
+  }
+
+  .lcrm-selected-account {
+    margin-top: 16px;
+    border-radius: 4px;
+    padding: 12px;
+    background-color: $table-header-color;
+
+    .lcrm-selected-label {
+      font-weight: $font-weight-semi-bold;
+      font-size: $font-size-xs;
+      margin-bottom: 10px;
+    }
+
+    .lcrm-account-table {
+      width: 100%;
+      border-collapse: collapse;
+
+      tr {
+
+        td {
+          padding: 6px 0;
+          vertical-align: top;
+        }
+      }
+
+      .lcrm-account-key {
+        color: $neutral-stroke;
+        font-size: $font-size-xs;
+        width: 40%;
+        padding-right: 12px;
+      }
+
+      .lcrm-account-value {
+        font-size: $font-size-small;
+        color: $btn-back-color;
+      }
+
+      .lcrm-verified-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        margin-left: 8px;
+        padding: 2px 8px;
+        background-color: $validate-success-bg;
+        color: $success-text-color;
+        border-radius: 12px;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        border: 1px solid $validate-success-border;
+
+        .lcrm-verified-icon {
+          font-size: $font-size-small;
+        }
+      }
+
+      .lcrm-not-verified-badge {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 8px;
+        padding: 2px 10px;
+        background-color: $neutral-stroke;
+        color: $color-white;
+        border-radius: 999px;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+      }
+
+      .lcrm-guid {
+        font-size: $font-size-xs;
+        color: $btn-back-color;
+        word-break: break-all;
+      }
+
+      .lcrm-opportunity-link {
+        color: $link-color;
+        text-decoration: none;
+        font-size: $font-size-small;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        .lcrm-opportunity-link-icon {
+          font-size: $font-size-small;
+          flex-shrink: 0;
+          margin-left: 5px;
+        }
+      }
+
+      .lcrm-revenue-date {
+        color: $success-toast-color;
+        font-weight: $font-weight-medium;
+      }
+    }
+  }
+
+  .lcrm-verify-account-btn {
+    margin-top: 16px;
+  }
+
+  .lcrm-slider-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 16px 0 4px;
+    flex-shrink: 0;
+    border-top: 1px solid $table-bordercolor;
+  }
+}

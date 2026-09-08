@@ -1,0 +1,19 @@
+# This file is used to define the metadata for the application and its dependencies .
+# More details can be found here https://euewizard.docs.teladoc.dev/#/pages/dev?id=-i-want-to-onboard-my-repo-with-application-metadata-files-dependency-graph
+production_branch: "main" # As per standard main is the production branch
+releases:
+  - name: "fe-ucc-remote"
+    type: "service"
+    part_of_product: ["Nirvana"]
+    labels:
+      - name: "FunctionalArea"
+        value: "Client Operations & Services"
+      - name: "Domain"
+        value: "Client Management"
+      - name: "Capability"
+        value: "Client Portal"
+    title: "UCC REMOTE"
+    description: >-
+      test
+    # These are the dependencies for the generated application.This needs to be updated for each application by developer. Refer to the https://github.com/Teladoc/ranch/blob/main/dependency-graph/templates/README.md for more details.
+    dependencies: []

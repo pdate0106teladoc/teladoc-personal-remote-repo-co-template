@@ -1,0 +1,84 @@
+.pending-changes-sidebar {
+    padding: 16px;
+
+    .filter {
+        .input-w-190 {
+            width: 190px;
+        }
+
+        .clear-button {
+            display: flex;
+            flex-direction: row;
+            font-weight: $font-weight-regular;
+            font-size: $font-size-xs;
+            color: $btn-back-color;
+            padding-top: 25px;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
+
+    .task-list {
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+    }
+
+    .task-card {
+        background: $color-white;
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+        margin-top: 16px;
+
+        .info-row {
+            align-items: center;
+            gap: 16px;
+        }
+
+        .info-label {
+            font-weight: $font-weight-semi-bold;
+            font-size: $font-size-xs;
+            color: $btn-back-color;
+            min-width: 200px;
+            flex: 0 0 200px;
+        }
+
+        .info-value {
+            font-weight: $font-weight-regular;
+            font-size: $font-size-xs;
+            flex: 1;
+
+            .task-detail-overview-link {
+                color: $color-purple;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                flex-wrap: wrap;
+                word-break: break-word;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                &--text {
+                    cursor: pointer;
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+
+        .details {
+            .view-details {
+                color: $link-color;
+                font-weight: $font-weight-regular;
+                font-size: $font-size-small;
+                cursor: pointer;
+                text-decoration: none;
+            }
+        }
+    }
+}

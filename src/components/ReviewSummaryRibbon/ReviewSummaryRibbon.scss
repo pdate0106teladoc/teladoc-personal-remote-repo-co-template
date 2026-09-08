@@ -1,0 +1,22 @@
+.review-summary-ribbon {
+  .message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    svg {
+      fill: $warning-error-color;
+    }
+
+    .view-details {
+      cursor: pointer;
+      padding: 0;
+      margin-left: 8px;
+      border: none;
+      background: none;
+      color: $link-color;
+      font-size: $font-size-12px;
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+.edit-opportunities-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+
+    .edit-opportunities-main {
+        flex: 3;
+        background-color: transparent;
+        overflow-y: scroll;
+        scrollbar-width: none;
+
+        .opp-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .opp-card {
+            background: $color-white;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            margin-top: 16px;
+
+            .opp-name {
+                font-weight: $font-weight-semi-bold;
+                font-size: $font-size-small;
+                color: $link-color;
+            }
+
+            .opp-id {
+                font-weight: $font-weight-regular;
+                font-size: $font-size-xs;
+                color: $neutral-stroke;
+            }
+
+            .info-row {
+                align-items: center;
+                gap: 16px;
+            }
+
+            .info-label {
+                font-weight: $font-weight-semi-bold;
+                font-size: $font-size-xs;
+                color: $neutral-stroke;
+                min-width: 140px;
+                flex: 0 0 140px;
+            }
+
+            .info-value {
+                font-weight: $font-weight-regular;
+                font-size: $font-size-xs;
+                flex: 1;
+                color: $primary-black;
+            }
+        }
+    }
+}

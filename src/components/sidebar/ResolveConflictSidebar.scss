@@ -1,0 +1,467 @@
+.right-modal-basics-resolve-conflicts {
+  .rc-sidebar-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 80px;
+  }
+
+  .rc-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+
+    .rc-summary-tile {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid $table-bordercolor;
+      background-color: $color-white;
+    }
+
+    .rc-summary-value {
+      font-size: $font-size-32;
+      font-weight: $font-weight-semi-bold;
+      color: $primary-black;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .rc-summary-label {
+      font-size: $font-size-small;
+      font-weight: $font-weight-semi-bold;
+      color: $neutral-stroke;
+      margin-bottom: 2px;
+    }
+
+    .rc-summary-hint {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-regular;
+      color: $neutral-foreground;
+    }
+
+    .rc-summary-tile--danger {
+      border-color: $validate-error-border;
+      background-color: $validate-error-bg;
+
+      .rc-summary-value {
+        color: $error-text-color;
+      }
+    }
+
+    .rc-summary-tile--muted {
+      border-color: $grey-94;
+      background-color: $table-header-color;
+
+      .rc-summary-value {
+        color: $neutral-stroke;
+      }
+    }
+  }
+
+  .rc-section {
+    .rc-section-header {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 8px 0;
+      text-align: left;
+      color: $neutral-stroke;
+
+      .rc-section-title {
+        font-size: $font-size-small;
+        font-weight: $font-weight-semi-bold;
+        color: $primary-black;
+      }
+    }
+
+    .rc-section-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  .rc-error-banner,
+  .rc-info-banner {
+    border-radius: 4px;
+    padding: 10px 10px;
+    font-size: $font-size-xs;
+    color: $primary-black;
+
+    .bold-text {
+      font-weight: $font-weight-semi-bold;
+    }
+
+    .regular-text {
+      font-weight: $font-weight-regular;
+    }
+  }
+
+  .rc-error-banner {
+    background-color: $warning-background-color;
+    border: 1px solid $warning-border-color;
+  }
+
+  .rc-info-banner {
+    background-color: $neutral-background-hover;
+    border: 1px solid $neutral-strole-1;
+  }
+
+  .rc-conflict-card {
+    border: 1px solid $grey-94;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .rc-card-header {
+      padding: 10px 16px;
+      background-color: $table-header-color;
+
+      .rc-conflicting-label {
+        font-size: $font-size-small;
+        font-weight: $font-weight-semi-bold;
+        color: $neutral-stroke;
+      }
+
+      .rc-conflict-link {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-regular;
+        color: $link-color;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .rc-by-text {
+        font-size: 12px;
+        font-weight: $font-weight-semi-bold;
+        color: $neutral-stroke;
+      }
+
+      .rc-avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: $filter-border;
+        color: $neutral-stroke;
+        font-size: $font-base-size;
+        font-weight: $font-weight-semi-bold;
+      }
+
+      .rc-by-name {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-regular;
+        color: $primary-black;
+      }
+    }
+  }
+
+  .rc-comparison-body {
+    background-color: $table-header-color;
+    padding: 0px 16px 16px 16px;
+
+    .rc-comparison {
+      padding: 16px;
+      background-color: $color-white;
+      box-shadow: 0px 0px 2px 0px #0000001F, 0px 1px 2px 0px #00000024;
+
+      .rc-comparison-header,
+      .rc-comparison-row,
+      .rc-comparison-footer {
+        display: grid;
+        grid-template-columns: 26% 33% 33%;
+        gap: 24px;
+      }
+
+      .rc-comparison-header {
+        border-bottom: 1px solid $grey-94;
+
+        .emptybox {
+          padding: 12px 16px;
+        }
+
+        .rc-field-col,
+        .rc-my-col,
+        .rc-their-col {
+          padding: 12px 16px;
+          font-size: 12px;
+          color: $neutral-stroke;
+        }
+
+        .rc-my-col {
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          background-color: $table-header-color;
+        }
+
+        .rc-their-col {
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          background-color: $warning-background-color;
+        }
+
+        .rc-date-label {
+          font-size: 12px;
+          font-weight: $font-weight-medium;
+          color: $primary-black;
+          margin-bottom: 4px;
+        }
+
+        .rc-date-value {
+          font-size: 12px;
+          color: $neutral-stroke;
+          margin-bottom: 8px;
+        }
+
+        .rc-col-title {
+          padding-top: 30px;
+          font-size: 12px;
+          font-weight: $font-weight-semi-bold;
+          color: $neutral-stroke;
+        }
+      }
+
+      .rc-comparison-row {
+        border-bottom: 1px solid $grey-94;
+
+        .emptybox {
+          padding: 12px 16px;
+        }
+
+        .rc-field-col,
+        .rc-my-col,
+        .rc-their-col {
+          padding: 12px 16px;
+          font-size: 13px;
+          color: $primary-black;
+          display: flex;
+          align-items: center;
+        }
+
+        .rc-field-col {
+          font-weight: $font-weight-medium;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          .rc-field-section {
+            font-size: $font-size-xs;
+            font-weight: $font-weight-regular;
+            color: $neutral-foreground;
+          }
+        }
+
+        .rc-my-col {
+          background-color: $table-header-color;
+        }
+
+        .rc-their-col {
+          background-color: $warning-background-color;
+        }
+
+        .rc-radio-label {
+          cursor: pointer;
+          font-size: 13px;
+          color: $primary-black;
+          margin: 0;
+
+          input[type="radio"] {
+            cursor: pointer;
+            accent-color: $link-color;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+          }
+        }
+      }
+
+      .rc-comparison-footer {
+
+        .rc-field-col,
+        .rc-my-col,
+        .rc-their-col {
+          padding: 12px 16px;
+          display: flex;
+          align-items: center;
+        }
+
+        .rc-my-col {
+          border-bottom-left-radius: 8px;
+          border-bottom-right-radius: 8px;
+          background-color: $table-header-color;
+        }
+
+        .rc-their-col {
+          border-bottom-left-radius: 8px;
+          border-bottom-right-radius: 8px;
+          background-color: $warning-background-color;
+        }
+      }
+    }
+  }
+
+  .rc-conflict-card--prod .rc-comparison-body .rc-comparison {
+
+    .rc-comparison-header .rc-their-col,
+    .rc-comparison-row .rc-their-col,
+    .rc-comparison-footer .rc-their-col {
+      background-color: $table-header-color;
+    }
+  }
+
+  .rc-comparison-body .rc-comparison--same-date {
+
+    .rc-comparison-header,
+    .rc-comparison-row {
+      border-bottom: none;
+    }
+
+    .rc-comparison-header .rc-field-col,
+    .rc-comparison-header .rc-their-col,
+    .rc-comparison-row .rc-field-col,
+    .rc-comparison-row .rc-their-col {
+      border-bottom: 1px solid $grey-94;
+    }
+
+    .rc-comparison-header .rc-my-col {
+      border-radius: 8px;
+      align-self: start;
+
+      .rc-date-value {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .rc-required {
+    color: $btn-danger-color;
+  }
+
+  .rc-confirm-section {
+    padding: 4px 0px 80px 0px;
+
+    .rc-confirm-title {
+      font-size: 13px;
+      font-weight: $font-weight-medium;
+      color: $primary-black;
+    }
+
+    .rc-confirm-label {
+      font-size: 13px;
+      color: $neutral-stroke;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+  }
+
+  .rc-card-banner {
+    margin-bottom: 16px;
+
+    .regular-text {
+      margin-top: 2px;
+    }
+  }
+
+  .rc-overwrite-hint {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
+    color: $neutral-stroke;
+  }
+
+  .rc-resolution-choices {
+    margin: 16px 0 0 0;
+    padding: 0;
+    border: 0;
+
+    .rc-resolution-legend {
+      float: none;
+      width: auto;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: $font-weight-medium;
+      color: $primary-black;
+    }
+
+    .rc-resolution-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      border: 1px solid $grey-94;
+      border-radius: 8px;
+      background-color: $color-white;
+      cursor: pointer;
+
+      &.--selected {
+        border: 2px solid $color-purple;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      input[type="radio"] {
+        margin-top: 2px;
+        cursor: pointer;
+        accent-color: $link-color;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+
+      .rc-resolution-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .rc-resolution-label {
+        font-size: 13px;
+        font-weight: $font-weight-medium;
+        color: $primary-black;
+      }
+
+      .rc-resolution-description {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-regular;
+        color: $neutral-stroke;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .rc-card-comment {
+    margin-top: 16px;
+  }
+
+  .rc-resolved-count {
+    font-size: 13px;
+    font-weight: $font-weight-regular;
+    color: $neutral-stroke;
+    white-space: nowrap;
+  }
+
+  .rc-card-confirm {
+    margin-top: 16px;
+
+    .rc-confirm-title {
+      font-size: 13px;
+      font-weight: $font-weight-medium;
+      color: $primary-black;
+    }
+
+    .rc-confirm-label {
+      font-size: 13px;
+      color: $neutral-stroke;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+  }
+}

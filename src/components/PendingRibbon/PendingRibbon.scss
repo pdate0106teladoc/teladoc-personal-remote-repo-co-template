@@ -1,0 +1,30 @@
+.validate-ribbon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: $primary-black;
+
+    .message {
+        width: 100%;
+        padding: 8px 14px;
+        font-size: $font-size-xs;
+        display: flex;
+        flex-direction: row;
+
+        .view-details {
+            cursor: pointer;
+            padding: 0;
+            color: $link-color;
+            font-size: $font-size-12px;
+            padding-left: 8px;
+            text-decoration: underline;
+        }
+
+        svg {
+            margin-right: 10px;
+            width: 16px;
+            height: 16px;
+        }
+    }
+}

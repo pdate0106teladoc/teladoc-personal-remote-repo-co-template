@@ -1,0 +1,27 @@
+.sync {
+  margin: 8px 24px 16px;
+
+  .warning {
+    background: $warning-bg-color;
+    border: 1px solid $warning-border-color;
+    border-radius: 4px;
+    width: 100%;
+    padding: 8px 14px;
+    font-size: $font-size-xs;
+    margin-bottom: 16px;
+
+    svg {
+      fill: $warning-error-color;
+      margin-right: 16px;
+      width: 16px;
+      height: 15px;
+    }
+  }
+
+  .sync-info {
+    width: 100%;
+    font-size: $font-size-small;
+    line-height: 20px;
+    font-weight: 400;
+  }
+}

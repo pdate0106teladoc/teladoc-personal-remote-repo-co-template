@@ -1,0 +1,33 @@
+.contact-details-sidebar {
+    .info-label {
+        font-weight: $font-weight-regular;
+        font-size: $font-size-xs;
+        color: $neutral-stroke;
+    }
+
+    .info-value {
+        font-weight: $font-weight-regular;
+        font-size: $font-size-small;
+    }
+
+    .info-link {
+        font-weight: $font-weight-regular;
+        font-size: $font-size-small;
+        color: $link-color;
+        text-decoration: none;
+
+        &.table-link {
+            font-size: $font-size-xs;
+        }
+    }
+
+    .parent-org {
+        font-weight: $font-weight-regular;
+        font-size: $font-base-size;
+        color: $neutral-stroke;
+    }
+
+    .nav-link.active {
+        background-color: transparent !important;
+    }
+}

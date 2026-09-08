@@ -1,0 +1,54 @@
+.put-on-hold-modal {
+    .modal-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 24px;
+
+        .comments-section {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            .comments-label {
+                font-size: $font-size-xs;
+                font-weight: $font-weight-medium;
+                color: $color-black;
+                margin-bottom: 0;
+            }
+
+            .comments-textarea {
+                width: 100%;
+                border: 1px solid $neutral-strole-1;
+                border-bottom: 1px solid $neutral-stroke;
+                border-radius: 4px;
+                padding: 10px 12px;
+                font-size: $font-size-xs;
+                color: $color-black;
+                resize: none;
+                font-family: inherit;
+                
+
+                &::placeholder {
+                    color: $color-grey;
+                }
+            }
+        }
+
+        .confirm-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .check-label {
+                font-size: $font-size-xs;
+                color: $color-grey;
+                margin-bottom: 0;
+            }
+
+            .required {
+                color: red;
+            }
+        }
+    }
+}

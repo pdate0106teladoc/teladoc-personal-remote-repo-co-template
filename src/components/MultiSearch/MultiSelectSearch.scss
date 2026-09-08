@@ -1,0 +1,67 @@
+.multi-search-input {
+    .dropdown {
+        width: 100%;
+        position: relative;
+    }
+
+    label {
+        font-size: $font-size-small;
+        font-weight: $font-weight-semi-bold;
+        margin-bottom: 4px;
+    }
+
+    #dropdown-basic-button {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        padding: 6px 12px;
+    }
+
+    .multi-select-content {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .custom-input,
+    .custom-input:focus-visible {
+        border: none;
+        outline: none;
+    }
+
+    .pill-item {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 8px 0px 4px;
+        margin: 0px 2px;
+        background-color: $neutral-background-hover;
+        color: $btn-back-color;
+        font-size: $font-size-12px;
+        border-radius: 4px;
+
+        #close-img {
+            cursor: pointer;
+            margin-left: 4px;
+            height: 16px;
+            width: 16px;
+        }
+    }
+
+    .dropdown-menu {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        transform: none !important;
+        margin-top: 0 !important;
+        border: 1px solid $table-bordercolor !important;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        cursor: pointer;
+
+        .check-icon {
+            width: 20px;
+        }
+    }
+}

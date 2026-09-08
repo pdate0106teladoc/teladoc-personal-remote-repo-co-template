@@ -1,0 +1,264 @@
+.org-config-content {
+  height: calc(96vh - 147px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding: 1rem;
+  padding-bottom: 0px;
+  overflow-y: auto;
+  background-color: $table-header-color;
+  padding-top: 0px;
+
+  .content-area-loader {
+    height: 100%;
+  }
+
+  &.edit-mode {
+    background-color: $color-white;
+
+    .nav-link.active {
+      background-color: $color-white !important;
+    }
+  }
+}
+
+.nav-link.active,
+.nav-link.active:hover {
+  color: $primary-black;
+  font-weight: $font-weight-semi-bold;
+  background-color: $table-header-color !important;
+  border: 0px;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    border-radius: 20px;
+    width: calc(100% - 20px);
+    height: 3px;
+    background-color: $btn-primary-color;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -3px;
+  }
+}
+
+.nav-link {
+  border: 0px !important;
+  color: $btn-back-color;
+}
+
+.nav-link:hover {
+  color: $btn-back-color;
+  border: 0px;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    border-radius: 20px;
+    width: calc(100% - 20px);
+    height: 3px;
+    background-color: $pill-hover-color;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -3px;
+  }
+}
+
+#uncontrolled-tab-example {
+  border: 0px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background-color: $table-header-color;
+  border-color: $table-header-color;
+  font-size: $font-size-reg;
+
+  &.edit-mode {
+    background-color: $color-white;
+  }
+}
+
+.table-header {
+  th {
+    background-color: $table-header-color;
+    color: $primary-black;
+    font-weight: $font-weight-semi-bold;
+    font-size: $font-size-reg;
+    line-height: 20px;
+  }
+}
+
+.table-body {
+  td {
+    color: $primary-black;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-small;
+    line-height: 20px;
+  }
+}
+
+.scroll-table {
+  width: 172%;
+  overflow-x: scroll;
+}
+
+.person-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+
+  .avatar-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: $table-bordercolor;
+    color: $neutral-stroke;
+    font-size: $font-base-size;
+    font-weight: $font-weight-semi-bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  .person-name {
+    color: $link-color;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-small;
+  }
+}
+
+.font-color {
+  color: $link-color !important;
+}
+
+.card-container-hierarchy {
+  width: 75% !important;
+}
+
+.custom-header {
+  font-weight: $font-weight-regular !important;
+  font-size: $font-size-small !important;
+  line-height: 20px !important;
+}
+
+.render-cell-style {
+  font-size: $font-size-xs;
+}
+
+.email-recipient-card {
+  margin-bottom: 0px;
+  border-bottom-left-radius: 0px;
+
+  .card-body {
+    padding-bottom: 0px;
+  }
+}
+
+.report-settings {
+  margin-top: 0px;
+}
+
+.tab-content {
+  padding: 8px;
+
+}
+
+.history-logs-page {
+  .history-header {
+    font-weight: $font-weight-semi-bold;
+    font-size: $font-size-reg;
+    margin-left: 4px;
+  }
+
+  .history-header-row{
+    .history-title{
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .person-name {
+    color: black;
+  }
+
+  .workfrontid {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 4px;
+  }
+
+  .text-link-none {
+    text-decoration: none;
+    color: $link-color;
+
+  }
+
+  .history-filter-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 16px;
+    gap: 8px;
+  }
+
+  .history-filter {
+    height: 24px;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
+  }
+
+  .fbb-clear {
+    min-width: fit-content;
+  }
+
+  .history-table-wrapper {
+
+    background-color: $color-white;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-top: 16px;
+
+  }
+}
+
+#history-drawer-tabs {
+  border: none;
+  margin-bottom: 25px;
+}
+
+.draft-save {
+  font-size: $font-size-small;
+  font-weight: $font-weight-regular;
+  line-height: 20px;
+  color: $neutral-stroke;
+}
+
+.saving-spinner {
+  width: 16px;
+  height: 16px;
+  border-width: 1px;
+}
+
+.action-button-dark-items {
+  .dropdown-menu .dropdown-item {
+    color: $btn-back-color;
+  }
+}
+
+.action-button-spacing {
+  margin-right: 7px;
+}
+
+.conflict-prompt-content {
+  display: inline-block;
+  padding-right: 8rem;
+}

@@ -1,0 +1,77 @@
+.bundle-tree {
+  margin-left: 1rem;
+  padding-left: 1rem;
+  margin-top: 1rem;
+
+  .bundle-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-left: 4rem;
+    color: $btn-secondary-color;
+    margin-top: 8px;
+    span{
+      font-size:$font-size-xs;
+    }
+
+    .bundle-date {
+      margin-right: 1rem;
+    }
+
+    .flag {
+      padding: 0.15rem 0.5rem;
+      border-radius: 0.25rem;
+      font-weight: $font-weight-medium;
+    }
+  }
+
+  .bundle-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+
+    .toggle-button {
+      border: 1px solid $pagination-arrow-disabled;
+      background-color: transparent;
+      border-radius: 3px;
+      width: 20px;
+      height: 20px;
+      margin-right: 16px;
+
+      svg {
+        fill: $link-color;
+        width: 10px;
+        height: 10px;
+        position: relative;
+        bottom: 5px;
+        right: 1px;
+        &.current-org {
+          fill: $primary-black !important;
+        }
+      }
+    }
+
+    .bundle-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: $link-color;
+      margin-bottom: 0px;
+    }
+  }
+
+  .bundle-content {
+    margin-top: 0.75rem;
+    margin-left: 4rem;
+  }
+
+  .product-wrapper {
+    margin-bottom: 0.75rem;
+    width: 60%;
+  }
+
+  .child-bundle {
+    padding: 16px;
+  }
+}

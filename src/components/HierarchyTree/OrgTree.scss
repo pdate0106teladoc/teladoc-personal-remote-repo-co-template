@@ -1,0 +1,144 @@
+.org-tree-container {
+  background: $color-white;
+  padding: 1rem;
+  max-width: 100%;
+  padding: 12px 6px 6px 6px;
+
+
+  .org-tree-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    font-weight: $font-weight-regular;
+    font-size: 14px;
+    background-color: $table-header-color;
+    color: $btn-back-color;
+    border-bottom: 1px solid $table-bordercolor;
+    margin-bottom: 0.5rem;
+  }
+
+  .tree-node-wrapper {
+    position: relative;
+
+    .tree-node {
+      display: flex;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 14px;
+      border-bottom: 1px solid $table-bordercolor;
+
+      .tree-node-content {
+        display: flex;
+        align-items: center;
+        flex: 5;
+        min-width: 0;
+
+        .tree-node-indent {
+          display: flex;
+          align-items: center;
+        }
+
+        .hierarchyCollapseButton,
+        .hierarchyExpandButton {
+          border: 1px solid $pagination-arrow-disabled;
+          background-color: transparent;
+          border-radius: 3px;
+          width: 24px;
+          height: 24px;
+
+          svg {
+            fill: $link-color;
+            width: 10px;
+            height: 10px;
+            position: relative;
+            bottom: 2px;
+
+            &.current-org {
+              fill: $primary-black !important;
+            }
+          }
+        }
+
+        .hierarchyCollapseButton {
+          background-color: $grey-94;
+        }
+      }
+
+      .billing-status {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+
+        .billOrg {
+          span {
+            margin-left: 8px;
+          }
+        }
+      }
+
+      .icon {
+        font-size: 0.9rem;
+        margin-right: 6px;
+        color: $link-color;
+
+        &.current-org {
+          color: $primary-black;
+        }
+      }
+
+      .label {
+        color: $link-color;
+        text-decoration: none;
+        margin-right: auto;
+        font-weight: $font-weight-regular;
+        font-size: $font-size-small;
+        line-height: 20px;
+
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+
+        &.current-org {
+          color: $primary-black;
+          text-decoration: none;
+          cursor: default;
+        }
+      }
+
+      .current-org-count {
+        color: $primary-black;
+        text-decoration: none;
+        cursor: default;
+        margin-left: 4px;
+      }
+
+      .badge-status {
+        padding: 3px 8px;
+        border-radius: 16px;
+
+        &.na {
+          background-color: $table-bordercolor;
+          color: $color-grey;
+          font-weight: $font-weight-medium;
+        }
+      }
+    }
+
+    .tree-indent {
+      padding-left: 1.5rem;
+    }
+  }
+
+  &.no-billing-column {
+    .tree-node-wrapper {
+      .tree-node {
+        .tree-node-content {
+          flex: 100%;
+        }
+      }
+    }
+  }
+}

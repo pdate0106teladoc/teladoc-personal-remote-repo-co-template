@@ -1,0 +1,16 @@
+@import "@/styles/variables.scss";
+
+.editable-marketing-site-users {
+  .marketing-site-users-multi-select {
+    min-width: 400px;
+    &.multi-search-input {
+      margin-bottom: 0;
+    }
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+}

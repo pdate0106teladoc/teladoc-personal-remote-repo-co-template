@@ -1,0 +1,42 @@
+.contact-filter-container {
+    .content {
+        gap: 24px;
+        padding: 10px;
+        padding-bottom: 80px;
+
+        .checkbox-group-wrapper {
+            &.filter-check {
+                padding: 0px;
+
+                .checkbox-group-title {
+                    font-weight: $font-weight-semi-bold;
+                    color: $color-black;
+                }
+
+                .checkbox-list {
+                    &.checkbox-list--vertical {
+                        padding: 8px 0px 0px 8px;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        flex-shrink: 0;
+        padding: 20px;
+        text-align: center;
+        border-top: 1px solid $grey-94;
+        display: flex;
+        justify-content: space-between;
+        background-color: $color-white;
+
+        button {
+            width: revert;
+        }
+    }
+}

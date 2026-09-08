@@ -1,0 +1,61 @@
+.review-summary-modal {
+  .review-summary-modal__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  &__warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background-color: #fef4f0;
+    border: 1px solid $warning-border-color;
+    border-radius: 6px;
+  }
+
+  &__warning-icon {
+    color: #d84a1b;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  &__warning-title {
+    font-size: $font-size-small;
+    font-weight: $font-weight-semi-bold;
+    color: $contact-name;
+    margin: 0;
+  }
+
+  &__warning-desc {
+    font-size: $font-size-small;
+    color: $breadcrumb-item;
+    margin: 0;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__field-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $contact-title;
+  }
+
+  &__field-value {
+    font-size: $font-size-small;
+    color: $contact-name;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+}

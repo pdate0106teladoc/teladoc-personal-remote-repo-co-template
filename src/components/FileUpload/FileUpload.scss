@@ -1,0 +1,199 @@
+.file-upload {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    .upload-modal-body {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        text-align: left;
+        gap: 16px;
+        padding: 24px;
+        background-color: $table-header-color;
+        border-radius: 4px;
+        .modal-message{
+            font-size: $font-size-small;
+            color: $btn-back-color;
+            font-weight: $font-weight-regular;
+        }
+
+        .file-text {
+            font-size: $font-size-small;
+            font-weight: $font-weight-regular;
+        }
+
+        .file-name {
+            font-weight: $font-weight-semi-bold;
+            font-size: $font-size-small;
+            padding-left: 8px;
+            max-width: 55%;
+            overflow-wrap: anywhere;
+        }
+
+        .file-size {
+            font-size: $font-size-small;
+            font-weight: $font-weight-regular;
+            color: $neutral-foreground;
+            padding-left: 8px;
+        }
+
+        .file-info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .error-dialog {
+            background-color: $warning-background-color;
+            border: 1px solid $warning-border-color;
+            border-radius: 4px;
+            padding: 5px 12px;
+            width: 100%;
+
+            .bold-text {
+                font-weight: $font-weight-semi-bold;
+                font-size: $font-size-xs;
+                color: $color-black;
+            }
+
+            .regular-text {
+                font-weight: $font-weight-regular;
+                font-size: $font-size-small;
+                color: $color-black;
+            }
+        }
+
+        .ribbon-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0.5rem 1rem;
+
+            .ribbon-close {
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 0.25rem;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .upload-area {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed $neutral-strole-1;
+            border-radius: 8px;
+            width: 100%;
+            padding: 20px 0 20px 0;
+
+            &.drag-over {
+                background-color: $neutral-background-hover;
+                border: 1px solid $color-purple;
+            }
+        }
+
+        .upload-button {
+            font-size: $font-size-small;
+            font-weight: $font-weight-regular;
+            color: $link-color;
+            background: none;
+            border: none;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .drag-text {
+            color: $color-purple;
+            font-weight: $font-weight-semi-bold;
+            font-size: $font-size-small;
+        }
+    }
+
+    .searching-spinner {
+        height: 20px;
+        width: 20px;
+        margin-right: 0px;
+        border-width: 2px;
+    }
+
+    .section-label {
+        font-weight: $font-weight-regular;
+        margin-bottom: 4px;
+        display: inline-block;
+        font-size: $font-size-xs;
+        color: $primary-black;
+    }
+
+    .add-documents-button {
+        width: fit-content;
+        font-weight: $font-weight-regular;
+        font-size: $font-size-xs;
+        padding: 0px 8px;
+    }
+
+    .file-info-loader {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .file-name-loader {
+            font-weight: $font-weight-semi-bold;
+            font-size: $font-size-small;
+            padding-left: 8px;
+        }
+
+        .file-size-loader {
+            font-size: $font-size-small;
+            font-weight: $font-weight-regular;
+            color: $neutral-foreground;
+            padding-left: 8px;
+        }
+    }
+
+    .error-dialog {
+        background-color: $warning-background-color;
+        border: 1px solid $warning-border-color;
+        border-radius: 4px;
+        padding: 5px 12px;
+        width: 100%;
+
+        .bold-text {
+            font-weight: $font-weight-semi-bold;
+            font-size: $font-size-xs;
+            color: $color-black;
+        }
+
+        .regular-text {
+            font-weight: $font-weight-regular;
+            font-size: $font-size-small;
+            color: $color-black;
+        }
+    }
+
+    .ribbon-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0.5rem 1rem;
+
+        .ribbon-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+        }
+    }
+}

@@ -1,0 +1,122 @@
+.hierarchyNode {
+    margin-bottom: 4px;
+
+    .hierarchyTable {
+        display: flex;
+        border-bottom: 1px solid $table-bordercolor;
+        justify-content: space-between;
+        align-items: center;
+
+        &:hover {
+            background-color: $table-header-color;
+        }
+
+        .billing {
+            padding-right: 65px;
+        }
+
+        .hierarchyNodeContent {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            transition: background-color 0.2s ease;
+            min-height: 44px;
+
+
+        }
+
+        .rootNode {
+            font-weight: 600;
+            color: $link-color;
+            padding-left: 8px;
+        }
+
+        .organizationNode {
+            font-weight: 500;
+            color: $link-color;
+            padding-left: 8px;
+        }
+
+        .defaultNode {
+            color: $primary-black;
+            padding-left: 8px;
+        }
+
+        .hierarchy-expand-button {
+            background: none;
+            border: none;
+            padding: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $expand-btn-color;
+            margin-right: 4px;
+            min-width: 24px;
+
+            &:hover {
+                color: $primary-black;
+            }
+        }
+
+        .hierarchyNodeLabel {
+            display: flex;
+            align-items: center;
+            font-size: $font-size-small;
+            line-height: $font-size-2rem;
+            color: $link-color;
+            font-weight: 400;
+            cursor: pointer;
+
+            svg {
+                margin-left: 6px;
+                min-width: 20px;
+            }
+        }
+
+        .hierarchyCollapseButton,
+        .hierarchyExpandButton {
+            border: 1px solid $pagination-arrow-disabled;
+            background-color: $expand-btn-border;
+            border-radius: 3px;
+            width: 24px;
+            height: 24px;
+
+            svg {
+                fill: $link-color;
+                width: 10px;
+                height: 10px;
+                position: relative;
+                top: -2px;
+            }
+        }
+
+        .hierarchyCollapseButton {
+            background-color: $color-white;
+        }
+
+        .ml5 {
+            margin-left: 5px;
+        }
+    }
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    background: $table-header-color;
+    border-bottom: 1px solid $table-bordercolor;
+    justify-content: space-between;
+    padding: 6px 0 6px 8px;
+
+    h3 {
+        align-items: self-end;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 10px;
+        color: $btn-back-color;
+        font-size: $font-size-small;
+        line-height: $font-size-2rem;
+        margin-bottom: 0;
+    }
+}

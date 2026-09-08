@@ -1,0 +1,64 @@
+.timeout-container {
+  height: calc(100vh - 42px);
+  background-color: $login-page-bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeout-card {
+  background: $color-white;
+  border-radius: 8px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  padding-left: 80px;
+  padding-right: 80px;
+  row-gap: 32px;
+  width: 501px;
+  height: 347px;
+  text-align: center;
+  align-items: start;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.timeout-content {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 32px;
+  width: 100%;
+  height: 100%;
+}
+
+#back-to-sign-in {
+  width: 100%;
+  height: 40px;
+}
+
+.logo {
+  width: 120px;
+  height: 39px;
+  display: flex;
+  align-items: start;
+}
+
+.timeout-title {
+  font-size: $font-size-28;
+  line-height: $font-size-xl;
+  font-weight: $font-weight-semi-bold;
+  color: $color-black;
+  width: auto;
+  letter-spacing: 1px;
+  margin-bottom: 0px;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.timeout-des {
+  font-size: $font-size-reg;
+  line-height: $font-size-2rem;
+  font-weight: 400;
+  color: $primary-black;
+  text-align: left;
+  justify-content: left;
+}
