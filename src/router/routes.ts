@@ -11,3 +11,4 @@ export const GRP_DETAIL_PATH = `${routes.root}/groups`;
 export const CONTACT_PATH = `${routes.root}/contacts`;
 export const ADMIN_PAGE_PATH = `${routes.root}/admin`;
 export const TASKS_DASHBOARD_PATH = `${routes.root}/tasks-dashboard`;
+export const TEMPLATE_PATH = `${routes.root}/template`;
