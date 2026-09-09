@@ -1,0 +1,101 @@
+.program-overview-detail {
+  .program-overview-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: $color-white;
+    border: 1px solid $btn-border-color;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: $font-size-xs;
+    color: $primary-black;
+
+    .back-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+
+      path {
+        fill: $primary-black;
+      }
+    }
+  }
+
+  .program-overview-title {
+    font-size: $font-size-2rem;
+    font-weight: $font-weight-semi-bold;
+    color: $primary-black;
+    margin: 16px 0 12px;
+  }
+
+  .program-detail-section {
+    padding-top: 8px;
+
+    .section-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: 0;
+      padding: 0;
+      margin-bottom: 12px;
+    }
+
+    .section-caret {
+      width: 12px;
+      height: 12px;
+      color: $primary-black;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semi-bold;
+      color: $primary-black;
+      margin: 0;
+    }
+  }
+
+  // Fields flow down the first column and continue in the second, matching the
+  // sequential order in the design.
+  .section-fields {
+    columns: 2;
+    column-gap: 40px;
+  }
+
+  .section-field {
+    break-inside: avoid;
+    padding: 5px 0;
+
+    // The shared DisplayRow is sized for full-page layouts; tighten it so two
+    // columns fit inside the modal.
+    .display-row {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .display-label {
+      flex: 0 0 56%;
+      min-width: 0;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semi-bold;
+      line-height: 18px;
+    }
+
+    .display-value-col {
+      min-width: 0;
+    }
+
+    .display-value {
+      min-width: 0;
+      padding-left: 0;
+      font-size: $font-size-xs;
+      line-height: 18px;
+    }
+
+    .bool-img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}

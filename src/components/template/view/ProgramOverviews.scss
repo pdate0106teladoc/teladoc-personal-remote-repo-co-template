@@ -1,0 +1,137 @@
+.template-program-overviews {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding-top: 16px;
+
+  .program-overview-panel {
+    flex: 0 1 auto;
+    overflow-y: auto;
+    background-color: $table-header-color;
+    border-radius: 6px;
+    padding: 12px 16px 16px;
+  }
+
+  // With nothing to list, the panel fills the tab area instead of hugging.
+  .program-overview-panel--empty {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .program-overview-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .empty-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background-color: $grey-94;
+      color: $primary-black;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .empty-title {
+      font-size: $font-size-l;
+      font-weight: $font-weight-semi-bold;
+      color: $primary-black;
+      margin: 0 0 16px;
+    }
+
+    .add-program-overview-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 8px;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-regular;
+      border-radius: 4px;
+    }
+  }
+
+  .panel-title {
+    font-size: $font-size-small;
+    font-weight: $font-weight-semi-bold;
+    color: $primary-black;
+    margin: 0 0 12px;
+  }
+
+  .program-overview-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .program-overview-card {
+    background-color: $color-white;
+    border: 1px solid $card-border;
+    border-radius: 6px;
+    padding: 12px 16px 14px;
+
+    & + .program-overview-card {
+      margin-top: 12px;
+    }
+  }
+
+  .program-overview-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: $font-size-small;
+    font-weight: $font-weight-semi-bold;
+    color: $link-color;
+  }
+
+  .program-overview-arrow {
+    width: 12px;
+    height: 10px;
+    flex-shrink: 0;
+  }
+
+  .program-overview-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: $font-size-xs;
+
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: $neutral-foreground;
+
+      path {
+        fill: $neutral-foreground;
+      }
+    }
+
+    .meta-label {
+      color: $color-grey;
+      font-weight: $font-weight-semi-bold;
+    }
+
+    .meta-value {
+      color: $primary-black;
+    }
+  }
+}

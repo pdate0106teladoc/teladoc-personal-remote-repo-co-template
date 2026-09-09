@@ -20,10 +20,22 @@ vi.mock("@ucc/common-ui", () => ({
         {children}
       </div>
     ) : null,
+  CustomTable: () => <div data-testid="applied-table" />,
+  PaginationView: () => <div data-testid="pagination-view" />,
+  RoundedLabel: ({ text }: any) => <span>{text}</span>,
+  DisplayRow: ({ label, value, format, personMeta }: any) => (
+    <div>
+      <span>{label}</span>
+      <span>{format === "person" ? personMeta?.name : String(value)}</span>
+    </div>
+  ),
 }));
 
 vi.mock("@/assets", () => ({
   DarkPlusIcon: () => <span />,
+  OpenIcon: () => <span />,
+  RightArrow: () => <span />,
+  ArrowLeft: () => <span />,
 }));
 
 describe("TemplatePage", () => {
@@ -162,6 +174,35 @@ describe("TemplatePage", () => {
     expect(
       within(dialog).getByRole("tabpanel", { name: "Billing" }),
     ).toHaveTextContent("comingSoon");
+  });
+
+  it("drills into a program overview and back out again", () => {
+    render(<TemplatePage />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Allied Template" }));
+
+    const dialog = screen.getByRole("dialog", { name: "Allied Template" });
+    fireEvent.click(within(dialog).getByRole("tab", { name: "Program Overviews" }));
+    fireEvent.click(
+      within(dialog).getByRole("button", { name: "Allied - Diabetes Care" }),
+    );
+
+    expect(
+      within(dialog).getByRole("heading", { name: "Allied - Diabetes Care" }),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByRole("tab", { name: "Engagement criteria" }),
+    ).toBeInTheDocument();
+    expect(within(dialog).getByText("Program Platform Version")).toBeInTheDocument();
+    expect(
+      within(dialog).queryByRole("tab", { name: "Applied Client Overviews" }),
+    ).not.toBeInTheDocument();
+
+    fireEvent.click(within(dialog).getByRole("button", { name: "Back" }));
+
+    expect(
+      within(dialog).getByRole("tab", { name: "Program Overviews" }),
+    ).toBeInTheDocument();
   });
 
   it("closes the detail modal", () => {
