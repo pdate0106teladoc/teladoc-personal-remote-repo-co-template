@@ -11,6 +11,7 @@ vi.mock("@ucc/common-ui", () => ({
 vi.mock("@/assets", () => ({
   RightArrow: () => <span data-testid="right-arrow" />,
   DarkPlusIcon: () => <span data-testid="plus-icon" />,
+  DustbinIcon: () => <span data-testid="dustbin-icon" />,
 }));
 
 describe("ProgramOverviews", () => {
@@ -58,5 +59,39 @@ describe("ProgramOverviews", () => {
     fireEvent.click(screen.getByRole("button", { name: "Allied - Hypertension" }));
 
     expect(onSelectProgramOverview).toHaveBeenCalledWith(ALLIED_PROGRAM_OVERVIEWS[1]);
+  });
+
+  it("hides the add and delete controls outside edit mode", () => {
+    render(<ProgramOverviews />);
+
+    expect(
+      screen.queryByRole("button", { name: "Add Program Overview" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Delete Allied - Diabetes Care" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("adds and deletes from the same list in edit mode", () => {
+    const onAddProgramOverview = vi.fn();
+    const onDeleteProgramOverview = vi.fn();
+    render(
+      <ProgramOverviews
+        editable
+        onAddProgramOverview={onAddProgramOverview}
+        onDeleteProgramOverview={onDeleteProgramOverview}
+      />,
+    );
+
+    expect(screen.getByRole("heading", { name: "2 Program Overviews" })).toBeInTheDocument();
+    expect(screen.getByText("Diabetes Care")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Add Program Overview" }));
+    expect(onAddProgramOverview).toHaveBeenCalledTimes(1);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Delete Allied - Diabetes Care" }),
+    );
+    expect(onDeleteProgramOverview).toHaveBeenCalledWith(ALLIED_PROGRAM_OVERVIEWS[0]);
   });
 });

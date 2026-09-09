@@ -11,9 +11,9 @@ vi.mock("@ucc/common-ui", () => ({
   CalendarIcon: () => <span />,
   GroupIcon: () => <span />,
   PencilIcon: () => <span />,
-  Modal: ({ show, title, children, onHide }: any) =>
+  SideModal: ({ show, title, children, onHide }: any) =>
     show ? (
-      <div role="dialog" aria-label={typeof title === "string" ? title : "dialog"}>
+      <div role="dialog" aria-label={typeof title === "string" ? title : "drawer"}>
         <button type="button" onClick={onHide}>
           Close
         </button>
@@ -29,6 +29,42 @@ vi.mock("@ucc/common-ui", () => ({
       <span>{format === "person" ? personMeta?.name : String(value)}</span>
     </div>
   ),
+  CustomInput: ({ label, value, onChange, id, name, type }: any) => (
+    <>
+      {label ? <span>{label}</span> : null}
+      <input
+        id={id}
+        name={name}
+        type={type}
+        aria-label={label}
+        value={value}
+        onChange={onChange}
+      />
+    </>
+  ),
+  CustomRadioGroup: ({ value, onChange }: any) => (
+    <div>
+      <button type="button" aria-pressed={value === true} onClick={() => onChange(true)}>
+        Yes
+      </button>
+      <button type="button" aria-pressed={value === false} onClick={() => onChange(false)}>
+        No
+      </button>
+    </div>
+  ),
+  CustomDropdown: ({ value, onChange, options, placeholder }: any) => (
+    <select
+      value={value}
+      onChange={(event) => onChange(event.target.value)}
+    >
+      <option value="">{placeholder}</option>
+      {options?.map((option: { label: string; value: string }) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  ),
 }));
 
 vi.mock("@/assets", () => ({
@@ -36,6 +72,7 @@ vi.mock("@/assets", () => ({
   OpenIcon: () => <span />,
   RightArrow: () => <span />,
   ArrowLeft: () => <span />,
+  DustbinIcon: () => <span />,
 }));
 
 describe("TemplatePage", () => {
@@ -152,6 +189,136 @@ describe("TemplatePage", () => {
       expect.objectContaining({ name: "ECM Template" }),
       "client-overview",
     );
+  });
+
+  it("opens and saves the client overview edit form", async () => {
+    render(<TemplatePage />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Edit Allied Template" }),
+    );
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Edit template" }),
+    );
+
+    const dialog = screen.getByRole("dialog", {
+      name: "Edit Client Overview template",
+    });
+    expect(
+      within(dialog).getByRole("heading", { name: "Allied Template" }),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByRole("tab", { name: "General settings" }),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByRole("tab", { name: "Program Overviews" }),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByLabelText("Account name (LCRM Livongo)"),
+    ).toHaveValue("Allied Benefit Systems");
+    expect(within(dialog).getByRole("button", { name: "Save" })).toBeDisabled();
+
+    fireEvent.change(within(dialog).getByLabelText("Template name"), {
+      target: { value: "Updated Allied Template" },
+    });
+    fireEvent.change(within(dialog).getByLabelText("Contract path"), {
+      target: { value: "Allied" },
+    });
+    fireEvent.change(within(dialog).getByLabelText("Client Success Manager"), {
+      target: { value: "Connor Hudson" },
+    });
+    fireEvent.change(
+      within(dialog).getByLabelText("Client Implementation Manager"),
+      { target: { value: "Jane Williams" } },
+    );
+    fireEvent.change(
+      within(dialog).getByLabelText("Registration customizations"),
+      { target: { value: "Standard" } },
+    );
+    fireEvent.change(within(dialog).getByLabelText("Cardio start date"), {
+      target: { value: "2026-01-01" },
+    });
+    fireEvent.change(within(dialog).getByLabelText("Member support phone"), {
+      target: { value: "555-0100" },
+    });
+
+    expect(within(dialog).getByRole("button", { name: "Save" })).toBeEnabled();
+    fireEvent.click(within(dialog).getByRole("button", { name: "Save" }));
+
+    expect(
+      screen.queryByRole("dialog", {
+        name: "Edit Client Overview template",
+      }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Updated Allied Template" }),
+    ).toBeInTheDocument();
+  });
+
+  it("edits a program overview from the editor and comes back to the list", async () => {
+    render(<TemplatePage />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Edit Allied Template" }),
+    );
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Edit template" }),
+    );
+
+    const dialog = screen.getByRole("dialog", {
+      name: "Edit Client Overview template",
+    });
+    fireEvent.click(
+      within(dialog).getByRole("tab", { name: "Program Overviews" }),
+    );
+    fireEvent.click(
+      within(dialog).getByRole("button", { name: "Allied - Diabetes Care" }),
+    );
+
+    expect(
+      within(dialog).getByRole("heading", {
+        name: "Program Overview: Allied - Diabetes Care",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByRole("tab", { name: "Engagement criteria" }),
+    ).toBeInTheDocument();
+    expect(within(dialog).getByRole("button", { name: "Cancel" })).toBeInTheDocument();
+    expect(within(dialog).getByRole("button", { name: "Save" })).toBeInTheDocument();
+    expect(within(dialog).queryByLabelText("Template name")).not.toBeInTheDocument();
+
+    fireEvent.change(within(dialog).getByLabelText("Enrollment Cap"), {
+      target: { value: "500" },
+    });
+    fireEvent.click(within(dialog).getByRole("button", { name: "Back" }));
+
+    expect(
+      within(dialog).getByRole("button", { name: "Allied - Diabetes Care" }),
+    ).toBeInTheDocument();
+
+    // Re-entering keeps the edit made before going back.
+    fireEvent.click(
+      within(dialog).getByRole("button", { name: "Allied - Diabetes Care" }),
+    );
+    expect(within(dialog).getByLabelText("Enrollment Cap")).toHaveValue("500");
+  });
+
+  it("does not open the client overview editor for organization templates", async () => {
+    render(<TemplatePage />);
+
+    fireEvent.click(screen.getByRole("tab", { name: "Organization" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Edit BCBS NC Template" }),
+    );
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Edit template" }),
+    );
+
+    expect(
+      screen.queryByRole("dialog", {
+        name: "Edit Client Overview template",
+      }),
+    ).not.toBeInTheDocument();
   });
 
   it("opens the detail modal from a template heading", () => {

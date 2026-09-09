@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
-import { Modal } from "@ucc/common-ui";
+import { SideModal } from "@ucc/common-ui";
 import {
   AppliedClientOverviews,
   Billing,
@@ -18,7 +18,7 @@ import type {
   TemplateDetail,
   TemplateSummary,
 } from "@/components/template/view";
-import "./TemplateDetailModal.scss";
+import "./TemplateDetailDrawer.scss";
 
 interface DetailTabContext {
   detail: TemplateDetail;
@@ -28,7 +28,7 @@ interface DetailTabContext {
 interface DetailTab {
   key: string;
   title: string;
-  /** Panes that manage their own scroll area rather than growing the modal. */
+  /** Panes that manage their own scroll area rather than growing the drawer. */
   fillHeight?: boolean;
   render: (context: DetailTabContext) => React.ReactNode;
 }
@@ -58,13 +58,13 @@ const TEMPLATE_DETAIL_TABS: DetailTab[] = [
   },
 ];
 
-interface TemplateDetailModalProps {
+interface TemplateDetailDrawerProps {
   show: boolean;
   template: TemplateSummary | null;
   onHide: () => void;
 }
 
-const TemplateDetailModal: React.FC<TemplateDetailModalProps> = ({
+const TemplateDetailDrawer: React.FC<TemplateDetailDrawerProps> = ({
   show,
   template,
   onHide,
@@ -73,49 +73,50 @@ const TemplateDetailModal: React.FC<TemplateDetailModalProps> = ({
     useState<ProgramOverviewSummary | null>(null);
   const detail = (template && DETAILS_BY_ID[template.id]) || dashDetail();
 
-  // Always land on the tab list when the modal opens or switches template.
+  // Always land on the tab list when the drawer opens or switches template.
   useEffect(() => {
     setSelectedOverview(null);
   }, [show, template?.id]);
 
   return (
-    <Modal
+    <SideModal
       show={show && Boolean(template)}
       onHide={onHide}
       title={template?.name}
-      size="xl"
-      centered
-      dialogClassName="template-detail-modal"
+      type="lg"
     >
-      {template && selectedOverview && (
-        <ProgramOverviewDetail
-          overview={selectedOverview}
-          onBack={() => setSelectedOverview(null)}
-        />
-      )}
-      {template && !selectedOverview && (
-        <Tabs
-          defaultActiveKey={TEMPLATE_DETAIL_TABS[0].key}
-          id={`template-detail-tabs-${template.id}`}
-          className="template-detail-tabs"
-        >
-          {TEMPLATE_DETAIL_TABS.map((tab) => (
-            <Tab
-              eventKey={tab.key}
-              title={tab.title}
-              key={tab.key}
-              className={tab.fillHeight ? "detail-pane-fill" : undefined}
+      {template && (
+        <div className="template-detail-drawer">
+          {selectedOverview ? (
+            <ProgramOverviewDetail
+              overview={selectedOverview}
+              onBack={() => setSelectedOverview(null)}
+            />
+          ) : (
+            <Tabs
+              defaultActiveKey={TEMPLATE_DETAIL_TABS[0].key}
+              id={`template-detail-tabs-${template.id}`}
+              className="template-detail-tabs"
             >
-              {tab.render({
-                detail,
-                onSelectProgramOverview: setSelectedOverview,
-              })}
-            </Tab>
-          ))}
-        </Tabs>
+              {TEMPLATE_DETAIL_TABS.map((tab) => (
+                <Tab
+                  eventKey={tab.key}
+                  title={tab.title}
+                  key={tab.key}
+                  className={tab.fillHeight ? "detail-pane-fill" : undefined}
+                >
+                  {tab.render({
+                    detail,
+                    onSelectProgramOverview: setSelectedOverview,
+                  })}
+                </Tab>
+              ))}
+            </Tabs>
+          )}
+        </div>
       )}
-    </Modal>
+    </SideModal>
   );
 };
 
-export default TemplateDetailModal;
+export default TemplateDetailDrawer;

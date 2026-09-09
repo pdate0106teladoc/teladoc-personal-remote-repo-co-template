@@ -1,0 +1,71 @@
+.template-detail-drawer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+
+  // Scoped to the direct child so the program overview drill-down's own tabs
+  // don't inherit a second scroll container.
+  > .tab-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 8px 0 0 !important;
+  }
+
+  // Panes that host their own scroll area (e.g. a paginated table) fill the
+  // drawer instead of stretching it, so the pane manages overflow internally.
+  > .tab-content > .detail-pane-fill.active {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  > .program-overview-detail {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding-top: 8px;
+  }
+
+  // The drill-down into a single program overview reuses the same tab styling.
+  .template-detail-tabs,
+  .program-detail-tabs {
+    flex: 0 0 auto;
+    border-bottom: 1px solid $card-border;
+
+    .nav-item + .nav-item {
+      margin-left: 16px;
+    }
+
+    .nav-link {
+      border: 0;
+      margin: 0;
+      padding: 0 0 8px;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-regular;
+      color: $color-grey;
+      background-color: transparent;
+    }
+
+    .nav-link.active {
+      color: $btn-primary-color;
+      font-weight: $font-weight-semi-bold;
+      position: relative;
+
+      &::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+        border-radius: 2px;
+        background-color: $btn-primary-color;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+}

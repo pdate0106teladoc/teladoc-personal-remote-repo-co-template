@@ -12,7 +12,11 @@ import {
 } from "@ucc/common-ui";
 import { DarkPlusIcon } from "@/assets";
 import { formatUTCtoDateOnly } from "@/utils";
-import TemplateDetailModal from "@/components/Modal/TemplateDetailModal";
+import {
+  EditClientOverviewTemplateDrawer,
+  TemplateDetailDrawer,
+} from "@/components/template";
+import type { ClientOverviewTemplateForm } from "@/components/template/edit";
 import type { TemplateSummary } from "@/components/template/view";
 import "./TemplatePage.scss";
 
@@ -55,6 +59,7 @@ const TEMPLATE_TABS: TemplateTab[] = [
 ];
 
 const EDIT_ACTIONS = ["Edit template", "Duplicate template", "Delete template"];
+const EDIT_ACTION = "Edit template";
 const DUPLICATE_ACTION = "Duplicate template";
 const COPY_NAME = /^(.*) \((\d+)\)$/;
 
@@ -140,6 +145,8 @@ const TemplatePage: React.FC<TemplatePageProps> = ({
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateSummary | null>(
     null,
   );
+  const [templateBeingEdited, setTemplateBeingEdited] =
+    useState<TemplateSummary | null>(null);
 
   const visibleTemplates = useMemo(
     () =>
@@ -186,10 +193,25 @@ const TemplatePage: React.FC<TemplatePageProps> = ({
     template: TemplateSummary,
     tab: TemplateTab,
   ) => {
-    if (action === DUPLICATE_ACTION) {
+    if (action === EDIT_ACTION && tab.scope === "client-overview") {
+      setTemplateBeingEdited(template);
+    } else if (action === DUPLICATE_ACTION) {
       duplicateTemplate(template, tab);
     }
     onEditAction?.(action, template, tab.scope);
+  };
+
+  const saveClientOverviewTemplate = (
+    template: TemplateSummary,
+    form: ClientOverviewTemplateForm,
+  ) => {
+    setTemplatesByScope((current) => ({
+      ...current,
+      "client-overview": current["client-overview"].map((item) =>
+        item.id === template.id ? { ...item, name: form.templateName } : item,
+      ),
+    }));
+    setTemplateBeingEdited(null);
   };
 
   const renderCreateButton = (tab: TemplateTab) => (
@@ -330,10 +352,16 @@ const TemplatePage: React.FC<TemplatePageProps> = ({
             </Tab>
           ))}
         </Tabs>
-        <TemplateDetailModal
+        <TemplateDetailDrawer
           show={Boolean(selectedTemplate)}
           template={selectedTemplate}
           onHide={() => setSelectedTemplate(null)}
+        />
+        <EditClientOverviewTemplateDrawer
+          show={Boolean(templateBeingEdited)}
+          template={templateBeingEdited}
+          onHide={() => setTemplateBeingEdited(null)}
+          onSave={saveClientOverviewTemplate}
         />
       </div>
     </div>

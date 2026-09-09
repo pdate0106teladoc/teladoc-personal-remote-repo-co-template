@@ -47,23 +47,31 @@
       color: $primary-black;
       margin: 0 0 16px;
     }
+  }
 
-    .add-program-overview-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 0 8px;
-      font-size: $font-size-xs;
-      font-weight: $font-weight-regular;
-      border-radius: 4px;
-    }
+  .add-program-overview-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
+    border-radius: 4px;
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
   }
 
   .panel-title {
     font-size: $font-size-small;
     font-weight: $font-weight-semi-bold;
     color: $primary-black;
-    margin: 0 0 12px;
+    margin: 0;
   }
 
   .program-overview-list {
@@ -73,6 +81,10 @@
   }
 
   .program-overview-card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
     background-color: $color-white;
     border: 1px solid $card-border;
     border-radius: 6px;
@@ -80,6 +92,25 @@
 
     & + .program-overview-card {
       margin-top: 12px;
+    }
+  }
+
+  .program-overview-card-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .program-overview-delete {
+    flex: 0 0 auto;
+    border: 0;
+    background: none;
+    padding: 0;
+    line-height: 0;
+
+    svg {
+      width: 18px;
+      height: 18px;
     }
   }
 
