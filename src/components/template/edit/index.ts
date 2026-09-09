@@ -5,14 +5,20 @@ export { default as Eligibility } from "./Eligibility";
 export { default as EngagementCriteria } from "./EngagementCriteria";
 export { default as ProgramOverviews } from "./ProgramOverviews";
 export { default as ProgramOverviewDetail } from "./ProgramOverviewDetail";
-export { default as AppliedClientOverviews } from "./AppliedClientOverviews";
-export { DETAILS_BY_ID, dashDetail } from "./detailData";
 export {
-  ALLIED_PROGRAM_OVERVIEWS,
-  buildProgramOverviewFields,
-} from "./programOverviewData";
+  buildClientOverviewTemplateForm,
+  isClientOverviewTemplateFormComplete,
+} from "./types";
 export type {
-  ProgramOverviewField,
-  ProgramOverviewSummary,
-} from "./programOverviewData";
-export type { TemplateSummary, TemplateDetail, FieldPair } from "./types";
+  ClientOverviewTemplateField,
+  ClientOverviewTemplateForm,
+} from "./types";
+export {
+  buildProgramOverviewContext,
+  buildProgramOverviewEditForm,
+} from "./programOverviewForm";
+export type {
+  ProgramOverviewContext,
+  ProgramOverviewEditField,
+  ProgramOverviewEditForm,
+} from "./programOverviewForm";

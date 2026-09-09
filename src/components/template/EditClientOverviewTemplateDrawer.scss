@@ -1,0 +1,119 @@
+.edit-template-drawer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+
+  &__content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  &__footer {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid $card-border;
+    padding-top: 16px;
+
+    .custom-button {
+      font-size: $font-size-small;
+    }
+  }
+
+  .edit-template-name-heading {
+    flex: 0 0 auto;
+    margin: 0 0 14px;
+    color: $primary-black;
+    font-size: $font-size-2rem;
+    font-weight: $font-weight-semi-bold;
+  }
+
+  .template-name-field {
+    flex: 0 0 auto;
+    margin-bottom: 22px;
+
+    // The wrapper keeps its own box (and `position: relative`) so the library's
+    // absolutely positioned focus underline can't escape to an outer ancestor.
+    .custom-input-wrapper {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      align-items: center;
+
+      // That underline spans the whole wrapper, which here includes the label
+      // column; the field's own focus border marks focus instead.
+      &::after {
+        display: none;
+      }
+    }
+
+    .custom-input-label {
+      margin-bottom: 0;
+      color: $color-grey;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-regular;
+    }
+
+    .custom-input-field {
+      height: 30px;
+      padding: 4px 8px;
+      font-size: $font-size-xs;
+    }
+  }
+
+  // The program overview drill-down reuses the same tab styling.
+  .edit-template-tabs,
+  .edit-program-detail-tabs {
+    flex: 0 0 auto;
+    border-bottom: 1px solid $card-border;
+
+    .nav-item + .nav-item {
+      margin-left: 18px;
+    }
+
+    .nav-link {
+      position: relative;
+      margin: 0;
+      border: 0;
+      background: transparent;
+      padding: 0 0 8px;
+      color: $color-grey;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-regular;
+    }
+
+    .nav-link.active {
+      color: $btn-primary-color;
+      font-weight: $font-weight-semi-bold;
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        border-radius: 2px;
+        background: $btn-primary-color;
+        content: "";
+      }
+    }
+  }
+
+  &__content > .tab-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding-bottom: 12px;
+  }
+
+  @media (max-width: 760px) {
+    .template-name-field .custom-input-wrapper {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+}

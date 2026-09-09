@@ -1,0 +1,43 @@
+.edit-program-overview-detail {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+
+  .program-overview-back {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid $btn-border-color;
+    border-radius: 4px;
+    background-color: $color-white;
+    padding: 4px 12px;
+    color: $primary-black;
+    font-size: $font-size-xs;
+
+    .back-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+
+      path {
+        fill: $primary-black;
+      }
+    }
+  }
+
+  .program-overview-title {
+    flex: 0 0 auto;
+    margin: 16px 0 12px;
+    color: $primary-black;
+    font-size: $font-size-2rem;
+    font-weight: $font-weight-semi-bold;
+  }
+
+  > .tab-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+}

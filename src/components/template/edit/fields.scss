@@ -1,0 +1,235 @@
+.edit-form {
+  padding-top: 8px;
+
+  .edit-section {
+    padding: 10px 4px 12px;
+    border-bottom: 1px solid $card-border;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  .edit-section-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    background: none;
+    padding: 0;
+    color: $primary-black;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semi-bold;
+  }
+
+  .section-chevron {
+    width: 12px;
+    height: 12px;
+    transition: transform 120ms ease;
+
+    &.collapsed {
+      transform: rotate(-90deg);
+    }
+  }
+
+  .edit-section-content {
+    padding: 12px 0 0;
+  }
+
+  .edit-fields-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0 48px;
+  }
+
+  .edit-fields-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .edit-field {
+    display: grid;
+    grid-template-columns: minmax(150px, 52%) minmax(0, 1fr);
+    align-items: center;
+    min-height: 28px;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+
+  fieldset.edit-field {
+    border: 0;
+    padding: 0;
+  }
+
+  .edit-field-label {
+    min-width: 0;
+    margin: 0;
+    padding-right: 12px;
+    color: $color-grey;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semi-bold;
+    line-height: 16px;
+  }
+
+  .edit-field-control {
+    min-width: 0;
+
+    .custom-input-wrapper {
+      width: 100%;
+      margin-bottom: 0;
+      // Keep the library underline inside this compact field, not the drawer.
+      &::after {
+        display: none;
+      }
+    }
+
+    .custom-input-field {
+      height: 28px;
+      padding: 3px 8px;
+      font-size: $font-size-xs;
+    }
+
+    .custom-radio-group .radio-options {
+      gap: 18px;
+    }
+
+    .custom-radio-group .radio-option .radio-custom {
+      width: 16px;
+      height: 16px;
+    }
+
+    .custom-radio-group .radio-option .radio-label {
+      margin-left: 5px;
+      font-size: $font-size-xs;
+      color: $primary-black;
+    }
+
+    .custom-dropdown-wrapper {
+      width: 100%;
+
+      .custom-dropdown::after {
+        display: none;
+      }
+
+      #dropdown-basic-button,
+      #dropdown-basic-button-error {
+        width: 100%;
+        height: 28px;
+        min-height: 28px;
+        padding: 3px 8px;
+        font-size: $font-size-xs;
+      }
+
+      .dropdown-menu {
+        width: 100%;
+      }
+    }
+  }
+
+  .read-only-value {
+    color: $primary-black;
+    font-size: $font-size-xs;
+    line-height: 18px;
+  }
+
+  // Nested under `.edit-field-control` so these win over the compact control
+  // padding set above, which would otherwise run text under the badge.
+  .edit-field-control .person-control {
+    position: relative;
+    display: block;
+    min-width: 0;
+
+    .person-initial {
+      position: absolute;
+      top: 50%;
+      left: 6px;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      background-color: $card-border;
+      color: $primary-black;
+      font-size: 10px;
+      font-weight: $font-weight-semi-bold;
+    }
+
+    .custom-dropdown-wrapper #dropdown-basic-button {
+      padding-left: 30px;
+    }
+  }
+
+  .edit-field-control .currency-control {
+    position: relative;
+    display: block;
+    min-width: 0;
+
+    .currency-symbol {
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      z-index: 1;
+      transform: translateY(-50%);
+      color: $primary-black;
+      font-size: $font-size-xs;
+    }
+
+    .custom-input-field {
+      padding-left: 20px;
+      text-align: right;
+    }
+  }
+
+  .lookup-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 28px;
+    gap: 5px;
+    border: 1px solid $btn-border-color;
+    border-radius: 4px;
+    padding: 3px 5px;
+    background-color: $color-white;
+    color: $color-grey;
+
+    > svg {
+      width: 12px;
+      height: 12px;
+      flex: 0 0 auto;
+    }
+
+    .lookup-value {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      color: $primary-black;
+      font-size: $font-size-xs;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    button {
+      display: inline-flex;
+      border: 0;
+      background: none;
+      padding: 0;
+      color: $color-grey;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  @media (max-width: 760px) {
+    .edit-fields-grid {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+}
