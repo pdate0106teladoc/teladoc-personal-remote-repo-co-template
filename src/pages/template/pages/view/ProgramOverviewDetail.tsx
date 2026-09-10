@@ -1,19 +1,17 @@
 import * as React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { ArrowLeft } from "@/assets";
-import Billing from "./Billing";
-import Eligibility from "./Eligibility";
+import ComingSoonTab from "./ComingSoonTab";
 import EngagementCriteria from "./EngagementCriteria";
-import Marketing from "./Marketing";
 import ProgramOverviewGeneralSettings from "./ProgramOverviewGeneralSettings";
 import { ProgramOverviewSummary } from "./programOverviewData";
 import "@/pages/template/style/ProgramOverviewDetail.scss";
 
 const PROGRAM_DETAIL_TABS = [
   { key: "general-settings", title: "General settings" },
-  { key: "billing", title: "Billing", Component: Billing },
-  { key: "marketing", title: "Marketing", Component: Marketing },
-  { key: "eligibility", title: "Eligibility", Component: Eligibility },
+  { key: "billing", title: "Billing", Component: ComingSoonTab },
+  { key: "marketing", title: "Marketing", Component: ComingSoonTab },
+  { key: "eligibility", title: "Eligibility", Component: ComingSoonTab },
   {
     key: "engagement-criteria",
     title: "Engagement criteria",
