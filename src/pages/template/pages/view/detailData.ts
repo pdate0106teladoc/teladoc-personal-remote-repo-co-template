@@ -39,9 +39,13 @@ export const ALLIED_DETAIL: TemplateDetail = {
   ],
   clinicalAndMemberSupportLeft: [
     { label: "Clinical model", value: EMPTY_VALUE },
+    { label: "Clinical data sharing and access", value: "None" },
+    { label: "Clinical referrals", value: "Bi-Directional" },
+    { label: "Clinical model details", value: EMPTY_VALUE },
   ],
   clinicalAndMemberSupportRight: [
     { label: "Member support phone", value: EMPTY_VALUE },
+    { label: "Member support URL", value: EMPTY_VALUE },
   ],
   ccmBillingLeft: [
     { label: "Billing partner", value: EMPTY_VALUE },

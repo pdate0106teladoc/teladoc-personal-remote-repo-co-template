@@ -55,6 +55,10 @@
     min-height: 28px;
     margin: 0;
     margin-bottom: 5px;
+
+    &.textarea-field {
+      align-items: flex-start;
+    }
   }
 
   fieldset.edit-field {
@@ -90,6 +94,16 @@
       height: 28px;
       padding: 3px 8px;
       font-size: $font-size-xs;
+    }
+
+    .custom-textarea,
+    textarea {
+      width: 100%;
+      min-height: 56px;
+      margin-bottom: 0;
+      padding: 6px 8px;
+      font-size: $font-size-xs;
+      line-height: 16px;
     }
 
     .custom-radio-group .radio-options {
