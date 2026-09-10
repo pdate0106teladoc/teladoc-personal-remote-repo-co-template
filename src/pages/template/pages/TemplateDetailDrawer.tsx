@@ -39,9 +39,21 @@ const TEMPLATE_DETAIL_TABS: DetailTab[] = [
     title: "General settings",
     render: ({ detail }) => <GeneralSettings detail={detail} />,
   },
-  { key: "billing", title: "Billing", render: () => <Billing /> },
-  { key: "marketing", title: "Marketing", render: () => <Marketing /> },
-  { key: "eligibility", title: "Eligibility", render: () => <Eligibility /> },
+  {
+    key: "billing",
+    title: "Billing",
+    render: ({ detail }) => <Billing detail={detail} />,
+  },
+  {
+    key: "marketing",
+    title: "Marketing",
+    render: ({ detail }) => <Marketing detail={detail} />,
+  },
+  {
+    key: "eligibility",
+    title: "Eligibility",
+    render: ({ detail }) => <Eligibility detail={detail} />,
+  },
   {
     key: "program-overviews",
     title: "Program Overviews",

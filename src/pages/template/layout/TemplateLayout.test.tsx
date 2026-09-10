@@ -244,6 +244,54 @@ describe("TemplateLayout", () => {
     });
 
     expect(within(dialog).getByRole("button", { name: "Save" })).toBeEnabled();
+
+    fireEvent.click(within(dialog).getByRole("tab", { name: "Billing" }));
+    expect(within(dialog).getByText("CCM billing details")).toBeInTheDocument();
+    expect(within(dialog).getByText("Contract Details")).toBeInTheDocument();
+    expect(within(dialog).getByText("Lapsed User Details")).toBeInTheDocument();
+    expect(within(dialog).getByText("Account has SLA?")).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Is there a lapsed user clause"),
+    ).toBeInTheDocument();
+    expect(within(dialog).getByLabelText("Billing partner")).toBeInTheDocument();
+    expect(
+      within(dialog).getByLabelText("Contract Type"),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByLabelText("Billing address - CCM"),
+    ).toHaveValue("");
+    expect(within(dialog).getByRole("button", { name: "Save" })).toBeEnabled();
+
+    fireEvent.click(within(dialog).getByRole("tab", { name: "Marketing" }));
+    expect(
+      within(dialog).getByText("Marketing Preferences"),
+    ).toBeInTheDocument();
+    expect(within(dialog).getByText("Group Overview")).toBeInTheDocument();
+    expect(within(dialog).getByText("CCM Logos")).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Allowed Communication Methods"),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Additional marketing details"),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Client allows targeted marketing?"),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByLabelText("Enrollment marketing customizations"),
+    ).toHaveValue("");
+
+    fireEvent.click(within(dialog).getByRole("tab", { name: "Eligibility" }));
+    expect(within(dialog).getByText("Eligibility Details")).toBeInTheDocument();
+    expect(within(dialog).getByText("CCM Integrations")).toBeInTheDocument();
+    expect(
+      within(dialog).getByRole("button", { name: "Member Support Details" }),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByLabelText("Link to Box folder - PHI Release"),
+    ).toHaveValue("");
+    expect(within(dialog).getByText("Program Eligibility Flag")).toBeInTheDocument();
+
     fireEvent.click(within(dialog).getByRole("button", { name: "Save" }));
 
     expect(
@@ -335,13 +383,68 @@ describe("TemplateLayout", () => {
     expect(within(dialog).getByRole("tab", { name: "Program Overviews" })).toBeInTheDocument();
     expect(within(dialog).getByRole("tab", { name: "Applied Client Overviews" })).toBeInTheDocument();
     expect(within(dialog).getByText("Overview")).toBeInTheDocument();
-    expect(within(dialog).getByText("Allied Benefit Systems")).toBeInTheDocument();
+    expect(within(dialog).getAllByText("Allied Benefit Systems").length).toBeGreaterThan(0);
     expect(within(dialog).getByText("Has broker")).toBeInTheDocument();
+    expect(
+      within(dialog).getByRole("button", { name: "Group permissions" }),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByRole("button", { name: "Clinical and member support" }),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Account name (LCRM Livongo)"),
+    ).toBeInTheDocument();
+    expect(within(dialog).getByText("Organization")).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("CCM multifactor authentication"),
+    ).toBeInTheDocument();
+    expect(within(dialog).getByText("Clinical model")).toBeInTheDocument();
 
     fireEvent.click(within(dialog).getByRole("tab", { name: "Billing" }));
+    const billingPanel = within(dialog).getByRole("tabpanel", {
+      name: "Billing",
+    });
+    expect(within(billingPanel).getByText("CCM billing details")).toBeInTheDocument();
+    expect(within(billingPanel).getByText("Contract Details")).toBeInTheDocument();
+    expect(within(billingPanel).getByText("Lapsed User Details")).toBeInTheDocument();
+    expect(within(billingPanel).getByText("Billing partner")).toBeInTheDocument();
+    expect(within(billingPanel).getByText("Account has SLA?")).toBeInTheDocument();
     expect(
-      within(dialog).getByRole("tabpanel", { name: "Billing" }),
-    ).toHaveTextContent("comingSoon");
+      within(billingPanel).getByText("Is there a lapsed user clause"),
+    ).toBeInTheDocument();
+
+    fireEvent.click(within(dialog).getByRole("tab", { name: "Marketing" }));
+    const marketingPanel = within(dialog).getByRole("tabpanel", {
+      name: "Marketing",
+    });
+    expect(within(marketingPanel).getByText("Group Overview")).toBeInTheDocument();
+    expect(within(marketingPanel).getByText("CCM Logos")).toBeInTheDocument();
+    expect(
+      within(marketingPanel).getByText("Allowed Communication Methods"),
+    ).toBeInTheDocument();
+    expect(
+      within(marketingPanel).getByText("Marketing Preferences"),
+    ).toBeInTheDocument();
+    expect(
+      within(marketingPanel).getByText("Additional marketing details"),
+    ).toBeInTheDocument();
+
+    fireEvent.click(within(dialog).getByRole("tab", { name: "Eligibility" }));
+    const eligibilityPanel = within(dialog).getByRole("tabpanel", {
+      name: "Eligibility",
+    });
+    expect(
+      within(eligibilityPanel).getByText("Eligibility Details"),
+    ).toBeInTheDocument();
+    expect(within(eligibilityPanel).getByText("CCM Integrations")).toBeInTheDocument();
+    expect(
+      within(eligibilityPanel).getByRole("button", {
+        name: "Member Support Details",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      within(eligibilityPanel).getByText("Program Eligibility Flag"),
+    ).toBeInTheDocument();
   });
 
   it("drills into a program overview and back out again", () => {

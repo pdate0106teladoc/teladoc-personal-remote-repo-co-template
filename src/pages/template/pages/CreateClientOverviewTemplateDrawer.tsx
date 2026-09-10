@@ -39,9 +39,27 @@ const CREATE_TABS: CreateTab[] = [
       <GeneralSettings form={form} onChange={onChange} />
     ),
   },
-  { key: "billing", title: "Billing", render: () => <Billing /> },
-  { key: "marketing", title: "Marketing", render: () => <Marketing /> },
-  { key: "eligibility", title: "Eligibility", render: () => <Eligibility /> },
+  {
+    key: "billing",
+    title: "Billing",
+    render: ({ form, onChange }) => (
+      <Billing form={form} onChange={onChange} />
+    ),
+  },
+  {
+    key: "marketing",
+    title: "Marketing",
+    render: ({ form, onChange }) => (
+      <Marketing form={form} onChange={onChange} />
+    ),
+  },
+  {
+    key: "eligibility",
+    title: "Eligibility",
+    render: ({ form, onChange }) => (
+      <Eligibility form={form} onChange={onChange} />
+    ),
+  },
 ];
 
 interface CreateClientOverviewTemplateDrawerProps {
@@ -106,7 +124,7 @@ const CreateClientOverviewTemplateDrawer: React.FC<
                 id="create-template-type"
                 name="templateType"
                 label="Template type"
-                className="input-style"
+                className="input-style readonly-field"
                 readOnly
                 value="Client Overview"
               />

@@ -44,10 +44,10 @@
       grid-template-columns: 250px minmax(0, 1fr);
       align-items: center;
 
-      // That underline spans the whole wrapper, which here includes the label
-      // column; the field's own focus border marks focus instead.
+      // The underline spans the whole wrapper, so start it where the input
+      // column does instead of under the label.
       &::after {
-        display: none;
+        left: 250px;
       }
     }
 
@@ -114,6 +114,11 @@
     .template-name-field .custom-input-wrapper {
       grid-template-columns: 1fr;
       gap: 6px;
+
+      // The label stacks above the input, so the underline spans the input again.
+      &::after {
+        left: 1px;
+      }
     }
   }
 }

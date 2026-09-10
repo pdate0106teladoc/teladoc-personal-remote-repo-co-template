@@ -2,9 +2,16 @@ import type { TemplateDetail } from "./types";
 
 const EMPTY_VALUE = "-";
 
+const dashFields = (fields: { label: string; value: string }[]) =>
+  fields.map((field) => ({ ...field, value: EMPTY_VALUE }));
+
+const empty = (labels: string[]) =>
+  labels.map((label) => ({ label, value: EMPTY_VALUE }));
+
 export const ALLIED_DETAIL: TemplateDetail = {
   overviewLeft: [
-    { label: "Account", value: "Allied Benefit Systems" },
+    { label: "Account name (LCRM Livongo)", value: "Allied Benefit Systems" },
+    { label: "Organization", value: "Allied Benefit Systems" },
     { label: "Contract path", value: "Allied" },
     { label: "Revenue bucket", value: "USGH" },
     { label: "Client Success Manager", value: EMPTY_VALUE },
@@ -21,18 +28,200 @@ export const ALLIED_DETAIL: TemplateDetail = {
     { label: "Welcome kits shipped by UPS, not Fedex", value: EMPTY_VALUE },
   ],
   groupRelationship: [{ label: "Has broker", value: "Yes" }],
+  groupPermissionsLeft: [
+    { label: "CCM multifactor authentication", value: EMPTY_VALUE },
+  ],
+  groupPermissionsRight: [
+    {
+      label: "Hide sexual orientation and gender identity questions?",
+      value: EMPTY_VALUE,
+    },
+  ],
+  clinicalAndMemberSupportLeft: [
+    { label: "Clinical model", value: EMPTY_VALUE },
+  ],
+  clinicalAndMemberSupportRight: [
+    { label: "Member support phone", value: EMPTY_VALUE },
+  ],
+  ccmBillingLeft: [
+    { label: "Billing partner", value: EMPTY_VALUE },
+    { label: "Billing method", value: EMPTY_VALUE },
+    { label: "Detailed invoice?", value: EMPTY_VALUE },
+    { label: "Billing point of contact", value: EMPTY_VALUE },
+    { label: "HIPAA covered entity", value: EMPTY_VALUE },
+    { label: "Detailed invoice recipients", value: EMPTY_VALUE },
+    { label: "Payment terms", value: EMPTY_VALUE },
+    { label: "Pricing model", value: EMPTY_VALUE },
+    { label: "Detailed invoice tags", value: EMPTY_VALUE },
+  ],
+  ccmBillingRight: [
+    { label: "Bundled pricing discount", value: EMPTY_VALUE },
+    { label: "Prorated enrollment", value: EMPTY_VALUE },
+    { label: "Fast start credit offered", value: EMPTY_VALUE },
+    { label: "Fast start credit type", value: EMPTY_VALUE },
+    { label: "Fast start participation rate", value: EMPTY_VALUE },
+    { label: "Fast start launch date", value: EMPTY_VALUE },
+    { label: "Fast start close date", value: EMPTY_VALUE },
+    { label: "Fast start custom", value: EMPTY_VALUE },
+    { label: "Billing address - CCM", value: EMPTY_VALUE },
+  ],
+  contractDetailsLeft: [
+    { label: "Contract Type", value: EMPTY_VALUE },
+    { label: "Legal Name", value: EMPTY_VALUE },
+    { label: "Contract Effective Date", value: EMPTY_VALUE },
+    { label: "Contract Termination Date", value: EMPTY_VALUE },
+    { label: "BAA Signed?", value: EMPTY_VALUE },
+    { label: "Unique Contract Terms", value: EMPTY_VALUE },
+    { label: "Marketing & DOPS requirement", value: EMPTY_VALUE },
+    { label: "Account has SLA?", value: EMPTY_VALUE },
+  ],
+  contractDetailsRight: [
+    { label: "SLA Details", value: EMPTY_VALUE },
+    { label: "Days notice for termination", value: EMPTY_VALUE },
+    { label: "Termination for convenience?", value: EMPTY_VALUE },
+    { label: "Days notice for convenience term", value: EMPTY_VALUE },
+    { label: "Bill early termination through claims", value: EMPTY_VALUE },
+    { label: "Customer signed date", value: EMPTY_VALUE },
+    { label: "Company signed date", value: EMPTY_VALUE },
+  ],
+  lapsedUserLeft: [
+    { label: "Clause: Claims data", value: EMPTY_VALUE },
+    { label: "Clause: Optimized enrollment plan", value: EMPTY_VALUE },
+    { label: "Is there a lapsed user clause", value: EMPTY_VALUE },
+  ],
+  lapsedUserRight: [
+    { label: "Clause: Multi-Channel marketing", value: EMPTY_VALUE },
+    { label: "Clause: Use of incentives", value: EMPTY_VALUE },
+  ],
+  groupOverviewLeft: empty([
+    "Enrollment Marketing Lead",
+    "Outreach Stratification",
+  ]),
+  groupOverviewRight: empty(["Outreach Stratification Date"]),
+  ccmLogosLeft: empty(["Client Logo Link"]),
+  ccmLogosRight: empty(["Logo File Name"]),
+  allowedCommunicationLeft: empty([
+    "Client Allows A/B Testing of",
+    "Marketing Channel Type",
+    "Union Client",
+  ]),
+  allowedCommunicationRight: empty([
+    "U18 Marketing?",
+    "Marketing Incentive Type",
+    "Phone Campaign",
+  ]),
+  marketingPreferencesLeft: empty([
+    "Client allows targeted marketing?",
+    "Clients must approve assets",
+    "Employee title",
+    "Marketing name",
+    "Client send out their own marketing?",
+    "Remove spanish",
+    "At no cost to you Alt text",
+    "Join Alt text",
+    "General eligibility sentence",
+    "General spanish eligibility sentence",
+    "100% paid for by",
+    "No OEP direct mail inserts",
+    "Use for activation/usage?",
+    "Type of incentive to exclude",
+    "Hold member marketing",
+    "Member comms need client approval",
+    "Hold all marketing",
+    "Lowercase registration code",
+  ]),
+  marketingPreferencesRight: empty([
+    "Use contract path for marketing",
+    "Date marketing put on hold",
+    "Ready for automation",
+    "Campaign lifecycle participation",
+    "Campaign type",
+    "Campaign options",
+    "Remove 'New'",
+    "Health benefit Alt text",
+    "Strips and lancets Alt text",
+    "General disclaimer",
+    "General spanish disclaimer",
+    "Remove unlimited",
+    "CCM incentives: Gift cards",
+    "CCM incentives: Gift cards date",
+    "CCM Incentives: Goods and Services",
+    "CCM Incentives: Goods and Services date",
+    "CCM Incentives: Content guides",
+    "CCM Incentives: Content Guides Date",
+  ]),
+  additionalMarketingLeft: empty([
+    "Enrollment marketing customizations",
+    "Enrollment on autopilot",
+  ]),
+  additionalMarketingRight: empty([
+    "Livongo led marketing",
+    "Marketing team notes",
+  ]),
+  eligibilityDetailsLeft: empty([
+    "Link to Box folder - PHI Release",
+    "Program Eligibility Flag",
+    "Is Eligibility Divertised?",
+    "Eligibility Verification Method",
+    "Eligibility File Cadence",
+    "Links to Eligibility Verification Folder",
+    "Eligibility Exceptions/Rules",
+  ]),
+  eligibilityDetailsRight: empty([
+    "Monthly Escalation Path",
+    "Eligibility Team Notes",
+    "Disable Live Program Eligibility Check",
+    "Eligible Group IDs",
+    "Manual Check",
+    "Population Data Sources",
+  ]),
+  ccmIntegrationsLeft: empty([
+    "SSO Partner",
+    "CVS/TDC Eligibility Criteria",
+    "Incentives API Partner",
+  ]),
+  ccmIntegrationsRight: empty([
+    "Incentives API Start Date",
+    "Incentive Reporting Partner",
+  ]),
+  memberSupportDetails: empty(["Member Support Details"]),
 };
 
-export const dashDetail = (overrides?: Partial<TemplateDetail>): TemplateDetail => ({
-  overviewLeft: ALLIED_DETAIL.overviewLeft.map((field) => ({
-    ...field,
-    value: EMPTY_VALUE,
-  })),
-  overviewRight: ALLIED_DETAIL.overviewRight.map((field) => ({
-    ...field,
-    value: EMPTY_VALUE,
-  })),
-  groupRelationship: [{ label: "Has broker", value: EMPTY_VALUE }],
+export const dashDetail = (
+  overrides?: Partial<TemplateDetail>,
+): TemplateDetail => ({
+  overviewLeft: dashFields(ALLIED_DETAIL.overviewLeft),
+  overviewRight: dashFields(ALLIED_DETAIL.overviewRight),
+  groupRelationship: dashFields(ALLIED_DETAIL.groupRelationship),
+  groupPermissionsLeft: dashFields(ALLIED_DETAIL.groupPermissionsLeft),
+  groupPermissionsRight: dashFields(ALLIED_DETAIL.groupPermissionsRight),
+  clinicalAndMemberSupportLeft: dashFields(
+    ALLIED_DETAIL.clinicalAndMemberSupportLeft,
+  ),
+  clinicalAndMemberSupportRight: dashFields(
+    ALLIED_DETAIL.clinicalAndMemberSupportRight,
+  ),
+  ccmBillingLeft: dashFields(ALLIED_DETAIL.ccmBillingLeft),
+  ccmBillingRight: dashFields(ALLIED_DETAIL.ccmBillingRight),
+  contractDetailsLeft: dashFields(ALLIED_DETAIL.contractDetailsLeft),
+  contractDetailsRight: dashFields(ALLIED_DETAIL.contractDetailsRight),
+  lapsedUserLeft: dashFields(ALLIED_DETAIL.lapsedUserLeft),
+  lapsedUserRight: dashFields(ALLIED_DETAIL.lapsedUserRight),
+  groupOverviewLeft: dashFields(ALLIED_DETAIL.groupOverviewLeft),
+  groupOverviewRight: dashFields(ALLIED_DETAIL.groupOverviewRight),
+  ccmLogosLeft: dashFields(ALLIED_DETAIL.ccmLogosLeft),
+  ccmLogosRight: dashFields(ALLIED_DETAIL.ccmLogosRight),
+  allowedCommunicationLeft: dashFields(ALLIED_DETAIL.allowedCommunicationLeft),
+  allowedCommunicationRight: dashFields(ALLIED_DETAIL.allowedCommunicationRight),
+  marketingPreferencesLeft: dashFields(ALLIED_DETAIL.marketingPreferencesLeft),
+  marketingPreferencesRight: dashFields(ALLIED_DETAIL.marketingPreferencesRight),
+  additionalMarketingLeft: dashFields(ALLIED_DETAIL.additionalMarketingLeft),
+  additionalMarketingRight: dashFields(ALLIED_DETAIL.additionalMarketingRight),
+  eligibilityDetailsLeft: dashFields(ALLIED_DETAIL.eligibilityDetailsLeft),
+  eligibilityDetailsRight: dashFields(ALLIED_DETAIL.eligibilityDetailsRight),
+  ccmIntegrationsLeft: dashFields(ALLIED_DETAIL.ccmIntegrationsLeft),
+  ccmIntegrationsRight: dashFields(ALLIED_DETAIL.ccmIntegrationsRight),
+  memberSupportDetails: dashFields(ALLIED_DETAIL.memberSupportDetails),
   ...overrides,
 });
 

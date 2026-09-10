@@ -16,4 +16,9 @@
     margin-left: 3px;
     font-size: $font-size-xs;
   }
+
+  // Nothing to edit here, so the focus underline would be misleading.
+  .custom-input-wrapper.readonly-field::after {
+    display: none;
+  }
 }

@@ -51,9 +51,27 @@ const EDIT_TABS: EditTab[] = [
       <GeneralSettings form={form} onChange={onChange} />
     ),
   },
-  { key: "billing", title: "Billing", render: () => <Billing /> },
-  { key: "marketing", title: "Marketing", render: () => <Marketing /> },
-  { key: "eligibility", title: "Eligibility", render: () => <Eligibility /> },
+  {
+    key: "billing",
+    title: "Billing",
+    render: ({ form, onChange }) => (
+      <Billing form={form} onChange={onChange} />
+    ),
+  },
+  {
+    key: "marketing",
+    title: "Marketing",
+    render: ({ form, onChange }) => (
+      <Marketing form={form} onChange={onChange} />
+    ),
+  },
+  {
+    key: "eligibility",
+    title: "Eligibility",
+    render: ({ form, onChange }) => (
+      <Eligibility form={form} onChange={onChange} />
+    ),
+  },
   {
     key: "program-overviews",
     title: "Program Overviews",
