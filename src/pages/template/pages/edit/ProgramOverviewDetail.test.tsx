@@ -82,6 +82,10 @@ describe("edit ProgramOverviewDetail", () => {
     expect(screen.getByText("Diabetes", readOnly)).toBeInTheDocument();
     expect(screen.getByText("Aetna", readOnly)).toBeInTheDocument();
     expect(screen.queryByLabelText("Program")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Name")).toHaveValue("Teamcare - Compr");
+    expect(screen.getByLabelText("Program start date")).toHaveValue("2026-01-01");
+    expect(screen.getByLabelText("Contract term")).toHaveValue("25");
+    expect(screen.getByLabelText("Renewal notice period")).toHaveValue("47");
   });
 
   it("reports edits to dropdowns, text, and radio fields", () => {
@@ -102,6 +106,28 @@ describe("edit ProgramOverviewDetail", () => {
     expect(onChange).toHaveBeenCalledWith("disableMentalHealthGuidance", false);
   });
 
+  it("renders and edits the program billing schedule", () => {
+    const { onChange } = renderDetail();
+
+    fireEvent.click(screen.getByRole("tab", { name: "Billing" }));
+
+    expect(
+      screen.getByRole("button", { name: "Contract: Program Schedule" }),
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText("Billing Partner Fee Type")).toHaveValue(
+      "Administrative",
+    );
+    expect(screen.getByLabelText("PPPM Billing Trigger")).toHaveValue(
+      "First Device Reading",
+    );
+
+    fireEvent.change(screen.getByLabelText("PPPM Billing Trigger"), {
+      target: { value: "Enrollment" },
+    });
+
+    expect(onChange).toHaveBeenCalledWith("pppmBillingTrigger", "Enrollment");
+  });
+
   it("goes back to the program overview list", () => {
     const { onBack } = renderDetail();
 
@@ -110,13 +136,29 @@ describe("edit ProgramOverviewDetail", () => {
     expect(onBack).toHaveBeenCalled();
   });
 
-  it("keeps the other tabs as placeholders", () => {
-    renderDetail();
+  it("renders and edits Marketing, Eligibility, and Engagement criteria", () => {
+    const { onChange } = renderDetail();
+
+    fireEvent.click(screen.getByRole("tab", { name: "Marketing" }));
+    expect(screen.getByLabelText("Incentive Criteria")).toHaveValue(
+      "Days Checking",
+    );
+    fireEvent.change(screen.getByLabelText("Phone Campaign"), {
+      target: { value: "SMS" },
+    });
+    expect(onChange).toHaveBeenCalledWith("phoneCampaign", "SMS");
+
+    fireEvent.click(screen.getByRole("tab", { name: "Eligibility" }));
+    expect(
+      screen.getByLabelText("Program Eligibility Verification Method"),
+    ).toHaveValue("RTE + (File OR Group ID)");
 
     fireEvent.click(screen.getByRole("tab", { name: "Engagement criteria" }));
-
-    expect(
-      screen.getByRole("tabpanel", { name: "Engagement criteria" }),
-    ).toHaveTextContent("comingSoon");
+    expect(screen.getByLabelText("Engagement Criteria Option")).toHaveValue(
+      "Default ESI",
+    );
+    expect(screen.getByLabelText("Required coaching sessions")).toHaveValue(
+      "5",
+    );
   });
 });

@@ -2,15 +2,8 @@ import * as React from "react";
 import { useMemo, useState } from "react";
 import { BsChevronDown, BsChevronRight } from "react-icons/bs";
 import { DisplayRow } from "@ucc/common-ui";
-import {
-  buildProgramOverviewGeneralSettingsSections,
-  ProgramOverviewSummary,
-} from "./programOverviewData";
+import { buildProgramOverviewBillingSections } from "./programOverviewData";
 import type { ProgramOverviewField } from "./programOverviewData";
-
-interface ProgramOverviewGeneralSettingsProps {
-  overview: ProgramOverviewSummary;
-}
 
 const renderColumn = (column: ProgramOverviewField[]) => (
   <div className="program-billing-column">
@@ -28,20 +21,15 @@ const renderColumn = (column: ProgramOverviewField[]) => (
   </div>
 );
 
-const ProgramOverviewGeneralSettings: React.FC<
-  ProgramOverviewGeneralSettingsProps
-> = ({ overview }) => {
-  const sections = useMemo(
-    () => buildProgramOverviewGeneralSettingsSections(overview),
-    [overview],
-  );
+const ProgramOverviewBilling = () => {
+  const sections = useMemo(buildProgramOverviewBillingSections, []);
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
 
   const toggle = (title: string) =>
     setCollapsed((current) => ({ ...current, [title]: !current[title] }));
 
   return (
-    <div className="program-general-settings">
+    <div className="program-general-settings program-billing-view">
       {sections.map((section) => {
         const expanded = !collapsed[section.title];
 
@@ -73,4 +61,4 @@ const ProgramOverviewGeneralSettings: React.FC<
   );
 };
 
-export default ProgramOverviewGeneralSettings;
+export default ProgramOverviewBilling;

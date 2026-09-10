@@ -212,6 +212,122 @@ const ProgramOverviewGeneralSettings: React.FC<
         </div>
       </div>
     </EditSection>
+
+    <EditSection title="Program Schedule">
+      <div className="edit-fields-grid">
+        <div className="edit-fields-column">
+          <TextField
+            label="Name"
+            field="scheduleName"
+            value={form.scheduleName}
+            onChange={(value) => onChange("scheduleName", value)}
+          />
+          <TextField
+            label="Program start date"
+            field="programStartDate"
+            type="date"
+            value={form.programStartDate}
+            onChange={(value) => onChange("programStartDate", value)}
+          />
+          <TextField
+            label="Program end date"
+            field="programEndDate"
+            type="date"
+            value={form.programEndDate}
+            onChange={(value) => onChange("programEndDate", value)}
+          />
+        </div>
+        <div className="edit-fields-column">
+          <TextField
+            label="Contract term"
+            field="contractTerm"
+            value={form.contractTerm}
+            onChange={(value) => onChange("contractTerm", value)}
+          />
+          <RadioField
+            label="Auto renewal"
+            value={form.autoRenewal}
+            onChange={(value) => onChange("autoRenewal", value)}
+          />
+          <TextField
+            label="Renewal notice period"
+            field="renewalNoticePeriod"
+            value={form.renewalNoticePeriod}
+            onChange={(value) => onChange("renewalNoticePeriod", value)}
+          />
+        </div>
+      </div>
+    </EditSection>
+
+    <EditSection title="Client Incentives">
+      <div className="edit-fields-grid">
+        <div className="edit-fields-column">
+          <TextField
+            label="Client plan design inclusions"
+            field="clientPlanDesignInclusions"
+            value={form.clientPlanDesignInclusions}
+            onChange={(value) => onChange("clientPlanDesignInclusions", value)}
+          />
+        </div>
+        <div className="edit-fields-column">
+          <RadioField
+            label="Provider based care"
+            value={form.providerBasedCare}
+            onChange={(value) => onChange("providerBasedCare", value)}
+          />
+        </div>
+      </div>
+    </EditSection>
+
+    <EditSection title="Client implementation">
+      <div className="edit-fields-grid">
+        <div className="edit-fields-column">
+          <TextField
+            label="Cumulative program cap"
+            field="cumulativeProgramCap"
+            value={form.cumulativeProgramCap}
+            onChange={(value) => onChange("cumulativeProgramCap", value)}
+          />
+          <TextField
+            label="BMI limit"
+            field="bmiLimit"
+            value={form.bmiLimit}
+            onChange={(value) => onChange("bmiLimit", value)}
+          />
+          <RadioField
+            label="Confirm on no recruitable match"
+            value={form.confirmOnNoRecruitableMatch}
+            onChange={(value) => onChange("confirmOnNoRecruitableMatch", value)}
+          />
+          <TextField
+            label="Qualification minimum age"
+            field="qualificationMinimumAge"
+            value={form.qualificationMinimumAge}
+            onChange={(value) => onChange("qualificationMinimumAge", value)}
+          />
+        </div>
+        <div className="edit-fields-column">
+          <TextField
+            label="Opt out questions"
+            field="optOutQuestions"
+            value={form.optOutQuestions}
+            onChange={(value) => onChange("optOutQuestions", value)}
+          />
+          <TextField
+            label="Additional questions"
+            field="additionalQuestions"
+            value={form.additionalQuestions}
+            onChange={(value) => onChange("additionalQuestions", value)}
+          />
+          <TextField
+            label="Insurance question group"
+            field="insuranceQuestionGroup"
+            value={form.insuranceQuestionGroup}
+            onChange={(value) => onChange("insuranceQuestionGroup", value)}
+          />
+        </div>
+      </div>
+    </EditSection>
   </div>
 );
 
