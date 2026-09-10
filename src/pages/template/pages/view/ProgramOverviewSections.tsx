@@ -1,20 +1,19 @@
 import * as React from "react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { BsChevronDown, BsChevronRight } from "react-icons/bs";
 import { DisplayRow } from "@ucc/common-ui";
-import {
-  buildProgramOverviewGeneralSettingsSections,
-  ProgramOverviewSummary,
+import type {
+  ProgramOverviewField,
+  ProgramOverviewFieldSection,
 } from "./programOverviewData";
-import type { ProgramOverviewField } from "./programOverviewData";
 
-interface ProgramOverviewGeneralSettingsProps {
-  overview: ProgramOverviewSummary;
+interface ProgramOverviewSectionsProps {
+  sections: ProgramOverviewFieldSection[];
 }
 
-const renderColumn = (column: ProgramOverviewField[]) => (
+const renderColumn = (fields: ProgramOverviewField[]) => (
   <div className="program-billing-column">
-    {column.map((field, index) => (
+    {fields.map((field, index) => (
       <div className="section-field" key={`${field.label}-${index}`}>
         <DisplayRow
           label={field.label}
@@ -28,17 +27,10 @@ const renderColumn = (column: ProgramOverviewField[]) => (
   </div>
 );
 
-const ProgramOverviewGeneralSettings: React.FC<
-  ProgramOverviewGeneralSettingsProps
-> = ({ overview }) => {
-  const sections = useMemo(
-    () => buildProgramOverviewGeneralSettingsSections(overview),
-    [overview],
-  );
+const ProgramOverviewSections: React.FC<ProgramOverviewSectionsProps> = ({
+  sections,
+}) => {
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
-
-  const toggle = (title: string) =>
-    setCollapsed((current) => ({ ...current, [title]: !current[title] }));
 
   return (
     <div className="program-general-settings">
@@ -50,7 +42,12 @@ const ProgramOverviewGeneralSettings: React.FC<
             <button
               type="button"
               className="section-toggle"
-              onClick={() => toggle(section.title)}
+              onClick={() =>
+                setCollapsed((current) => ({
+                  ...current,
+                  [section.title]: !current[section.title],
+                }))
+              }
               aria-expanded={expanded}
             >
               {expanded ? (
@@ -73,4 +70,4 @@ const ProgramOverviewGeneralSettings: React.FC<
   );
 };
 
-export default ProgramOverviewGeneralSettings;
+export default ProgramOverviewSections;

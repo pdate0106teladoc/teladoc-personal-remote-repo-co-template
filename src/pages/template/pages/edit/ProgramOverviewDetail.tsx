@@ -2,9 +2,11 @@ import * as React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { ArrowLeft } from "@/assets";
 import type { ProgramOverviewSummary } from "@/pages/template/pages/view";
-import ComingSoonTab from "./ComingSoonTab";
 import EngagementCriteria from "./EngagementCriteria";
+import ProgramOverviewBilling from "./ProgramOverviewBilling";
+import ProgramOverviewEligibility from "./ProgramOverviewEligibility";
 import ProgramOverviewGeneralSettings from "./ProgramOverviewGeneralSettings";
+import ProgramOverviewMarketing from "./ProgramOverviewMarketing";
 import { buildProgramOverviewContext } from "./programOverviewForm";
 import type {
   ProgramOverviewEditField,
@@ -14,14 +16,10 @@ import "@/pages/template/style/EditProgramOverviewDetail.scss";
 
 const PROGRAM_DETAIL_TABS = [
   { key: "general-settings", title: "General settings" },
-  { key: "billing", title: "Billing", Component: ComingSoonTab },
-  { key: "marketing", title: "Marketing", Component: ComingSoonTab },
-  { key: "eligibility", title: "Eligibility", Component: ComingSoonTab },
-  {
-    key: "engagement-criteria",
-    title: "Engagement criteria",
-    Component: EngagementCriteria,
-  },
+  { key: "billing", title: "Billing" },
+  { key: "marketing", title: "Marketing" },
+  { key: "eligibility", title: "Eligibility" },
+  { key: "engagement-criteria", title: "Engagement criteria" },
 ] as const;
 
 interface ProgramOverviewDetailProps {
@@ -58,8 +56,14 @@ const ProgramOverviewDetail: React.FC<ProgramOverviewDetailProps> = ({
       >
         {PROGRAM_DETAIL_TABS.map((tab) => (
           <Tab eventKey={tab.key} title={tab.title} key={tab.key}>
-            {"Component" in tab ? (
-              <tab.Component />
+            {tab.key === "billing" ? (
+              <ProgramOverviewBilling form={form} onChange={onChange} />
+            ) : tab.key === "marketing" ? (
+              <ProgramOverviewMarketing form={form} onChange={onChange} />
+            ) : tab.key === "eligibility" ? (
+              <ProgramOverviewEligibility form={form} onChange={onChange} />
+            ) : tab.key === "engagement-criteria" ? (
+              <EngagementCriteria form={form} onChange={onChange} />
             ) : (
               <ProgramOverviewGeneralSettings
                 form={form}
