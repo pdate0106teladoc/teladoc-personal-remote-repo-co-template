@@ -11,12 +11,13 @@ export interface ClientOverviewTemplateForm {
   chronicCarePopulationCoverage: string;
   ccmRegistrationAddressType: string;
   ccmRegistrationFlowScenarios: string;
-  cardioFeatureEnabled: boolean;
+  // `null` is an unanswered radio, which a brand new template starts with.
+  cardioFeatureEnabled: boolean | null;
   cardioStartDate: string;
-  welcomeKitsShippedByUps: boolean;
-  hasBroker: boolean;
+  welcomeKitsShippedByUps: boolean | null;
+  hasBroker: boolean | null;
   ccmMultifactorAuthentication: string;
-  hideSexualOrientationQuestions: boolean;
+  hideSexualOrientationQuestions: boolean | null;
   clinicalModel: string;
   memberSupportPhone: string;
 }
@@ -55,3 +56,33 @@ export const buildClientOverviewTemplateForm = (
   clinicalModel: "Care coordination",
   memberSupportPhone: "",
 });
+
+export const buildNewClientOverviewTemplateForm =
+  (): ClientOverviewTemplateForm => ({
+    templateName: "",
+    accountName: "Allied Benefit Systems",
+    organization: "Allied Benefit Systems",
+    contractPath: "",
+    revenueBucket: "",
+    clientSuccessManager: "",
+    clientImplementationManager: "",
+    registrationCustomizations: "",
+    chronicCarePopulationType: "",
+    chronicCarePopulationCoverage: "",
+    ccmRegistrationAddressType: "",
+    ccmRegistrationFlowScenarios: "",
+    cardioFeatureEnabled: null,
+    cardioStartDate: "",
+    welcomeKitsShippedByUps: null,
+    hasBroker: null,
+    ccmMultifactorAuthentication: "",
+    hideSexualOrientationQuestions: null,
+    clinicalModel: "",
+    memberSupportPhone: "",
+  });
+
+/** Creating a template only needs the two fields the design stars. */
+export const isNewClientOverviewTemplateFormComplete = (
+  form: ClientOverviewTemplateForm,
+): boolean =>
+  form.templateName.trim().length > 0 && form.organization.trim().length > 0;

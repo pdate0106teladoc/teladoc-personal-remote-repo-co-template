@@ -29,7 +29,7 @@ vi.mock("@ucc/common-ui", () => ({
       <span>{format === "person" ? personMeta?.name : String(value)}</span>
     </div>
   ),
-  CustomInput: ({ label, value, onChange, id, name, type }: any) => (
+  CustomInput: ({ label, value, onChange, id, name, type, readOnly }: any) => (
     <>
       {label ? <span>{label}</span> : null}
       <input
@@ -38,6 +38,7 @@ vi.mock("@ucc/common-ui", () => ({
         type={type}
         aria-label={label}
         value={value}
+        readOnly={readOnly}
         onChange={onChange}
       />
     </>
@@ -435,6 +436,52 @@ describe("TemplateLayout", () => {
       screen.getByRole("button", { name: "Create Client Overview template" }),
     );
     expect(onCreateTemplate).toHaveBeenCalledWith("client-overview");
+  });
+
+  it("creates a client overview template from the empty state", () => {
+    render(
+      <TemplateLayout
+        templates={{ "client-overview": [], organization: [], group: [] }}
+      />,
+    );
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Create Client Overview template" }),
+    );
+
+    const dialog = screen.getByRole("dialog", {
+      name: "Create Client Overview template",
+    });
+    expect(within(dialog).getByLabelText("Template type")).toHaveValue(
+      "Client Overview",
+    );
+    expect(
+      within(dialog).getByRole("tab", { name: "General settings" }),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).queryByRole("tab", { name: "Program Overviews" }),
+    ).not.toBeInTheDocument();
+    expect(within(dialog).getByLabelText("Contract path")).toHaveValue("");
+    within(dialog)
+      .getAllByRole("button", { name: /^(Yes|No)$/ })
+      .forEach((option) => expect(option).toHaveAttribute("aria-pressed", "false"));
+    expect(within(dialog).getByRole("button", { name: "Save" })).toBeDisabled();
+
+    fireEvent.change(within(dialog).getByLabelText("Template name"), {
+      target: { value: "Allied Template" },
+    });
+
+    expect(within(dialog).getByRole("button", { name: "Save" })).toBeEnabled();
+    fireEvent.click(within(dialog).getByRole("button", { name: "Save" }));
+
+    expect(
+      screen.queryByRole("dialog", {
+        name: "Create Client Overview template",
+      }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Allied Template" }),
+    ).toBeInTheDocument();
   });
 
   it("labels the empty state per tab", () => {

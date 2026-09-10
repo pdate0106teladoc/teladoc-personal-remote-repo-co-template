@@ -1,0 +1,19 @@
+.create-template-drawer {
+  .create-template-fields {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .create-template-fields .template-name-field {
+    margin-bottom: 0;
+  }
+
+  // The library sizes its asterisk for full-size labels; these labels are 1rem.
+  .template-name-field .mandatory-asterisk {
+    margin-left: 3px;
+    font-size: $font-size-xs;
+  }
+}

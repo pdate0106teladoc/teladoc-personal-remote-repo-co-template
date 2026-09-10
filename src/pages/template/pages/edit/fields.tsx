@@ -5,12 +5,16 @@ import "@/pages/template/style/fields.scss";
 
 interface FieldProps {
   label: string;
+  required?: boolean;
   children: React.ReactNode;
 }
 
-export const Field: React.FC<FieldProps> = ({ label, children }) => (
+export const Field: React.FC<FieldProps> = ({ label, required, children }) => (
   <label className="edit-field">
-    <span className="edit-field-label">{label}</span>
+    <span className="edit-field-label">
+      {label}
+      {required && <span className="mandatory-asterisk">*</span>}
+    </span>
     <span className="edit-field-control">{children}</span>
   </label>
 );
@@ -82,7 +86,7 @@ export const PersonSelectField: React.FC<SelectFieldProps> = ({
 
 interface RadioFieldProps {
   label: string;
-  value: boolean;
+  value: boolean | null;
   onChange: (value: boolean) => void;
 }
 
@@ -94,7 +98,9 @@ export const RadioField: React.FC<RadioFieldProps> = ({
   <div className="edit-field radio-field">
     <span className="edit-field-label">{label}</span>
     <span className="edit-field-control">
-      <CustomRadioGroup value={value} onChange={onChange} />
+      {/* The group types its value as boolean, but leaves both options
+          unchecked for anything else, which is how `null` reads here. */}
+      <CustomRadioGroup value={value as boolean} onChange={onChange} />
     </span>
   </div>
 );

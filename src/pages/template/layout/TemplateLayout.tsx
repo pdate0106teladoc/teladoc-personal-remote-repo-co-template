@@ -13,6 +13,7 @@ import {
 import { DarkPlusIcon } from "@/assets";
 import { formatUTCtoDateOnly } from "@/utils";
 import {
+  CreateClientOverviewTemplateDrawer,
   EditClientOverviewTemplateDrawer,
   TemplateDetailDrawer,
 } from "@/pages/template/pages";
@@ -147,6 +148,7 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
   );
   const [templateBeingEdited, setTemplateBeingEdited] =
     useState<TemplateSummary | null>(null);
+  const [creatingClientOverview, setCreatingClientOverview] = useState(false);
 
   const visibleTemplates = useMemo(
     () =>
@@ -214,11 +216,36 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
     setTemplateBeingEdited(null);
   };
 
+  const createClientOverviewTemplate = (form: ClientOverviewTemplateForm) => {
+    setTemplatesByScope((current) => ({
+      ...current,
+      "client-overview": [
+        ...current["client-overview"],
+        {
+          id: `client-overview-${Date.now()}`,
+          name: form.templateName,
+          totalCount: 0,
+          activeCount: 0,
+          createdOn: new Date().toISOString(),
+          lastUsedOn: "",
+        },
+      ],
+    }));
+    setCreatingClientOverview(false);
+  };
+
+  const startCreateTemplate = (tab: TemplateTab) => {
+    if (tab.scope === "client-overview") {
+      setCreatingClientOverview(true);
+    }
+    onCreateTemplate?.(tab.scope);
+  };
+
   const renderCreateButton = (tab: TemplateTab) => (
     <Button
       variant="add"
       className="template-create-btn"
-      onClick={() => onCreateTemplate?.(tab.scope)}
+      onClick={() => startCreateTemplate(tab)}
     >
       <DarkPlusIcon className="add-icon" aria-hidden />
       {`Create ${tab.title} template`}
@@ -362,6 +389,11 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
           template={templateBeingEdited}
           onHide={() => setTemplateBeingEdited(null)}
           onSave={saveClientOverviewTemplate}
+        />
+        <CreateClientOverviewTemplateDrawer
+          show={creatingClientOverview}
+          onHide={() => setCreatingClientOverview(false)}
+          onSave={createClientOverviewTemplate}
         />
       </div>
     </div>

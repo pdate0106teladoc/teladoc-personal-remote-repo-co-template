@@ -70,6 +70,12 @@
     font-size: $font-size-xs;
     font-weight: $font-weight-semi-bold;
     line-height: 16px;
+
+    // The library sizes its asterisk for full-size labels, not these compact ones.
+    .mandatory-asterisk {
+      margin-left: 3px;
+      font-size: $font-size-xs;
+    }
   }
 
   .edit-field-control {
