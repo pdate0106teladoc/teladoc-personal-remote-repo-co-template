@@ -7,7 +7,7 @@ import EngagementCriteria from "./EngagementCriteria";
 import Marketing from "./Marketing";
 import ProgramOverviewGeneralSettings from "./ProgramOverviewGeneralSettings";
 import { ProgramOverviewSummary } from "./programOverviewData";
-import "./ProgramOverviewDetail.scss";
+import "@/pages/template/style/ProgramOverviewDetail.scss";
 
 const PROGRAM_DETAIL_TABS = [
   { key: "general-settings", title: "General settings" },

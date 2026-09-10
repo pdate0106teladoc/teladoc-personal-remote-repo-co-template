@@ -3,8 +3,8 @@ import { useState } from "react";
 import {
   ALLIED_PROGRAM_OVERVIEWS,
   ProgramOverviews as ProgramOverviewList,
-} from "@/components/template/view";
-import type { ProgramOverviewSummary } from "@/components/template/view";
+} from "@/pages/template/pages/view";
+import type { ProgramOverviewSummary } from "@/pages/template/pages/view";
 
 interface ProgramOverviewsProps {
   overviews?: ProgramOverviewSummary[];

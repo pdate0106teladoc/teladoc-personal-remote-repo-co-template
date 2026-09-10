@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import TemplatePage from "./TemplatePage";
+import TemplateLayout from "./TemplateLayout";
 
 vi.mock("@ucc/common-ui", () => ({
   Button: ({ children, ...rest }: any) => <button {...rest}>{children}</button>,
@@ -75,13 +75,13 @@ vi.mock("@/assets", () => ({
   DustbinIcon: () => <span />,
 }));
 
-describe("TemplatePage", () => {
+describe("TemplateLayout", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   it("renders the tabs, search, and create action for the default tab", () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     expect(screen.getByRole("heading", { name: "Templates" })).toBeInTheDocument();
     expect(screen.getByRole("tab", { name: "Client Overview" })).toBeInTheDocument();
@@ -94,7 +94,7 @@ describe("TemplatePage", () => {
   });
 
   it("renders each template with its counts and formatted dates", () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     expect(screen.getByRole("button", { name: "Allied Template" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "ECM Template" })).toBeInTheDocument();
@@ -105,7 +105,7 @@ describe("TemplatePage", () => {
   });
 
   it("filters the list by the search term", () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.change(screen.getByPlaceholderText("Find template"), {
       target: { value: "ecm" },
@@ -116,7 +116,7 @@ describe("TemplatePage", () => {
   });
 
   it("shows the empty state when no template matches", () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.change(screen.getByPlaceholderText("Find template"), {
       target: { value: "no such template" },
@@ -127,7 +127,7 @@ describe("TemplatePage", () => {
 
   it("reports the selected edit action for a template", async () => {
     const onEditAction = vi.fn();
-    render(<TemplatePage onEditAction={onEditAction} />);
+    render(<TemplateLayout onEditAction={onEditAction} />);
 
     fireEvent.click(screen.getByRole("button", { name: "Edit Allied Template" }));
     fireEvent.click(await screen.findByRole("button", { name: "Duplicate template" }));
@@ -140,7 +140,7 @@ describe("TemplatePage", () => {
   });
 
   it("inserts a reset copy after the original when Duplicate is chosen", async () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.click(screen.getByRole("button", { name: "Edit Allied Template" }));
     fireEvent.click(await screen.findByRole("button", { name: "Duplicate template" }));
@@ -160,7 +160,7 @@ describe("TemplatePage", () => {
   });
 
   it("duplicates Organization and Group templates with a numbered name", async () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.click(screen.getByRole("tab", { name: "Organization" }));
     const orgPanel = screen.getByRole("tabpanel", { name: "Organization" });
@@ -181,7 +181,7 @@ describe("TemplatePage", () => {
 
   it("reports the template opened from its name", () => {
     const onSelectTemplate = vi.fn();
-    render(<TemplatePage onSelectTemplate={onSelectTemplate} />);
+    render(<TemplateLayout onSelectTemplate={onSelectTemplate} />);
 
     fireEvent.click(screen.getByRole("button", { name: "ECM Template" }));
 
@@ -192,7 +192,7 @@ describe("TemplatePage", () => {
   });
 
   it("opens and saves the client overview edit form", async () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.click(
       screen.getByRole("button", { name: "Edit Allied Template" }),
@@ -256,7 +256,7 @@ describe("TemplatePage", () => {
   });
 
   it("edits a program overview from the editor and comes back to the list", async () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.click(
       screen.getByRole("button", { name: "Edit Allied Template" }),
@@ -304,7 +304,7 @@ describe("TemplatePage", () => {
   });
 
   it("does not open the client overview editor for organization templates", async () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.click(screen.getByRole("tab", { name: "Organization" }));
     fireEvent.click(
@@ -322,7 +322,7 @@ describe("TemplatePage", () => {
   });
 
   it("opens the detail modal from a template heading", () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.click(screen.getByRole("button", { name: "Allied Template" }));
 
@@ -344,7 +344,7 @@ describe("TemplatePage", () => {
   });
 
   it("drills into a program overview and back out again", () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.click(screen.getByRole("button", { name: "Allied Template" }));
 
@@ -373,7 +373,7 @@ describe("TemplatePage", () => {
   });
 
   it("closes the detail modal", () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.click(screen.getByRole("button", { name: "Allied Template" }));
     fireEvent.click(screen.getByRole("button", { name: "Close" }));
@@ -383,7 +383,7 @@ describe("TemplatePage", () => {
 
   it("switches the create action when another tab is selected", () => {
     const onCreateTemplate = vi.fn();
-    render(<TemplatePage onCreateTemplate={onCreateTemplate} />);
+    render(<TemplateLayout onCreateTemplate={onCreateTemplate} />);
 
     fireEvent.click(screen.getByRole("tab", { name: "Organization" }));
 
@@ -404,7 +404,7 @@ describe("TemplatePage", () => {
   });
 
   it("renders Group templates with the same date-only metadata as Organization", () => {
-    render(<TemplatePage />);
+    render(<TemplateLayout />);
 
     fireEvent.click(screen.getByRole("tab", { name: "Group" }));
 
@@ -419,7 +419,7 @@ describe("TemplatePage", () => {
   it("shows the empty state, without the toolbar, when a tab has no templates", () => {
     const onCreateTemplate = vi.fn();
     render(
-      <TemplatePage
+      <TemplateLayout
         onCreateTemplate={onCreateTemplate}
         templates={{ "client-overview": [], organization: [], group: [] }}
       />,
@@ -438,7 +438,7 @@ describe("TemplatePage", () => {
   });
 
   it("labels the empty state per tab", () => {
-    render(<TemplatePage templates={{ "client-overview": [], organization: [], group: [] }} />);
+    render(<TemplateLayout templates={{ "client-overview": [], organization: [], group: [] }} />);
 
     fireEvent.click(screen.getByRole("tab", { name: "Group" }));
 
@@ -448,7 +448,7 @@ describe("TemplatePage", () => {
 
   it("renders templates supplied by the caller", () => {
     render(
-      <TemplatePage
+      <TemplateLayout
         templates={{
           "client-overview": [],
           organization: [],

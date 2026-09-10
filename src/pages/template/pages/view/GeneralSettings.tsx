@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FieldGrid } from "./FieldGrid";
 import type { TemplateDetail } from "./types";
-import "./GeneralSettings.scss";
+import "@/pages/template/style/GeneralSettings.scss";
 
 interface GeneralSettingsProps {
   detail: TemplateDetail;

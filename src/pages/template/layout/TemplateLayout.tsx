@@ -15,10 +15,10 @@ import { formatUTCtoDateOnly } from "@/utils";
 import {
   EditClientOverviewTemplateDrawer,
   TemplateDetailDrawer,
-} from "@/components/template";
-import type { ClientOverviewTemplateForm } from "@/components/template/edit";
-import type { TemplateSummary } from "@/components/template/view";
-import "./TemplatePage.scss";
+} from "@/pages/template/pages";
+import type { ClientOverviewTemplateForm } from "@/pages/template/pages/edit";
+import type { TemplateSummary } from "@/pages/template/pages/view";
+import "@/pages/template/style/TemplateLayout.scss";
 
 export type TemplateScope = "client-overview" | "organization" | "group";
 export type { TemplateSummary };
@@ -131,7 +131,7 @@ const EMPTY_SEARCH: Record<TemplateScope, string> = {
   group: "",
 };
 
-const TemplatePage: React.FC<TemplatePageProps> = ({
+const TemplateLayout: React.FC<TemplatePageProps> = ({
   templates = SAMPLE_TEMPLATES,
   editActions = EDIT_ACTIONS,
   onCreateTemplate,
@@ -368,4 +368,4 @@ const TemplatePage: React.FC<TemplatePageProps> = ({
   );
 };
 
-export default TemplatePage;
+export default TemplateLayout;
