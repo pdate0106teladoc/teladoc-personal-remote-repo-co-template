@@ -7,7 +7,7 @@ import {
   ALLIED_PROGRAM_OVERVIEWS,
   ProgramOverviewSummary,
 } from "./programOverviewData";
-import "./ProgramOverviews.scss";
+import "@/pages/template/style/ProgramOverviews.scss";
 
 interface ProgramOverviewsProps {
   overviews?: ProgramOverviewSummary[];

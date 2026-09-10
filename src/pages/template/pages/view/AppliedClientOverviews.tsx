@@ -10,7 +10,7 @@ import {
   AppliedClientOverviewRow,
   TERMINATED_CLIENT_OVERVIEWS,
 } from "./appliedClientOverviewData";
-import "./AppliedClientOverviews.scss";
+import "@/pages/template/style/AppliedClientOverviews.scss";
 
 type StatusTab = "active" | "terminated";
 

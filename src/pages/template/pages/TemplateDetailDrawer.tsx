@@ -12,13 +12,13 @@ import {
   ProgramOverviews,
   DETAILS_BY_ID,
   dashDetail,
-} from "@/components/template/view";
+} from "@/pages/template/pages/view";
 import type {
   ProgramOverviewSummary,
   TemplateDetail,
   TemplateSummary,
-} from "@/components/template/view";
-import "./TemplateDetailDrawer.scss";
+} from "@/pages/template/pages/view";
+import "@/pages/template/style/TemplateDetailDrawer.scss";
 
 interface DetailTabContext {
   detail: TemplateDetail;

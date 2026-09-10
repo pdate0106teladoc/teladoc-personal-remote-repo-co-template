@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { ArrowLeft } from "@/assets";
-import type { ProgramOverviewSummary } from "@/components/template/view";
+import type { ProgramOverviewSummary } from "@/pages/template/pages/view";
 import Billing from "./Billing";
 import Eligibility from "./Eligibility";
 import EngagementCriteria from "./EngagementCriteria";
@@ -12,7 +12,7 @@ import type {
   ProgramOverviewEditField,
   ProgramOverviewEditForm,
 } from "./programOverviewForm";
-import "./ProgramOverviewDetail.scss";
+import "@/pages/template/style/EditProgramOverviewDetail.scss";
 
 const PROGRAM_DETAIL_TABS = [
   { key: "general-settings", title: "General settings" },

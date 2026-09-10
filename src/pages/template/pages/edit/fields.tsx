@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { CustomDropdown, CustomInput, CustomRadioGroup } from "@ucc/common-ui";
-import "./fields.scss";
+import "@/pages/template/style/fields.scss";
 
 interface FieldProps {
   label: string;

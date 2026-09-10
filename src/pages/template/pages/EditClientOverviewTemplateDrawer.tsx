@@ -12,19 +12,19 @@ import {
   Marketing,
   ProgramOverviewDetail,
   ProgramOverviews,
-} from "@/components/template/edit";
+} from "@/pages/template/pages/edit";
 import type {
   ClientOverviewTemplateField,
   ClientOverviewTemplateForm,
   ProgramOverviewEditField,
   ProgramOverviewEditForm,
-} from "@/components/template/edit";
-import { ALLIED_PROGRAM_OVERVIEWS } from "@/components/template/view";
+} from "@/pages/template/pages/edit";
+import { ALLIED_PROGRAM_OVERVIEWS } from "@/pages/template/pages/view";
 import type {
   ProgramOverviewSummary,
   TemplateSummary,
-} from "@/components/template/view";
-import "./EditClientOverviewTemplateDrawer.scss";
+} from "@/pages/template/pages/view";
+import "@/pages/template/style/EditClientOverviewTemplateDrawer.scss";
 
 interface EditTabContext {
   form: ClientOverviewTemplateForm;
