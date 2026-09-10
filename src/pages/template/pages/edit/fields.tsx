@@ -1,16 +1,22 @@
 import * as React from "react";
 import { BsChevronDown } from "react-icons/bs";
-import { CustomDropdown, CustomInput, CustomRadioGroup } from "@ucc/common-ui";
+import { CustomDropdown, CustomInput, CustomRadioGroup, CustomTextarea } from "@ucc/common-ui";
 import "@/pages/template/style/fields.scss";
 
 interface FieldProps {
   label: string;
   required?: boolean;
+  className?: string;
   children: React.ReactNode;
 }
 
-export const Field: React.FC<FieldProps> = ({ label, required, children }) => (
-  <label className="edit-field">
+export const Field: React.FC<FieldProps> = ({
+  label,
+  required,
+  className,
+  children,
+}) => (
+  <label className={`edit-field${className ? ` ${className}` : ""}`}>
     <span className="edit-field-label">
       {label}
       {required && <span className="mandatory-asterisk">*</span>}
@@ -130,6 +136,31 @@ export const TextField: React.FC<TextFieldProps> = ({
       value={value}
       onChange={(event) => onChange(event.target.value)}
       autoComplete="off"
+    />
+  </Field>
+);
+
+interface TextAreaFieldProps {
+  label: string;
+  field: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export const TextAreaField: React.FC<TextAreaFieldProps> = ({
+  label,
+  field,
+  value,
+  onChange,
+}) => (
+  <Field label={label} className="textarea-field">
+    <CustomTextarea
+      id={`edit-${field}`}
+      name={field}
+      className="input-style"
+      value={value}
+      rows={3}
+      onChange={(event) => onChange(event.target.value)}
     />
   </Field>
 );

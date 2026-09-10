@@ -5,6 +5,7 @@ import {
   Field,
   RadioField,
   SelectField,
+  TextAreaField,
   TextField,
 } from "./fields";
 import type {
@@ -177,6 +178,24 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = ({
             options={["Care coordination", "Standard care", "Guided care"]}
             onChange={(value) => onChange("clinicalModel", value)}
           />
+          <SelectField
+            label="Clinical data sharing and access"
+            value={form.clinicalDataSharingAndAccess}
+            options={["None", "One-way", "Bi-Directional"]}
+            onChange={(value) => onChange("clinicalDataSharingAndAccess", value)}
+          />
+          <SelectField
+            label="Clinical referrals"
+            value={form.clinicalReferrals}
+            options={["None", "One-way", "Bi-Directional"]}
+            onChange={(value) => onChange("clinicalReferrals", value)}
+          />
+          <TextAreaField
+            label="Clinical model details"
+            field="clinicalModelDetails"
+            value={form.clinicalModelDetails}
+            onChange={(value) => onChange("clinicalModelDetails", value)}
+          />
         </div>
         <div className="edit-fields-column">
           <TextField
@@ -185,6 +204,12 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = ({
             type="tel"
             value={form.memberSupportPhone}
             onChange={(value) => onChange("memberSupportPhone", value)}
+          />
+          <TextAreaField
+            label="Member support URL"
+            field="memberSupportUrl"
+            value={form.memberSupportUrl}
+            onChange={(value) => onChange("memberSupportUrl", value)}
           />
         </div>
       </div>

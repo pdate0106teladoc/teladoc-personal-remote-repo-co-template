@@ -19,7 +19,11 @@ export interface ClientOverviewTemplateForm {
   ccmMultifactorAuthentication: string;
   hideSexualOrientationQuestions: boolean | null;
   clinicalModel: string;
+  clinicalDataSharingAndAccess: string;
+  clinicalReferrals: string;
+  clinicalModelDetails: string;
   memberSupportPhone: string;
+  memberSupportUrl: string;
   billingPartner: string;
   billingMethod: string;
   detailedInvoice: boolean | null;
@@ -153,6 +157,8 @@ const GENERAL_SETTINGS_FIELDS: ClientOverviewTemplateField[] = [
   "ccmMultifactorAuthentication",
   "hideSexualOrientationQuestions",
   "clinicalModel",
+  "clinicalDataSharingAndAccess",
+  "clinicalReferrals",
   "memberSupportPhone",
 ];
 
@@ -305,7 +311,11 @@ export const buildClientOverviewTemplateForm = (
   ccmMultifactorAuthentication: "MFA Required",
   hideSexualOrientationQuestions: false,
   clinicalModel: "Care coordination",
+  clinicalDataSharingAndAccess: "None",
+  clinicalReferrals: "Bi-Directional",
+  clinicalModelDetails: "",
   memberSupportPhone: "",
+  memberSupportUrl: "",
   ...EMPTY_BILLING_FIELDS,
   ...EMPTY_MARKETING_FIELDS,
   ...EMPTY_ELIGIBILITY_FIELDS,
@@ -332,7 +342,11 @@ export const buildNewClientOverviewTemplateForm =
     ccmMultifactorAuthentication: "",
     hideSexualOrientationQuestions: null,
     clinicalModel: "",
+    clinicalDataSharingAndAccess: "None",
+    clinicalReferrals: "Bi-Directional",
+    clinicalModelDetails: "",
     memberSupportPhone: "",
+    memberSupportUrl: "",
     ...EMPTY_BILLING_FIELDS,
     ...EMPTY_MARKETING_FIELDS,
     ...EMPTY_ELIGIBILITY_FIELDS,
