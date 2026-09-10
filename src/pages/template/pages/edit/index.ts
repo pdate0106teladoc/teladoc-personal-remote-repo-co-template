@@ -7,7 +7,9 @@ export { default as ProgramOverviews } from "./ProgramOverviews";
 export { default as ProgramOverviewDetail } from "./ProgramOverviewDetail";
 export {
   buildClientOverviewTemplateForm,
+  buildNewClientOverviewTemplateForm,
   isClientOverviewTemplateFormComplete,
+  isNewClientOverviewTemplateFormComplete,
 } from "./types";
 export type {
   ClientOverviewTemplateField,

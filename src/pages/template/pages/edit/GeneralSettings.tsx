@@ -34,7 +34,7 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = ({
             value={form.accountName}
             onChange={(value) => onChange("accountName", value)}
           />
-          <Field label="Organization">
+          <Field label="Organization" required>
             <span className="lookup-control">
               <BsSearch aria-hidden />
               <span className="lookup-value">{form.organization}</span>
