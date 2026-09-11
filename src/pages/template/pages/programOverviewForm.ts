@@ -1,4 +1,4 @@
-import type { ProgramOverviewSummary } from "@/pages/template/pages/view";
+import type { ProgramOverviewSummary } from "./programOverviewData";
 
 /** The editable half of a program overview; the rest is owned by the template. */
 export interface ProgramOverviewEditForm {

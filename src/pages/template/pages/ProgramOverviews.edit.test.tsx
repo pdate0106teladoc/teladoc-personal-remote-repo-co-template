@@ -15,7 +15,7 @@ vi.mock("@/assets", () => ({
 
 describe("edit ProgramOverviews", () => {
   it("shows the view list with the edit-mode controls", () => {
-    render(<ProgramOverviews />);
+    render(<ProgramOverviews editable />);
 
     expect(
       screen.getByRole("heading", { name: "2 Program Overviews" }),
@@ -29,7 +29,7 @@ describe("edit ProgramOverviews", () => {
   });
 
   it("removes a card when its delete control is used", () => {
-    render(<ProgramOverviews />);
+    render(<ProgramOverviews editable />);
 
     fireEvent.click(
       screen.getByRole("button", { name: "Delete Allied - Diabetes Care" }),
@@ -42,7 +42,7 @@ describe("edit ProgramOverviews", () => {
   });
 
   it("falls back to the empty state once every card is deleted", () => {
-    render(<ProgramOverviews />);
+    render(<ProgramOverviews editable />);
 
     fireEvent.click(
       screen.getByRole("button", { name: "Delete Allied - Diabetes Care" }),

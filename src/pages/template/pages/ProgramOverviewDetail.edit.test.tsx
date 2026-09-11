@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import ProgramOverviewDetail from "./ProgramOverviewDetail";
 import { buildProgramOverviewEditForm } from "./programOverviewForm";
-import type { ProgramOverviewSummary } from "@/pages/template/pages/view";
+import type { ProgramOverviewSummary } from "@/pages/template/pages";
 
 vi.mock("@ucc/common-ui", () => ({
   FailSafePage: ({ cardType }: any) => <div>{cardType}</div>,

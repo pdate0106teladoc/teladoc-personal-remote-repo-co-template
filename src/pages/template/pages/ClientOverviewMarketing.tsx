@@ -1,4 +1,7 @@
 import * as React from "react";
+import { ReadOnlyTemplateSections } from "./TemplateSections";
+import { getClientOverviewSections } from "./clientOverviewSections";
+import type { TemplateDetail } from "./templateTypes";
 import {
   EditSection,
   RadioField,
@@ -8,9 +11,9 @@ import {
 import type {
   ClientOverviewTemplateField,
   ClientOverviewTemplateForm,
-} from "./types";
+} from "./clientOverviewForm";
 
-interface MarketingProps {
+interface ClientOverviewMarketingEditProps {
   form: ClientOverviewTemplateForm;
   onChange: (
     field: ClientOverviewTemplateField,
@@ -18,7 +21,25 @@ interface MarketingProps {
   ) => void;
 }
 
-const Marketing: React.FC<MarketingProps> = ({ form, onChange }) => (
+interface ClientOverviewMarketingViewProps {
+  detail: TemplateDetail;
+}
+
+type ClientOverviewMarketingProps = ClientOverviewMarketingEditProps | ClientOverviewMarketingViewProps;
+
+const ClientOverviewMarketing: React.FC<ClientOverviewMarketingProps> = (props) => {
+  if ("detail" in props) {
+    return (
+      <ReadOnlyTemplateSections
+        sections={getClientOverviewSections("marketing", props.detail)}
+      />
+    );
+  }
+
+  const { form, onChange } = props;
+
+  return (
+
   <div className="edit-form edit-marketing">
     <EditSection title="Group Overview">
       <div className="edit-fields-grid">
@@ -377,6 +398,7 @@ const Marketing: React.FC<MarketingProps> = ({ form, onChange }) => (
       </div>
     </EditSection>
   </div>
-);
+  );
+};
 
-export default Marketing;
+export default ClientOverviewMarketing;

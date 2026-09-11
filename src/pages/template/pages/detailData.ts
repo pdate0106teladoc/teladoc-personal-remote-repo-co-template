@@ -1,4 +1,4 @@
-import type { TemplateDetail } from "./types";
+import type { TemplateDetail } from "./templateTypes";
 
 const EMPTY_VALUE = "-";
 

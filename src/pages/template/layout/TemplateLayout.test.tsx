@@ -43,6 +43,15 @@ vi.mock("@ucc/common-ui", () => ({
       />
     </>
   ),
+  CustomTextarea: ({ value, onChange, id, name, rows }: any) => (
+    <textarea
+      id={id}
+      name={name}
+      value={value}
+      rows={rows}
+      onChange={onChange}
+    />
+  ),
   CustomRadioGroup: ({ value, onChange }: any) => (
     <div>
       <button type="button" aria-pressed={value === true} onClick={() => onChange(true)}>

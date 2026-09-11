@@ -5,12 +5,12 @@ import type {
   ProgramOverviewEditForm,
 } from "./programOverviewForm";
 
-interface EngagementCriteriaProps {
+interface ProgramOverviewEngagementCriteriaProps {
   form: ProgramOverviewEditForm;
   onChange: (field: ProgramOverviewEditField, value: string | boolean) => void;
 }
 
-const EngagementCriteria: React.FC<EngagementCriteriaProps> = ({
+const ProgramOverviewEngagementCriteria: React.FC<ProgramOverviewEngagementCriteriaProps> = ({
   form,
   onChange,
 }) => (
@@ -127,4 +127,4 @@ const EngagementCriteria: React.FC<EngagementCriteriaProps> = ({
   </div>
 );
 
-export default EngagementCriteria;
+export default ProgramOverviewEngagementCriteria;

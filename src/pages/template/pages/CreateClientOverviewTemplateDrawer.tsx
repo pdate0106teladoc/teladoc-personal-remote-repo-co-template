@@ -3,17 +3,17 @@ import { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { Button, CustomInput, SideModal } from "@ucc/common-ui";
 import {
-  Billing,
+  ClientOverviewBilling,
   buildNewClientOverviewTemplateForm,
-  Eligibility,
-  GeneralSettings,
+  ClientOverviewEligibility,
+  ClientOverviewGeneralSettings,
   isNewClientOverviewTemplateFormComplete,
-  Marketing,
-} from "@/pages/template/pages/edit";
+  ClientOverviewMarketing,
+} from "@/pages/template/pages";
 import type {
   ClientOverviewTemplateField,
   ClientOverviewTemplateForm,
-} from "@/pages/template/pages/edit";
+} from "@/pages/template/pages";
 import "@/pages/template/style/EditClientOverviewTemplateDrawer.scss";
 import "@/pages/template/style/CreateClientOverviewTemplateDrawer.scss";
 
@@ -36,28 +36,28 @@ const CREATE_TABS: CreateTab[] = [
     key: "general-settings",
     title: "General settings",
     render: ({ form, onChange }) => (
-      <GeneralSettings form={form} onChange={onChange} />
+      <ClientOverviewGeneralSettings form={form} onChange={onChange} />
     ),
   },
   {
     key: "billing",
     title: "Billing",
     render: ({ form, onChange }) => (
-      <Billing form={form} onChange={onChange} />
+      <ClientOverviewBilling form={form} onChange={onChange} />
     ),
   },
   {
     key: "marketing",
     title: "Marketing",
     render: ({ form, onChange }) => (
-      <Marketing form={form} onChange={onChange} />
+      <ClientOverviewMarketing form={form} onChange={onChange} />
     ),
   },
   {
     key: "eligibility",
     title: "Eligibility",
     render: ({ form, onChange }) => (
-      <Eligibility form={form} onChange={onChange} />
+      <ClientOverviewEligibility form={form} onChange={onChange} />
     ),
   },
 ];

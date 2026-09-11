@@ -249,3 +249,29 @@
     }
   }
 }
+
+// Read-only Client Overview reuses the edit section/grid structure but keeps
+// today's card treatment and plain-value typography.
+.template-readonly-form {
+  padding-top: 16px;
+
+  .edit-section {
+    margin-bottom: 12px;
+    border-bottom: 0;
+    border-radius: 6px;
+    background-color: $table-header-color;
+    padding: 12px 16px 8px;
+  }
+
+  .edit-section-toggle {
+    font-size: $font-size-small;
+  }
+
+  .edit-section-content {
+    padding-top: 10px;
+  }
+
+  .edit-field-label {
+    font-weight: $font-weight-regular;
+  }
+}

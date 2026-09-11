@@ -4,20 +4,20 @@ import { Tab, Tabs } from "react-bootstrap";
 import { SideModal } from "@ucc/common-ui";
 import {
   AppliedClientOverviews,
-  Billing,
-  Eligibility,
-  GeneralSettings,
-  Marketing,
+  ClientOverviewBilling,
+  ClientOverviewEligibility,
+  ClientOverviewGeneralSettings,
+  ClientOverviewMarketing,
   ProgramOverviewDetail,
   ProgramOverviews,
   DETAILS_BY_ID,
   dashDetail,
-} from "@/pages/template/pages/view";
+} from "@/pages/template/pages";
 import type {
   ProgramOverviewSummary,
   TemplateDetail,
   TemplateSummary,
-} from "@/pages/template/pages/view";
+} from "@/pages/template/pages";
 import "@/pages/template/style/TemplateDetailDrawer.scss";
 
 interface DetailTabContext {
@@ -37,22 +37,22 @@ const TEMPLATE_DETAIL_TABS: DetailTab[] = [
   {
     key: "general-settings",
     title: "General settings",
-    render: ({ detail }) => <GeneralSettings detail={detail} />,
+    render: ({ detail }) => <ClientOverviewGeneralSettings detail={detail} />,
   },
   {
     key: "billing",
     title: "Billing",
-    render: ({ detail }) => <Billing detail={detail} />,
+    render: ({ detail }) => <ClientOverviewBilling detail={detail} />,
   },
   {
     key: "marketing",
     title: "Marketing",
-    render: ({ detail }) => <Marketing detail={detail} />,
+    render: ({ detail }) => <ClientOverviewMarketing detail={detail} />,
   },
   {
     key: "eligibility",
     title: "Eligibility",
-    render: ({ detail }) => <Eligibility detail={detail} />,
+    render: ({ detail }) => <ClientOverviewEligibility detail={detail} />,
   },
   {
     key: "program-overviews",
