@@ -66,6 +66,17 @@ describe("AppliedClientOverviews", () => {
     expect(screen.queryByText("Joe's Pizza")).not.toBeInTheDocument();
   });
 
+  it("renders Applied Group rows with last updated on dates", () => {
+    render(<AppliedClientOverviews variant="group" />);
+
+    expect(
+      screen.getAllByText("541 - Blue Cross Blue Shield of NC").length,
+    ).toBeGreaterThan(0);
+    expect(screen.queryByText(/Contract number:/)).not.toBeInTheDocument();
+    expect(screen.getAllByText("Jan 1, 2025").length).toBeGreaterThan(0);
+    expect(screen.queryByText("Joe's Pizza")).not.toBeInTheDocument();
+  });
+
   it("switches to Terminated rows", () => {
     render(<AppliedClientOverviews />);
 

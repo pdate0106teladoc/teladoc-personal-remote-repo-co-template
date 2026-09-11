@@ -14,7 +14,7 @@ import {
 } from "./appliedClientOverviewData";
 import "@/pages/template/style/AppliedClientOverviews.scss";
 
-export type AppliedOverviewsVariant = "client-overview" | "organisation";
+export type AppliedOverviewsVariant = "client-overview" | "organisation" | "group";
 
 type StatusTab = "active" | "terminated";
 
@@ -64,9 +64,11 @@ const clientOverviewColumns: TableColumn<AppliedClientOverviewRow>[] = [
   },
 ];
 
-const organisationColumns: TableColumn<AppliedClientOverviewRow>[] = [
+const datedEntityColumns = (
+  nameLabel: string,
+): TableColumn<AppliedClientOverviewRow>[] => [
   {
-    label: "Organisation",
+    label: nameLabel,
     field: "name",
     width: "46%",
     render: (_value, row) => (
@@ -82,21 +84,30 @@ const organisationColumns: TableColumn<AppliedClientOverviewRow>[] = [
   },
 ];
 
+const organisationColumns = datedEntityColumns("Organisation");
+const groupColumns = datedEntityColumns("Group");
+
 const AppliedClientOverviews: React.FC<AppliedClientOverviewsProps> = ({
   variant = "client-overview",
 }) => {
   const [statusTab, setStatusTab] = useState<StatusTab>("active");
   const [page, setPage] = useState(0);
-  const isOrganisation = variant === "organisation";
+  const usesDatedEntityTable =
+    variant === "organisation" || variant === "group";
 
-  const activeRows = isOrganisation
+  const activeRows = usesDatedEntityTable
     ? ACTIVE_ORGANISATIONS
     : ACTIVE_CLIENT_OVERVIEWS;
-  const terminatedRows = isOrganisation
+  const terminatedRows = usesDatedEntityTable
     ? TERMINATED_ORGANISATIONS
     : TERMINATED_CLIENT_OVERVIEWS;
   const rows = statusTab === "active" ? activeRows : terminatedRows;
-  const columns = isOrganisation ? organisationColumns : clientOverviewColumns;
+  const columns =
+    variant === "group"
+      ? groupColumns
+      : variant === "organisation"
+        ? organisationColumns
+        : clientOverviewColumns;
 
   const pageRows = useMemo(
     () =>

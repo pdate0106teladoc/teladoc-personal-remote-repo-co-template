@@ -685,6 +685,54 @@ describe("TemplateLayout", () => {
     ).toBeInTheDocument();
   });
 
+  it("opens and saves the group create form", () => {
+    render(<TemplateLayout />);
+
+    fireEvent.click(screen.getByRole("tab", { name: "Group" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Create Group template" }),
+    );
+
+    const dialog = screen.getByRole("dialog", {
+      name: "Create Group template",
+    });
+    expect(within(dialog).getByLabelText("Template type")).toHaveValue("Group");
+    [
+      "General settings",
+      "Billing",
+      "Marketing",
+      "Reporting",
+      "Eligibility and claims",
+      "Products",
+      "Hierarchy",
+      "Contacts",
+    ].forEach((tab) => {
+      expect(within(dialog).getByRole("tab", { name: tab })).toBeInTheDocument();
+    });
+    expect(
+      within(dialog).queryByRole("tab", { name: "Applied Group" }),
+    ).not.toBeInTheDocument();
+    expect(within(dialog).getByRole("button", { name: "Overview" }))
+      .toBeInTheDocument();
+    expect(within(dialog).getByText("Group overview")).toBeInTheDocument();
+    expect(within(dialog).getByLabelText("Group name (Admin)")).toHaveValue("");
+    expect(within(dialog).getByRole("button", { name: "Save" })).toBeDisabled();
+
+    fireEvent.change(within(dialog).getByLabelText("Template name"), {
+      target: { value: "HMO Standard Template" },
+    });
+
+    expect(within(dialog).getByRole("button", { name: "Save" })).toBeEnabled();
+    fireEvent.click(within(dialog).getByRole("button", { name: "Save" }));
+
+    expect(
+      screen.queryByRole("dialog", { name: "Create Group template" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "HMO Standard Template" }),
+    ).toBeInTheDocument();
+  });
+
   it("renders Group templates with the same date-only metadata as Organization", () => {
     render(<TemplateLayout />);
 
@@ -696,6 +744,72 @@ describe("TemplateLayout", () => {
     ).toBeInTheDocument();
     expect(within(groupPanel).getByRole("button", { name: "BCBS NC Template" })).toBeInTheDocument();
     expect(within(groupPanel).queryByText("Total Groups")).not.toBeInTheDocument();
+  });
+
+  it("opens group details with its tabs and general settings", () => {
+    render(<TemplateLayout />);
+
+    fireEvent.click(screen.getByRole("tab", { name: "Group" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "BCBS NC Template" }),
+    );
+
+    const dialog = screen.getByRole("dialog", { name: "BCBS NC Template" });
+    [
+      "General settings",
+      "Billing",
+      "Marketing",
+      "Reporting",
+      "Eligibility and claims",
+      "Products",
+      "Hierarchy",
+      "Contacts",
+      "Applied Group",
+    ].forEach((tab) => {
+      expect(within(dialog).getByRole("tab", { name: tab })).toBeInTheDocument();
+    });
+
+    expect(within(dialog).getByRole("button", { name: "Overview" }))
+      .toBeInTheDocument();
+    expect(within(dialog).getByText("Group overview")).toBeInTheDocument();
+    expect(within(dialog).getByText("Brand")).toBeInTheDocument();
+    expect(within(dialog).getByText("CCM configuration")).toBeInTheDocument();
+    expect(within(dialog).getByText("Group name (Admin)")).toBeInTheDocument();
+    expect(within(dialog).getByText("Aetna Primary Aetna")).toBeInTheDocument();
+    expect(within(dialog).getByText("Brian Cosgrove")).toBeInTheDocument();
+    expect(within(dialog).queryByRole("button", { name: "Group overview" }))
+      .not.toBeInTheDocument();
+
+    fireEvent.click(within(dialog).getByRole("tab", { name: "Applied Group" }));
+    expect(within(dialog).getByRole("tab", { name: "Active (115)" }))
+      .toBeInTheDocument();
+    expect(within(dialog).getByRole("tab", { name: "Terminated (10)" }))
+      .toBeInTheDocument();
+  });
+
+  it("opens the group editor for group templates", async () => {
+    render(<TemplateLayout />);
+
+    fireEvent.click(screen.getByRole("tab", { name: "Group" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Edit BCBS NC Template" }),
+    );
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Edit template" }),
+    );
+
+    const dialog = screen.getByRole("dialog", { name: "Edit Group template" });
+    expect(within(dialog).getByRole("tab", { name: "General settings" }))
+      .toBeInTheDocument();
+    expect(
+      within(dialog).queryByRole("tab", { name: "Applied Group" }),
+    ).not.toBeInTheDocument();
+    expect(within(dialog).getByRole("button", { name: "Overview" }))
+      .toBeInTheDocument();
+    expect(within(dialog).getByText("Group overview")).toBeInTheDocument();
+    expect(within(dialog).getByLabelText("Group name (Admin)")).toHaveValue(
+      "Aetna Primary Aetna",
+    );
   });
 
   it("shows the empty state, without the toolbar, when a tab has no templates", () => {

@@ -15,13 +15,16 @@ import { formatUTCtoDateOnly } from "@/utils";
 import DeleteTemplateModal from "@/components/Modal/DeleteTemplateModal";
 import {
   CreateClientOverviewTemplateDrawer,
+  CreateGroupTemplateDrawer,
   CreateOrganizationTemplateDrawer,
   EditClientOverviewTemplateDrawer,
+  EditGroupTemplateDrawer,
   EditOrganizationTemplateDrawer,
   TemplateDetailDrawer,
 } from "@/pages/template/pages";
 import type {
   ClientOverviewTemplateForm,
+  GroupTemplateForm,
   OrganizationTemplateForm,
 } from "@/pages/template/pages";
 import type { TemplateSummary } from "@/pages/template/pages";
@@ -159,8 +162,11 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
     useState<TemplateSummary | null>(null);
   const [organizationBeingEdited, setOrganizationBeingEdited] =
     useState<TemplateSummary | null>(null);
+  const [groupBeingEdited, setGroupBeingEdited] =
+    useState<TemplateSummary | null>(null);
   const [creatingClientOverview, setCreatingClientOverview] = useState(false);
   const [creatingOrganization, setCreatingOrganization] = useState(false);
+  const [creatingGroup, setCreatingGroup] = useState(false);
   const [templatePendingDelete, setTemplatePendingDelete] = useState<{
     template: TemplateSummary;
     scope: TemplateScope;
@@ -216,6 +222,8 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
       setTemplateBeingEdited(template);
     } else if (action === EDIT_ACTION && tab.scope === "organization") {
       setOrganizationBeingEdited(template);
+    } else if (action === EDIT_ACTION && tab.scope === "group") {
+      setGroupBeingEdited(template);
     } else if (action === DUPLICATE_ACTION) {
       duplicateTemplate(template, tab);
     } else if (action === DELETE_ACTION) {
@@ -243,6 +251,9 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
     if (organizationBeingEdited?.id === template.id) {
       setOrganizationBeingEdited(null);
     }
+    if (groupBeingEdited?.id === template.id) {
+      setGroupBeingEdited(null);
+    }
   };
 
   const saveClientOverviewTemplate = (
@@ -269,6 +280,19 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
       ),
     }));
     setOrganizationBeingEdited(null);
+  };
+
+  const saveGroupTemplate = (
+    template: TemplateSummary,
+    form: GroupTemplateForm,
+  ) => {
+    setTemplatesByScope((current) => ({
+      ...current,
+      group: current.group.map((item) =>
+        item.id === template.id ? { ...item, name: form.templateName } : item,
+      ),
+    }));
+    setGroupBeingEdited(null);
   };
 
   const createClientOverviewTemplate = (form: ClientOverviewTemplateForm) => {
@@ -305,11 +329,29 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
     setCreatingOrganization(false);
   };
 
+  const createGroupTemplate = (form: GroupTemplateForm) => {
+    setTemplatesByScope((current) => ({
+      ...current,
+      group: [
+        ...current.group,
+        {
+          id: `group-${Date.now()}`,
+          name: form.templateName,
+          createdOn: new Date().toISOString(),
+          lastUsedOn: "",
+        },
+      ],
+    }));
+    setCreatingGroup(false);
+  };
+
   const startCreateTemplate = (tab: TemplateTab) => {
     if (tab.scope === "client-overview") {
       setCreatingClientOverview(true);
     } else if (tab.scope === "organization") {
       setCreatingOrganization(true);
+    } else if (tab.scope === "group") {
+      setCreatingGroup(true);
     }
     onCreateTemplate?.(tab.scope);
   };
@@ -470,6 +512,12 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
           onHide={() => setOrganizationBeingEdited(null)}
           onSave={saveOrganizationTemplate}
         />
+        <EditGroupTemplateDrawer
+          show={Boolean(groupBeingEdited)}
+          template={groupBeingEdited}
+          onHide={() => setGroupBeingEdited(null)}
+          onSave={saveGroupTemplate}
+        />
         <CreateClientOverviewTemplateDrawer
           show={creatingClientOverview}
           onHide={() => setCreatingClientOverview(false)}
@@ -479,6 +527,11 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
           show={creatingOrganization}
           onHide={() => setCreatingOrganization(false)}
           onSave={createOrganizationTemplate}
+        />
+        <CreateGroupTemplateDrawer
+          show={creatingGroup}
+          onHide={() => setCreatingGroup(false)}
+          onSave={createGroupTemplate}
         />
         <DeleteTemplateModal
           show={Boolean(templatePendingDelete)}

@@ -8,6 +8,7 @@ import {
   ClientOverviewEligibility,
   ClientOverviewGeneralSettings,
   ClientOverviewMarketing,
+  GroupGeneralSettings,
   OrganizationGeneralSettings,
   ProgramOverviewDetail,
   ProgramOverviews,
@@ -97,6 +98,33 @@ const ORGANIZATION_DETAIL_TABS: DetailTab[] = [
   },
 ];
 
+const GROUP_DETAIL_TABS: DetailTab[] = [
+  {
+    key: "general-settings",
+    title: "General settings",
+    render: () => <GroupGeneralSettings />,
+  },
+  ...[
+    ["billing", "Billing"],
+    ["marketing", "Marketing"],
+    ["reporting", "Reporting"],
+    ["eligibility-and-claims", "Eligibility and claims"],
+    ["products", "Products"],
+    ["hierarchy", "Hierarchy"],
+    ["contacts", "Contacts"],
+  ].map(([key, title]) => ({
+    key,
+    title,
+    render: () => <FailSafePage cardType="comingSoon" />,
+  })),
+  {
+    key: "applied-group",
+    title: "Applied Group",
+    fillHeight: true,
+    render: () => <AppliedClientOverviews variant="group" />,
+  },
+];
+
 interface TemplateDetailDrawerProps {
   show: boolean;
   template: TemplateSummary | null;
@@ -120,7 +148,11 @@ const TemplateDetailDrawer: React.FC<TemplateDetailDrawerProps> = ({
   }, [show, template?.id, scope]);
 
   const detailTabs =
-    scope === "organization" ? ORGANIZATION_DETAIL_TABS : TEMPLATE_DETAIL_TABS;
+    scope === "organization"
+      ? ORGANIZATION_DETAIL_TABS
+      : scope === "group"
+        ? GROUP_DETAIL_TABS
+        : TEMPLATE_DETAIL_TABS;
 
   return (
     <SideModal
