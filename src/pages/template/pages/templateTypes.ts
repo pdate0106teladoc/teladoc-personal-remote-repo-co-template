@@ -1,3 +1,5 @@
+export type TemplateScope = "client-overview" | "organization" | "group";
+
 export interface TemplateSummary {
   id: string;
   name: string;

@@ -14,24 +14,16 @@ import { DarkPlusIcon } from "@/assets";
 import { formatUTCtoDateOnly } from "@/utils";
 import DeleteTemplateModal from "@/components/Modal/DeleteTemplateModal";
 import {
-  CreateClientOverviewTemplateDrawer,
-  CreateGroupTemplateDrawer,
-  CreateOrganizationTemplateDrawer,
-  EditClientOverviewTemplateDrawer,
-  EditGroupTemplateDrawer,
-  EditOrganizationTemplateDrawer,
-  TemplateDetailDrawer,
+  CreateTemplateDrawer,
+  EditTemplateDrawer,
+  ViewTemplateDrawer,
 } from "@/pages/template/pages";
 import type {
-  ClientOverviewTemplateForm,
-  GroupTemplateForm,
-  OrganizationTemplateForm,
+  CreateTemplateScope,
+  TemplateScope,
+  TemplateSummary,
 } from "@/pages/template/pages";
-import type { TemplateSummary } from "@/pages/template/pages";
 import "@/pages/template/style/TemplateLayout.scss";
-
-export type TemplateScope = "client-overview" | "organization" | "group";
-export type { TemplateSummary };
 
 interface TemplateTab {
   scope: TemplateScope;
@@ -158,15 +150,12 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
   );
   const [selectedTemplateScope, setSelectedTemplateScope] =
     useState<TemplateScope>("client-overview");
-  const [templateBeingEdited, setTemplateBeingEdited] =
-    useState<TemplateSummary | null>(null);
-  const [organizationBeingEdited, setOrganizationBeingEdited] =
-    useState<TemplateSummary | null>(null);
-  const [groupBeingEdited, setGroupBeingEdited] =
-    useState<TemplateSummary | null>(null);
-  const [creatingClientOverview, setCreatingClientOverview] = useState(false);
-  const [creatingOrganization, setCreatingOrganization] = useState(false);
-  const [creatingGroup, setCreatingGroup] = useState(false);
+  const [editing, setEditing] = useState<{
+    template: TemplateSummary;
+    scope: TemplateScope;
+  } | null>(null);
+  const [creatingScope, setCreatingScope] =
+    useState<CreateTemplateScope | null>(null);
   const [templatePendingDelete, setTemplatePendingDelete] = useState<{
     template: TemplateSummary;
     scope: TemplateScope;
@@ -218,12 +207,8 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
     template: TemplateSummary,
     tab: TemplateTab,
   ) => {
-    if (action === EDIT_ACTION && tab.scope === "client-overview") {
-      setTemplateBeingEdited(template);
-    } else if (action === EDIT_ACTION && tab.scope === "organization") {
-      setOrganizationBeingEdited(template);
-    } else if (action === EDIT_ACTION && tab.scope === "group") {
-      setGroupBeingEdited(template);
+    if (action === EDIT_ACTION) {
+      setEditing({ template, scope: tab.scope });
     } else if (action === DUPLICATE_ACTION) {
       duplicateTemplate(template, tab);
     } else if (action === DELETE_ACTION) {
@@ -245,114 +230,49 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
     if (selectedTemplate?.id === template.id) {
       setSelectedTemplate(null);
     }
-    if (templateBeingEdited?.id === template.id) {
-      setTemplateBeingEdited(null);
-    }
-    if (organizationBeingEdited?.id === template.id) {
-      setOrganizationBeingEdited(null);
-    }
-    if (groupBeingEdited?.id === template.id) {
-      setGroupBeingEdited(null);
+    if (editing?.template.id === template.id) {
+      setEditing(null);
     }
   };
 
-  const saveClientOverviewTemplate = (
+  const saveTemplate = (
+    scope: TemplateScope,
     template: TemplateSummary,
-    form: ClientOverviewTemplateForm,
+    form: { templateName: string },
   ) => {
     setTemplatesByScope((current) => ({
       ...current,
-      "client-overview": current["client-overview"].map((item) =>
+      [scope]: current[scope].map((item) =>
         item.id === template.id ? { ...item, name: form.templateName } : item,
       ),
     }));
-    setTemplateBeingEdited(null);
+    setEditing(null);
   };
 
-  const saveOrganizationTemplate = (
-    template: TemplateSummary,
-    form: OrganizationTemplateForm,
+  const createTemplate = (
+    scope: CreateTemplateScope,
+    form: { templateName: string },
   ) => {
     setTemplatesByScope((current) => ({
       ...current,
-      organization: current.organization.map((item) =>
-        item.id === template.id ? { ...item, name: form.templateName } : item,
-      ),
-    }));
-    setOrganizationBeingEdited(null);
-  };
-
-  const saveGroupTemplate = (
-    template: TemplateSummary,
-    form: GroupTemplateForm,
-  ) => {
-    setTemplatesByScope((current) => ({
-      ...current,
-      group: current.group.map((item) =>
-        item.id === template.id ? { ...item, name: form.templateName } : item,
-      ),
-    }));
-    setGroupBeingEdited(null);
-  };
-
-  const createClientOverviewTemplate = (form: ClientOverviewTemplateForm) => {
-    setTemplatesByScope((current) => ({
-      ...current,
-      "client-overview": [
-        ...current["client-overview"],
+      [scope]: [
+        ...current[scope],
         {
-          id: `client-overview-${Date.now()}`,
-          name: form.templateName,
-          totalCount: 0,
-          activeCount: 0,
-          createdOn: new Date().toISOString(),
-          lastUsedOn: "",
-        },
-      ],
-    }));
-    setCreatingClientOverview(false);
-  };
-
-  const createOrganizationTemplate = (form: OrganizationTemplateForm) => {
-    setTemplatesByScope((current) => ({
-      ...current,
-      organization: [
-        ...current.organization,
-        {
-          id: `organization-${Date.now()}`,
+          id: `${scope}-${Date.now()}`,
           name: form.templateName,
           createdOn: new Date().toISOString(),
           lastUsedOn: "",
+          ...(scope === "client-overview"
+            ? { totalCount: 0, activeCount: 0 }
+            : {}),
         },
       ],
     }));
-    setCreatingOrganization(false);
-  };
-
-  const createGroupTemplate = (form: GroupTemplateForm) => {
-    setTemplatesByScope((current) => ({
-      ...current,
-      group: [
-        ...current.group,
-        {
-          id: `group-${Date.now()}`,
-          name: form.templateName,
-          createdOn: new Date().toISOString(),
-          lastUsedOn: "",
-        },
-      ],
-    }));
-    setCreatingGroup(false);
+    setCreatingScope(null);
   };
 
   const startCreateTemplate = (tab: TemplateTab) => {
-    if (tab.scope === "client-overview") {
-      setCreatingClientOverview(true);
-    } else if (tab.scope === "organization") {
-      setCreatingOrganization(true);
-    } else if (tab.scope === "group") {
-      setCreatingGroup(true);
-    }
+    setCreatingScope(tab.scope);
     onCreateTemplate?.(tab.scope);
   };
 
@@ -494,44 +414,24 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
             </Tab>
           ))}
         </Tabs>
-        <TemplateDetailDrawer
+        <ViewTemplateDrawer
           show={Boolean(selectedTemplate)}
           template={selectedTemplate}
           scope={selectedTemplateScope}
           onHide={() => setSelectedTemplate(null)}
         />
-        <EditClientOverviewTemplateDrawer
-          show={Boolean(templateBeingEdited)}
-          template={templateBeingEdited}
-          onHide={() => setTemplateBeingEdited(null)}
-          onSave={saveClientOverviewTemplate}
+        <EditTemplateDrawer
+          show={Boolean(editing)}
+          scope={editing?.scope ?? "client-overview"}
+          template={editing?.template ?? null}
+          onHide={() => setEditing(null)}
+          onSave={saveTemplate}
         />
-        <EditOrganizationTemplateDrawer
-          show={Boolean(organizationBeingEdited)}
-          template={organizationBeingEdited}
-          onHide={() => setOrganizationBeingEdited(null)}
-          onSave={saveOrganizationTemplate}
-        />
-        <EditGroupTemplateDrawer
-          show={Boolean(groupBeingEdited)}
-          template={groupBeingEdited}
-          onHide={() => setGroupBeingEdited(null)}
-          onSave={saveGroupTemplate}
-        />
-        <CreateClientOverviewTemplateDrawer
-          show={creatingClientOverview}
-          onHide={() => setCreatingClientOverview(false)}
-          onSave={createClientOverviewTemplate}
-        />
-        <CreateOrganizationTemplateDrawer
-          show={creatingOrganization}
-          onHide={() => setCreatingOrganization(false)}
-          onSave={createOrganizationTemplate}
-        />
-        <CreateGroupTemplateDrawer
-          show={creatingGroup}
-          onHide={() => setCreatingGroup(false)}
-          onSave={createGroupTemplate}
+        <CreateTemplateDrawer
+          show={Boolean(creatingScope)}
+          scope={creatingScope ?? "client-overview"}
+          onHide={() => setCreatingScope(null)}
+          onSave={createTemplate}
         />
         <DeleteTemplateModal
           show={Boolean(templatePendingDelete)}

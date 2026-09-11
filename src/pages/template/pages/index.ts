@@ -8,13 +8,10 @@ export { default as GroupGeneralSettings } from "./GroupGeneralSettings";
 export { default as ProgramOverviews } from "./ProgramOverviews";
 export { default as ProgramOverviewDetail } from "./ProgramOverviewDetail";
 export { default as AppliedClientOverviews } from "./AppliedClientOverviews";
-export { default as CreateClientOverviewTemplateDrawer } from "./CreateClientOverviewTemplateDrawer";
-export { default as CreateOrganizationTemplateDrawer } from "./CreateOrganizationTemplateDrawer";
-export { default as CreateGroupTemplateDrawer } from "./CreateGroupTemplateDrawer";
-export { default as EditClientOverviewTemplateDrawer } from "./EditClientOverviewTemplateDrawer";
-export { default as EditOrganizationTemplateDrawer } from "./EditOrganizationTemplateDrawer";
-export { default as EditGroupTemplateDrawer } from "./EditGroupTemplateDrawer";
-export { default as TemplateDetailDrawer } from "./TemplateDetailDrawer";
+export { default as CreateTemplateDrawer } from "./CreateTemplateDrawer";
+export type { CreateTemplateScope } from "./CreateTemplateDrawer";
+export { default as EditTemplateDrawer } from "./EditTemplateDrawer";
+export { default as ViewTemplateDrawer } from "./ViewTemplateDrawer";
 export { DETAILS_BY_ID, dashDetail } from "./detailData";
 export {
   ALLIED_PROGRAM_OVERVIEWS,
@@ -61,5 +58,6 @@ export type {
 export type {
   FieldPair,
   TemplateDetail,
+  TemplateScope,
   TemplateSummary,
 } from "./templateTypes";

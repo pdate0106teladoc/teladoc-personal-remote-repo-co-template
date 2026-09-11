@@ -653,10 +653,12 @@ describe("TemplateLayout", () => {
       "Opportunities",
       "Hierarchy",
       "Contact",
-      "Applied Organisation",
     ].forEach((tab) => {
       expect(within(dialog).getByRole("tab", { name: tab })).toBeInTheDocument();
     });
+    expect(
+      within(dialog).queryByRole("tab", { name: "Applied Organisation" }),
+    ).not.toBeInTheDocument();
     expect(within(dialog).getByRole("button", { name: "Overview" }))
       .toBeInTheDocument();
     expect(within(dialog).getByText("Account overview")).toBeInTheDocument();
