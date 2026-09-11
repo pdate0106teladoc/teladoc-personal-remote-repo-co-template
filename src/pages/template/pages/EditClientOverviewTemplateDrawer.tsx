@@ -3,27 +3,27 @@ import { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { Button, CustomInput, SideModal } from "@ucc/common-ui";
 import {
-  Billing,
+  ClientOverviewBilling,
   buildClientOverviewTemplateForm,
   buildProgramOverviewEditForm,
-  Eligibility,
-  GeneralSettings,
+  ClientOverviewEligibility,
+  ClientOverviewGeneralSettings,
   isClientOverviewTemplateFormComplete,
-  Marketing,
+  ClientOverviewMarketing,
   ProgramOverviewDetail,
   ProgramOverviews,
-} from "@/pages/template/pages/edit";
+} from "@/pages/template/pages";
 import type {
   ClientOverviewTemplateField,
   ClientOverviewTemplateForm,
   ProgramOverviewEditField,
   ProgramOverviewEditForm,
-} from "@/pages/template/pages/edit";
-import { ALLIED_PROGRAM_OVERVIEWS } from "@/pages/template/pages/view";
+} from "@/pages/template/pages";
+import { ALLIED_PROGRAM_OVERVIEWS } from "@/pages/template/pages";
 import type {
   ProgramOverviewSummary,
   TemplateSummary,
-} from "@/pages/template/pages/view";
+} from "@/pages/template/pages";
 import "@/pages/template/style/EditClientOverviewTemplateDrawer.scss";
 
 interface EditTabContext {
@@ -48,28 +48,28 @@ const EDIT_TABS: EditTab[] = [
     key: "general-settings",
     title: "General settings",
     render: ({ form, onChange }) => (
-      <GeneralSettings form={form} onChange={onChange} />
+      <ClientOverviewGeneralSettings form={form} onChange={onChange} />
     ),
   },
   {
     key: "billing",
     title: "Billing",
     render: ({ form, onChange }) => (
-      <Billing form={form} onChange={onChange} />
+      <ClientOverviewBilling form={form} onChange={onChange} />
     ),
   },
   {
     key: "marketing",
     title: "Marketing",
     render: ({ form, onChange }) => (
-      <Marketing form={form} onChange={onChange} />
+      <ClientOverviewMarketing form={form} onChange={onChange} />
     ),
   },
   {
     key: "eligibility",
     title: "Eligibility",
     render: ({ form, onChange }) => (
-      <Eligibility form={form} onChange={onChange} />
+      <ClientOverviewEligibility form={form} onChange={onChange} />
     ),
   },
   {
@@ -82,6 +82,7 @@ const EDIT_TABS: EditTab[] = [
     }) => (
       <ProgramOverviews
         overviews={programOverviews}
+        editable
         onSelectProgramOverview={onSelectProgramOverview}
         onDeleteProgramOverview={onDeleteProgramOverview}
       />

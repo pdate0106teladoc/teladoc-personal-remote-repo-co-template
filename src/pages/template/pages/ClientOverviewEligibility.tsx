@@ -1,4 +1,7 @@
 import * as React from "react";
+import { ReadOnlyTemplateSections } from "./TemplateSections";
+import { getClientOverviewSections } from "./clientOverviewSections";
+import type { TemplateDetail } from "./templateTypes";
 import {
   EditSection,
   RadioField,
@@ -8,9 +11,9 @@ import {
 import type {
   ClientOverviewTemplateField,
   ClientOverviewTemplateForm,
-} from "./types";
+} from "./clientOverviewForm";
 
-interface EligibilityProps {
+interface ClientOverviewEligibilityEditProps {
   form: ClientOverviewTemplateForm;
   onChange: (
     field: ClientOverviewTemplateField,
@@ -18,7 +21,25 @@ interface EligibilityProps {
   ) => void;
 }
 
-const Eligibility: React.FC<EligibilityProps> = ({ form, onChange }) => (
+interface ClientOverviewEligibilityViewProps {
+  detail: TemplateDetail;
+}
+
+type ClientOverviewEligibilityProps = ClientOverviewEligibilityEditProps | ClientOverviewEligibilityViewProps;
+
+const ClientOverviewEligibility: React.FC<ClientOverviewEligibilityProps> = (props) => {
+  if ("detail" in props) {
+    return (
+      <ReadOnlyTemplateSections
+        sections={getClientOverviewSections("eligibility", props.detail)}
+      />
+    );
+  }
+
+  const { form, onChange } = props;
+
+  return (
+
   <div className="edit-form edit-eligibility">
     <EditSection title="Eligibility Details">
       <div className="edit-fields-grid">
@@ -158,6 +179,7 @@ const Eligibility: React.FC<EligibilityProps> = ({ form, onChange }) => (
       />
     </EditSection>
   </div>
-);
+  );
+};
 
-export default Eligibility;
+export default ClientOverviewEligibility;

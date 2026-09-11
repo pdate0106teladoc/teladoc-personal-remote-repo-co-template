@@ -17,8 +17,8 @@ import {
   EditClientOverviewTemplateDrawer,
   TemplateDetailDrawer,
 } from "@/pages/template/pages";
-import type { ClientOverviewTemplateForm } from "@/pages/template/pages/edit";
-import type { TemplateSummary } from "@/pages/template/pages/view";
+import type { ClientOverviewTemplateForm } from "@/pages/template/pages";
+import type { TemplateSummary } from "@/pages/template/pages";
 import "@/pages/template/style/TemplateLayout.scss";
 
 export type TemplateScope = "client-overview" | "organization" | "group";

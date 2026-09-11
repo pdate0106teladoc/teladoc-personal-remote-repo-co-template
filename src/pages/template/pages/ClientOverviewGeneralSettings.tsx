@@ -1,4 +1,7 @@
 import * as React from "react";
+import { ReadOnlyTemplateSections } from "./TemplateSections";
+import { getClientOverviewSections } from "./clientOverviewSections";
+import type { TemplateDetail } from "./templateTypes";
 import { BsSearch, BsX } from "react-icons/bs";
 import {
   EditSection,
@@ -11,9 +14,9 @@ import {
 import type {
   ClientOverviewTemplateField,
   ClientOverviewTemplateForm,
-} from "./types";
+} from "./clientOverviewForm";
 
-interface GeneralSettingsProps {
+interface ClientOverviewGeneralSettingsEditProps {
   form: ClientOverviewTemplateForm;
   onChange: (
     field: ClientOverviewTemplateField,
@@ -21,10 +24,25 @@ interface GeneralSettingsProps {
   ) => void;
 }
 
-const GeneralSettings: React.FC<GeneralSettingsProps> = ({
-  form,
-  onChange,
-}) => (
+interface ClientOverviewGeneralSettingsViewProps {
+  detail: TemplateDetail;
+}
+
+type ClientOverviewGeneralSettingsProps = ClientOverviewGeneralSettingsEditProps | ClientOverviewGeneralSettingsViewProps;
+
+const ClientOverviewGeneralSettings: React.FC<ClientOverviewGeneralSettingsProps> = (props) => {
+  if ("detail" in props) {
+    return (
+      <ReadOnlyTemplateSections
+        sections={getClientOverviewSections("general-settings", props.detail)}
+      />
+    );
+  }
+
+  const { form, onChange } = props;
+
+  return (
+
   <div className="edit-form edit-general-settings">
     <EditSection title="Overview">
       <div className="edit-fields-grid">
@@ -215,6 +233,7 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = ({
       </div>
     </EditSection>
   </div>
-);
+  );
+};
 
-export default GeneralSettings;
+export default ClientOverviewGeneralSettings;

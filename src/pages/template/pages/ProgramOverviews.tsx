@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { BsFileEarmark, BsLink45Deg } from "react-icons/bs";
 import { Button, CalendarIcon } from "@ucc/common-ui";
 import { DarkPlusIcon, DustbinIcon, RightArrow } from "@/assets";
@@ -19,13 +20,30 @@ interface ProgramOverviewsProps {
 }
 
 const ProgramOverviews: React.FC<ProgramOverviewsProps> = ({
-  overviews = ALLIED_PROGRAM_OVERVIEWS,
+  overviews,
   editable = false,
   onSelectProgramOverview,
   onAddProgramOverview,
   onDeleteProgramOverview,
 }) => {
-  const isEmpty = overviews.length === 0;
+  const [ownList, setOwnList] = useState(
+    overviews ?? ALLIED_PROGRAM_OVERVIEWS,
+  );
+  const controlled =
+    overviews !== undefined && onDeleteProgramOverview !== undefined;
+  const displayedOverviews = overviews ?? ownList;
+  const isEmpty = displayedOverviews.length === 0;
+
+  const deleteOverview = (overview: ProgramOverviewSummary) => {
+    if (controlled) {
+      onDeleteProgramOverview(overview);
+      return;
+    }
+    setOwnList((current) =>
+      current.filter((item) => item.id !== overview.id),
+    );
+    onDeleteProgramOverview?.(overview);
+  };
 
   const addButton = (
     <Button
@@ -55,12 +73,12 @@ const ProgramOverviews: React.FC<ProgramOverviewsProps> = ({
           <>
             <div className="panel-header">
               <h3 className="panel-title">
-                {`${overviews.length} Program Overview${overviews.length === 1 ? "" : "s"}`}
+                {`${displayedOverviews.length} Program Overview${displayedOverviews.length === 1 ? "" : "s"}`}
               </h3>
               {editable && addButton}
             </div>
             <ul className="program-overview-list">
-              {overviews.map((overview) => (
+              {displayedOverviews.map((overview) => (
                 <li className="program-overview-card" key={overview.id}>
                   <div className="program-overview-card-main">
                     <button
@@ -91,7 +109,7 @@ const ProgramOverviews: React.FC<ProgramOverviewsProps> = ({
                       type="button"
                       className="program-overview-delete"
                       aria-label={`Delete ${overview.name}`}
-                      onClick={() => onDeleteProgramOverview?.(overview)}
+                      onClick={() => deleteOverview(overview)}
                     >
                       <DustbinIcon aria-hidden />
                     </button>

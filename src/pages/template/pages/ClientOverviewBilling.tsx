@@ -1,4 +1,7 @@
 import * as React from "react";
+import { ReadOnlyTemplateSections } from "./TemplateSections";
+import { getClientOverviewSections } from "./clientOverviewSections";
+import type { TemplateDetail } from "./templateTypes";
 import {
   EditSection,
   RadioField,
@@ -8,9 +11,9 @@ import {
 import type {
   ClientOverviewTemplateField,
   ClientOverviewTemplateForm,
-} from "./types";
+} from "./clientOverviewForm";
 
-interface BillingProps {
+interface ClientOverviewBillingEditProps {
   form: ClientOverviewTemplateForm;
   onChange: (
     field: ClientOverviewTemplateField,
@@ -18,7 +21,25 @@ interface BillingProps {
   ) => void;
 }
 
-const Billing: React.FC<BillingProps> = ({ form, onChange }) => (
+interface ClientOverviewBillingViewProps {
+  detail: TemplateDetail;
+}
+
+type ClientOverviewBillingProps = ClientOverviewBillingEditProps | ClientOverviewBillingViewProps;
+
+const ClientOverviewBilling: React.FC<ClientOverviewBillingProps> = (props) => {
+  if ("detail" in props) {
+    return (
+      <ReadOnlyTemplateSections
+        sections={getClientOverviewSections("billing", props.detail)}
+      />
+    );
+  }
+
+  const { form, onChange } = props;
+
+  return (
+
   <div className="edit-form edit-billing">
     <EditSection title="CCM billing details">
       <div className="edit-fields-grid">
@@ -276,6 +297,7 @@ const Billing: React.FC<BillingProps> = ({ form, onChange }) => (
       </div>
     </EditSection>
   </div>
-);
+  );
+};
 
-export default Billing;
+export default ClientOverviewBilling;
