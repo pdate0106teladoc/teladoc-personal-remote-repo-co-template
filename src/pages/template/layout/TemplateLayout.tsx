@@ -12,12 +12,18 @@ import {
 } from "@ucc/common-ui";
 import { DarkPlusIcon } from "@/assets";
 import { formatUTCtoDateOnly } from "@/utils";
+import DeleteTemplateModal from "@/components/Modal/DeleteTemplateModal";
 import {
   CreateClientOverviewTemplateDrawer,
+  CreateOrganizationTemplateDrawer,
   EditClientOverviewTemplateDrawer,
+  EditOrganizationTemplateDrawer,
   TemplateDetailDrawer,
 } from "@/pages/template/pages";
-import type { ClientOverviewTemplateForm } from "@/pages/template/pages";
+import type {
+  ClientOverviewTemplateForm,
+  OrganizationTemplateForm,
+} from "@/pages/template/pages";
 import type { TemplateSummary } from "@/pages/template/pages";
 import "@/pages/template/style/TemplateLayout.scss";
 
@@ -62,6 +68,7 @@ const TEMPLATE_TABS: TemplateTab[] = [
 const EDIT_ACTIONS = ["Edit template", "Duplicate template", "Delete template"];
 const EDIT_ACTION = "Edit template";
 const DUPLICATE_ACTION = "Duplicate template";
+const DELETE_ACTION = "Delete template";
 const COPY_NAME = /^(.*) \((\d+)\)$/;
 
 const nextDuplicateName = (name: string, existing: TemplateSummary[]) => {
@@ -146,9 +153,18 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateSummary | null>(
     null,
   );
+  const [selectedTemplateScope, setSelectedTemplateScope] =
+    useState<TemplateScope>("client-overview");
   const [templateBeingEdited, setTemplateBeingEdited] =
     useState<TemplateSummary | null>(null);
+  const [organizationBeingEdited, setOrganizationBeingEdited] =
+    useState<TemplateSummary | null>(null);
   const [creatingClientOverview, setCreatingClientOverview] = useState(false);
+  const [creatingOrganization, setCreatingOrganization] = useState(false);
+  const [templatePendingDelete, setTemplatePendingDelete] = useState<{
+    template: TemplateSummary;
+    scope: TemplateScope;
+  } | null>(null);
 
   const visibleTemplates = useMemo(
     () =>
@@ -170,6 +186,7 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
 
   const openTemplateDetail = (template: TemplateSummary, scope: TemplateScope) => {
     setSelectedTemplate(template);
+    setSelectedTemplateScope(scope);
     onSelectTemplate?.(template, scope);
   };
 
@@ -197,10 +214,35 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
   ) => {
     if (action === EDIT_ACTION && tab.scope === "client-overview") {
       setTemplateBeingEdited(template);
+    } else if (action === EDIT_ACTION && tab.scope === "organization") {
+      setOrganizationBeingEdited(template);
     } else if (action === DUPLICATE_ACTION) {
       duplicateTemplate(template, tab);
+    } else if (action === DELETE_ACTION) {
+      setTemplatePendingDelete({ template, scope: tab.scope });
     }
     onEditAction?.(action, template, tab.scope);
+  };
+
+  const confirmDeleteTemplate = () => {
+    if (!templatePendingDelete) {
+      return;
+    }
+    const { template, scope } = templatePendingDelete;
+    setTemplatesByScope((current) => ({
+      ...current,
+      [scope]: current[scope].filter((item) => item.id !== template.id),
+    }));
+    setTemplatePendingDelete(null);
+    if (selectedTemplate?.id === template.id) {
+      setSelectedTemplate(null);
+    }
+    if (templateBeingEdited?.id === template.id) {
+      setTemplateBeingEdited(null);
+    }
+    if (organizationBeingEdited?.id === template.id) {
+      setOrganizationBeingEdited(null);
+    }
   };
 
   const saveClientOverviewTemplate = (
@@ -214,6 +256,19 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
       ),
     }));
     setTemplateBeingEdited(null);
+  };
+
+  const saveOrganizationTemplate = (
+    template: TemplateSummary,
+    form: OrganizationTemplateForm,
+  ) => {
+    setTemplatesByScope((current) => ({
+      ...current,
+      organization: current.organization.map((item) =>
+        item.id === template.id ? { ...item, name: form.templateName } : item,
+      ),
+    }));
+    setOrganizationBeingEdited(null);
   };
 
   const createClientOverviewTemplate = (form: ClientOverviewTemplateForm) => {
@@ -234,9 +289,27 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
     setCreatingClientOverview(false);
   };
 
+  const createOrganizationTemplate = (form: OrganizationTemplateForm) => {
+    setTemplatesByScope((current) => ({
+      ...current,
+      organization: [
+        ...current.organization,
+        {
+          id: `organization-${Date.now()}`,
+          name: form.templateName,
+          createdOn: new Date().toISOString(),
+          lastUsedOn: "",
+        },
+      ],
+    }));
+    setCreatingOrganization(false);
+  };
+
   const startCreateTemplate = (tab: TemplateTab) => {
     if (tab.scope === "client-overview") {
       setCreatingClientOverview(true);
+    } else if (tab.scope === "organization") {
+      setCreatingOrganization(true);
     }
     onCreateTemplate?.(tab.scope);
   };
@@ -382,6 +455,7 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
         <TemplateDetailDrawer
           show={Boolean(selectedTemplate)}
           template={selectedTemplate}
+          scope={selectedTemplateScope}
           onHide={() => setSelectedTemplate(null)}
         />
         <EditClientOverviewTemplateDrawer
@@ -390,10 +464,26 @@ const TemplateLayout: React.FC<TemplatePageProps> = ({
           onHide={() => setTemplateBeingEdited(null)}
           onSave={saveClientOverviewTemplate}
         />
+        <EditOrganizationTemplateDrawer
+          show={Boolean(organizationBeingEdited)}
+          template={organizationBeingEdited}
+          onHide={() => setOrganizationBeingEdited(null)}
+          onSave={saveOrganizationTemplate}
+        />
         <CreateClientOverviewTemplateDrawer
           show={creatingClientOverview}
           onHide={() => setCreatingClientOverview(false)}
           onSave={createClientOverviewTemplate}
+        />
+        <CreateOrganizationTemplateDrawer
+          show={creatingOrganization}
+          onHide={() => setCreatingOrganization(false)}
+          onSave={createOrganizationTemplate}
+        />
+        <DeleteTemplateModal
+          show={Boolean(templatePendingDelete)}
+          onHide={() => setTemplatePendingDelete(null)}
+          onConfirm={confirmDeleteTemplate}
         />
       </div>
     </div>

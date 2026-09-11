@@ -1,13 +1,14 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
-import { SideModal } from "@ucc/common-ui";
+import { FailSafePage, SideModal } from "@ucc/common-ui";
 import {
   AppliedClientOverviews,
   ClientOverviewBilling,
   ClientOverviewEligibility,
   ClientOverviewGeneralSettings,
   ClientOverviewMarketing,
+  OrganizationGeneralSettings,
   ProgramOverviewDetail,
   ProgramOverviews,
   DETAILS_BY_ID,
@@ -70,15 +71,43 @@ const TEMPLATE_DETAIL_TABS: DetailTab[] = [
   },
 ];
 
+const ORGANIZATION_DETAIL_TABS: DetailTab[] = [
+  {
+    key: "general-settings",
+    title: "General settings",
+    render: () => <OrganizationGeneralSettings />,
+  },
+  ...[
+    ["billing", "Billing"],
+    ["marketing", "Marketing"],
+    ["reporting", "Reporting"],
+    ["opportunities", "Opportunities"],
+    ["hierarchy", "Hierarchy"],
+    ["contact", "Contact"],
+  ].map(([key, title]) => ({
+    key,
+    title,
+    render: () => <FailSafePage cardType="comingSoon" />,
+  })),
+  {
+    key: "applied-organisation",
+    title: "Applied Organisation",
+    fillHeight: true,
+    render: () => <AppliedClientOverviews variant="organisation" />,
+  },
+];
+
 interface TemplateDetailDrawerProps {
   show: boolean;
   template: TemplateSummary | null;
+  scope?: "client-overview" | "organization" | "group";
   onHide: () => void;
 }
 
 const TemplateDetailDrawer: React.FC<TemplateDetailDrawerProps> = ({
   show,
   template,
+  scope = "client-overview",
   onHide,
 }) => {
   const [selectedOverview, setSelectedOverview] =
@@ -88,7 +117,10 @@ const TemplateDetailDrawer: React.FC<TemplateDetailDrawerProps> = ({
   // Always land on the tab list when the drawer opens or switches template.
   useEffect(() => {
     setSelectedOverview(null);
-  }, [show, template?.id]);
+  }, [show, template?.id, scope]);
+
+  const detailTabs =
+    scope === "organization" ? ORGANIZATION_DETAIL_TABS : TEMPLATE_DETAIL_TABS;
 
   return (
     <SideModal
@@ -99,18 +131,18 @@ const TemplateDetailDrawer: React.FC<TemplateDetailDrawerProps> = ({
     >
       {template && (
         <div className="template-detail-drawer">
-          {selectedOverview ? (
+          {selectedOverview && scope === "client-overview" ? (
             <ProgramOverviewDetail
               overview={selectedOverview}
               onBack={() => setSelectedOverview(null)}
             />
           ) : (
             <Tabs
-              defaultActiveKey={TEMPLATE_DETAIL_TABS[0].key}
-              id={`template-detail-tabs-${template.id}`}
+              defaultActiveKey={detailTabs[0].key}
+              id={`${scope}-template-detail-tabs-${template.id}`}
               className="template-detail-tabs"
             >
-              {TEMPLATE_DETAIL_TABS.map((tab) => (
+              {detailTabs.map((tab) => (
                 <Tab
                   eventKey={tab.key}
                   title={tab.title}

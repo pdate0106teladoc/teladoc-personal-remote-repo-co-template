@@ -1,6 +1,7 @@
 import * as React from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { CustomDropdown, CustomInput, CustomRadioGroup, CustomTextarea } from "@ucc/common-ui";
+import { getInitials } from "@/utils";
 import "@/pages/template/style/fields.scss";
 
 interface FieldProps {
@@ -28,16 +29,29 @@ export const Field: React.FC<FieldProps> = ({
 interface ReadOnlyFieldProps {
   label: string;
   value: string;
+  format?: "person";
 }
 
 /** Values the template owns rather than the editor, shown as plain text. */
 export const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
   label,
   value,
+  format,
 }) => (
   <div className="edit-field">
     <span className="edit-field-label">{label}</span>
-    <span className="edit-field-control read-only-value">{value}</span>
+    <span className="edit-field-control read-only-value">
+      {format === "person" && value ? (
+        <span className="person-readonly">
+          <span className="person-initial" aria-hidden>
+            {getInitials(value)}
+          </span>
+          <span className="person-name">{value}</span>
+        </span>
+      ) : (
+        value
+      )}
+    </span>
   </div>
 );
 
@@ -65,30 +79,8 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   </Field>
 );
 
-/** A select that also shows the initial badge the design puts on people. */
-export const PersonSelectField: React.FC<SelectFieldProps> = ({
-  label,
-  value,
-  options,
-  onChange,
-}) => (
-  <Field label={label}>
-    <span className="person-control">
-      {value && (
-        <span className="person-initial" aria-hidden>
-          {value.charAt(0).toUpperCase()}
-        </span>
-      )}
-      <CustomDropdown
-        placeholder="Select"
-        value={value}
-        customClass="edit-dropdown"
-        options={options.map((option) => ({ label: option, value: option }))}
-        onChange={onChange}
-      />
-    </span>
-  </Field>
-);
+/** Person dropdown in edit mode; view mode adds the initials badge separately. */
+export const PersonSelectField: React.FC<SelectFieldProps> = SelectField;
 
 interface RadioFieldProps {
   label: string;
@@ -192,29 +184,37 @@ export const CurrencyField: React.FC<Omit<TextFieldProps, "type">> = ({
 interface EditSectionProps {
   title: string;
   children: React.ReactNode;
+  collapsible?: boolean;
 }
 
 export const EditSection: React.FC<EditSectionProps> = ({
   title,
   children,
+  collapsible = true,
 }) => {
   const [expanded, setExpanded] = React.useState(true);
 
   return (
     <section className="edit-section">
-      <button
-        type="button"
-        className="edit-section-toggle"
-        onClick={() => setExpanded((current) => !current)}
-        aria-expanded={expanded}
-      >
-        <BsChevronDown
-          className={`section-chevron${expanded ? "" : " collapsed"}`}
-          aria-hidden
-        />
-        {title}
-      </button>
-      {expanded && <div className="edit-section-content">{children}</div>}
+      {collapsible ? (
+        <button
+          type="button"
+          className="edit-section-toggle"
+          onClick={() => setExpanded((current) => !current)}
+          aria-expanded={expanded}
+        >
+          <BsChevronDown
+            className={`section-chevron${expanded ? "" : " collapsed"}`}
+            aria-hidden
+          />
+          {title}
+        </button>
+      ) : (
+        <h4 className="edit-section-toggle">{title}</h4>
+      )}
+      {(!collapsible || expanded) && (
+        <div className="edit-section-content">{children}</div>
+      )}
     </section>
   );
 };

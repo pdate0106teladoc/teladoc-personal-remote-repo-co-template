@@ -10,6 +10,7 @@ export interface TemplateSummary {
 export interface FieldPair {
   label: string;
   value: string;
+  format?: "person";
 }
 
 export interface TemplateDetail {

@@ -38,12 +38,18 @@ export const TwoColumnFields = <T,>({
 /** Client Overview view mode, using the same sections and grid as edit mode. */
 export const ReadOnlyTemplateSections = ({
   sections,
+  collapsible = true,
 }: {
   sections: TemplateSection<FieldPair>[];
+  collapsible?: boolean;
 }) => (
   <div className="template-readonly-form edit-form">
     {sections.map((section) => (
-      <EditSection title={section.title} key={section.title}>
+      <EditSection
+        title={section.title}
+        key={section.title}
+        collapsible={collapsible}
+      >
         <TwoColumnFields
           left={section.left}
           right={section.right}
@@ -52,6 +58,7 @@ export const ReadOnlyTemplateSections = ({
               key={field.label}
               label={field.label}
               value={field.value}
+              format={field.format}
             />
           )}
         />

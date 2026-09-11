@@ -1,0 +1,45 @@
+.delete-template-modal {
+  .modal-body {
+    padding: 8px 24px 16px;
+  }
+
+  .delete-template-description {
+    margin: 0;
+    color: $primary-black;
+    font-size: $font-size-small;
+    font-weight: $font-weight-regular;
+  }
+}
+
+.delete-template-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+
+  .custom-button {
+    font-size: $font-size-small;
+  }
+
+  .delete-template-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: $btn-danger-color;
+    border-color: $btn-danger-color;
+    color: $color-white;
+
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      background-color: $btn-danger-hover;
+      border-color: $btn-danger-hover;
+      color: $color-white;
+    }
+
+    svg,
+    svg path {
+      fill: $color-white;
+    }
+  }
+}

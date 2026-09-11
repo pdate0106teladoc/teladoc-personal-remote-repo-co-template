@@ -22,6 +22,13 @@ vi.mock("@ucc/common-ui", () => ({
     ) : null,
   CustomTable: () => <div data-testid="applied-table" />,
   PaginationView: () => <div data-testid="pagination-view" />,
+  Modal: ({ show, title, children, footer }: any) =>
+    show ? (
+      <div role="dialog" aria-label={typeof title === "string" ? title : "modal"}>
+        {children}
+        {footer}
+      </div>
+    ) : null,
   RoundedLabel: ({ text }: any) => <span>{text}</span>,
   DisplayRow: ({ label, value, format, personMeta }: any) => (
     <div>
@@ -187,6 +194,43 @@ describe("TemplateLayout", () => {
     expect(
       within(groupPanel).getByRole("button", { name: "BCBS NC Template (1)" }),
     ).toBeInTheDocument();
+  });
+
+  it("asks for confirmation before deleting a template", async () => {
+    render(<TemplateLayout />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Edit Allied Template" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Delete template" }));
+
+    const dialog = screen.getByRole("dialog", { name: "Remove template?" });
+    expect(
+      within(dialog).getByText(
+        "Are you sure you want to remove this template ? This action can't be undone.",
+      ),
+    ).toBeInTheDocument();
+
+    fireEvent.click(within(dialog).getByRole("button", { name: "Keep template" }));
+
+    expect(
+      screen.queryByRole("dialog", { name: "Remove template?" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Allied Template" })).toBeInTheDocument();
+  });
+
+  it("removes the template after confirming delete", async () => {
+    render(<TemplateLayout />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Edit Allied Template" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Delete template" }));
+    fireEvent.click(
+      within(screen.getByRole("dialog", { name: "Remove template?" })).getByRole(
+        "button",
+        { name: "Delete template" },
+      ),
+    );
+
+    expect(screen.queryByRole("button", { name: "Allied Template" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "ECM Template" })).toBeInTheDocument();
   });
 
   it("reports the template opened from its name", () => {
@@ -361,7 +405,7 @@ describe("TemplateLayout", () => {
     expect(within(dialog).getByLabelText("Enrollment Cap")).toHaveValue("500");
   });
 
-  it("does not open the client overview editor for organization templates", async () => {
+  it("opens the organization editor for organization templates", async () => {
     render(<TemplateLayout />);
 
     fireEvent.click(screen.getByRole("tab", { name: "Organization" }));
@@ -377,6 +421,77 @@ describe("TemplateLayout", () => {
         name: "Edit Client Overview template",
       }),
     ).not.toBeInTheDocument();
+
+    const dialog = screen.getByRole("dialog", {
+      name: "Edit Organization template",
+    });
+    expect(within(dialog).getByRole("tab", { name: "General settings" }))
+      .toBeInTheDocument();
+    expect(
+      within(dialog).queryByRole("tab", { name: "Applied Organisation" }),
+    ).not.toBeInTheDocument();
+    expect(within(dialog).getByRole("button", { name: "Overview" }))
+      .toBeInTheDocument();
+    expect(within(dialog).getByText("Account overview")).toBeInTheDocument();
+    expect(within(dialog).queryByRole("button", { name: "Account overview" }))
+      .not.toBeInTheDocument();
+    expect(within(dialog).getByLabelText("Organization name (Admin)"))
+      .toHaveValue("Aetna Primary Aetna");
+  });
+
+  it("opens organization details with its tabs and general settings", () => {
+    render(<TemplateLayout />);
+
+    fireEvent.click(screen.getByRole("tab", { name: "Organization" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "BCBS NC Template" }),
+    );
+
+    const dialog = screen.getByRole("dialog", { name: "BCBS NC Template" });
+    [
+      "General settings",
+      "Billing",
+      "Marketing",
+      "Reporting",
+      "Opportunities",
+      "Hierarchy",
+      "Contact",
+      "Applied Organisation",
+    ].forEach((tab) => {
+      expect(within(dialog).getByRole("tab", { name: tab })).toBeInTheDocument();
+    });
+
+    expect(within(dialog).getByRole("button", { name: "Overview" }))
+      .toBeInTheDocument();
+    expect(within(dialog).getByText("Account overview")).toBeInTheDocument();
+    expect(within(dialog).getByText("Account team")).toBeInTheDocument();
+    expect(within(dialog).getByText("Client team")).toBeInTheDocument();
+    expect(within(dialog).queryByRole("button", { name: "Account overview" }))
+      .not.toBeInTheDocument();
+    expect(within(dialog).queryByRole("button", { name: "Account team" }))
+      .not.toBeInTheDocument();
+    expect(within(dialog).queryByRole("button", { name: "Client team" }))
+      .not.toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Organization name (Admin)"),
+    ).toBeInTheDocument();
+    expect(within(dialog).getByText("Aetna Primary Aetna", { exact: false }))
+      .toBeInTheDocument();
+    expect(within(dialog).getByText("Chloe O’Malley", { exact: false }))
+      .toBeInTheDocument();
+    expect(within(dialog).getByText("CO")).toBeInTheDocument();
+    expect(within(dialog).getAllByText("AM")).toHaveLength(2);
+    expect(within(dialog).getByText("SA")).toBeInTheDocument();
+    expect(within(dialog).getAllByText("BC")).toHaveLength(2);
+    expect(within(dialog).getByText("JM")).toBeInTheDocument();
+
+    fireEvent.click(
+      within(dialog).getByRole("tab", { name: "Applied Organisation" }),
+    );
+    expect(within(dialog).getByRole("tab", { name: "Active (115)" }))
+      .toBeInTheDocument();
+    expect(within(dialog).getByRole("tab", { name: "Terminated (10)" }))
+      .toBeInTheDocument();
   });
 
   it("opens the detail modal from a template heading", () => {
@@ -514,6 +629,60 @@ describe("TemplateLayout", () => {
     );
 
     expect(onCreateTemplate).toHaveBeenCalledWith("organization");
+  });
+
+  it("opens and saves the organization create form", () => {
+    render(<TemplateLayout />);
+
+    fireEvent.click(screen.getByRole("tab", { name: "Organization" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Create Organization template" }),
+    );
+
+    const dialog = screen.getByRole("dialog", {
+      name: "Create Organisation template",
+    });
+    expect(within(dialog).getByLabelText("Template type")).toHaveValue(
+      "Organisation",
+    );
+    [
+      "General settings",
+      "Billing",
+      "Marketing",
+      "Reporting",
+      "Opportunities",
+      "Hierarchy",
+      "Contact",
+      "Applied Organisation",
+    ].forEach((tab) => {
+      expect(within(dialog).getByRole("tab", { name: tab })).toBeInTheDocument();
+    });
+    expect(within(dialog).getByRole("button", { name: "Overview" }))
+      .toBeInTheDocument();
+    expect(within(dialog).getByText("Account overview")).toBeInTheDocument();
+    expect(within(dialog).getByLabelText("Organization name (Admin)"))
+      .toHaveValue("");
+    expect(within(dialog).getByLabelText("Name (LCRM - CCM)")).toHaveValue("");
+    within(dialog)
+      .getAllByRole("button", { name: /^(Yes|No)$/ })
+      .forEach((option) => expect(option).toHaveAttribute("aria-pressed", "false"));
+    expect(within(dialog).getByRole("button", { name: "Save" })).toBeDisabled();
+
+    fireEvent.change(within(dialog).getByLabelText("Template name"), {
+      target: { value: "Medicaid Managed Care Template" },
+    });
+
+    expect(within(dialog).getByRole("button", { name: "Save" })).toBeEnabled();
+    fireEvent.click(within(dialog).getByRole("button", { name: "Save" }));
+
+    expect(
+      screen.queryByRole("dialog", {
+        name: "Create Organisation template",
+      }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Medicaid Managed Care Template" }),
+    ).toBeInTheDocument();
   });
 
   it("renders Group templates with the same date-only metadata as Organization", () => {

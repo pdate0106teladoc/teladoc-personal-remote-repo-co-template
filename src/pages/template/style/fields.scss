@@ -16,6 +16,7 @@
     gap: 8px;
     border: 0;
     background: none;
+    margin: 0;
     padding: 0;
     color: $primary-black;
     font-size: $font-size-xs;
@@ -149,33 +150,26 @@
     line-height: 18px;
   }
 
-  // Nested under `.edit-field-control` so these win over the compact control
-  // padding set above, which would otherwise run text under the badge.
-  .edit-field-control .person-control {
-    position: relative;
-    display: block;
-    min-width: 0;
+  .edit-field-control .person-readonly {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 
     .person-initial {
-      position: absolute;
-      top: 50%;
-      left: 6px;
-      z-index: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 18px;
-      height: 18px;
-      transform: translateY(-50%);
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background-color: $card-border;
       color: $primary-black;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: $font-weight-semi-bold;
     }
 
-    .custom-dropdown-wrapper #dropdown-basic-button {
-      padding-left: 30px;
+    .person-name {
+      color: $link-color;
     }
   }
 
@@ -255,6 +249,10 @@
 .template-readonly-form {
   padding-top: 16px;
 
+  .edit-section-content & {
+    padding-top: 0;
+  }
+
   .edit-section {
     margin-bottom: 12px;
     border-bottom: 0;
@@ -269,9 +267,5 @@
 
   .edit-section-content {
     padding-top: 10px;
-  }
-
-  .edit-field-label {
-    font-weight: $font-weight-regular;
   }
 }

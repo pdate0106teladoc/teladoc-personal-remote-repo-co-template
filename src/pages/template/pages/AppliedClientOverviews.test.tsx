@@ -54,6 +54,18 @@ describe("AppliedClientOverviews", () => {
     expect(screen.getByTestId("page-label")).toHaveTextContent("1 of 5");
   });
 
+  it("renders Applied Organisation rows with last updated on dates", () => {
+    render(<AppliedClientOverviews variant="organisation" />);
+
+    expect(
+      screen.getAllByText("541 - Blue Cross Blue Shield of NC").length,
+    ).toBeGreaterThan(0);
+    expect(screen.queryByText(/Contract number:/)).not.toBeInTheDocument();
+    expect(screen.getAllByText("25 groups").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Jan 1, 2025").length).toBeGreaterThan(0);
+    expect(screen.queryByText("Joe's Pizza")).not.toBeInTheDocument();
+  });
+
   it("switches to Terminated rows", () => {
     render(<AppliedClientOverviews />);
 

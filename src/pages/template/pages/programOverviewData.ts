@@ -1,3 +1,5 @@
+import { getInitials } from "@/utils";
+
 export interface ProgramOverviewSummary {
   id: string;
   name: string;
@@ -30,11 +32,10 @@ export const ALLIED_PROGRAM_OVERVIEWS: ProgramOverviewSummary[] = [
 const EMPTY_VALUE = "-";
 const PROGRAM_DATE = "2025-01-01T00:00:00Z";
 
-/** `DisplayRow` derives two-letter initials; the design shows a single letter. */
 const person = (name: string) => ({
   value: { displayName: name },
   format: "person" as const,
-  personMeta: { name, initials: name.charAt(0).toUpperCase() },
+  personMeta: { name, initials: getInitials(name) },
 });
 
 export const buildProgramOverviewFields = (

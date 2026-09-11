@@ -7,14 +7,22 @@ import { OpenIcon } from "@/assets";
 import { NO_OF_RECORDS_PER_PAGE_INDIVIDUAL } from "@/constants";
 import {
   ACTIVE_CLIENT_OVERVIEWS,
+  ACTIVE_ORGANISATIONS,
   AppliedClientOverviewRow,
   TERMINATED_CLIENT_OVERVIEWS,
+  TERMINATED_ORGANISATIONS,
 } from "./appliedClientOverviewData";
 import "@/pages/template/style/AppliedClientOverviews.scss";
 
+export type AppliedOverviewsVariant = "client-overview" | "organisation";
+
 type StatusTab = "active" | "terminated";
 
-const columns: TableColumn<AppliedClientOverviewRow>[] = [
+interface AppliedClientOverviewsProps {
+  variant?: AppliedOverviewsVariant;
+}
+
+const clientOverviewColumns: TableColumn<AppliedClientOverviewRow>[] = [
   {
     label: "Client Overview",
     field: "name",
@@ -56,18 +64,46 @@ const columns: TableColumn<AppliedClientOverviewRow>[] = [
   },
 ];
 
-const AppliedClientOverviews: React.FC = () => {
+const organisationColumns: TableColumn<AppliedClientOverviewRow>[] = [
+  {
+    label: "Organisation",
+    field: "name",
+    width: "46%",
+    render: (_value, row) => (
+      <span className="overview-name">{row.name}</span>
+    ),
+  },
+  clientOverviewColumns[1],
+  clientOverviewColumns[2],
+  {
+    label: "Last updated on",
+    field: "lastUpdatedOn",
+    width: "24%",
+  },
+];
+
+const AppliedClientOverviews: React.FC<AppliedClientOverviewsProps> = ({
+  variant = "client-overview",
+}) => {
   const [statusTab, setStatusTab] = useState<StatusTab>("active");
   const [page, setPage] = useState(0);
+  const isOrganisation = variant === "organisation";
 
-  const rows =
-    statusTab === "active" ? ACTIVE_CLIENT_OVERVIEWS : TERMINATED_CLIENT_OVERVIEWS;
+  const activeRows = isOrganisation
+    ? ACTIVE_ORGANISATIONS
+    : ACTIVE_CLIENT_OVERVIEWS;
+  const terminatedRows = isOrganisation
+    ? TERMINATED_ORGANISATIONS
+    : TERMINATED_CLIENT_OVERVIEWS;
+  const rows = statusTab === "active" ? activeRows : terminatedRows;
+  const columns = isOrganisation ? organisationColumns : clientOverviewColumns;
 
   const pageRows = useMemo(
     () =>
       rows.slice(
         page * NO_OF_RECORDS_PER_PAGE_INDIVIDUAL,
-        page * NO_OF_RECORDS_PER_PAGE_INDIVIDUAL + NO_OF_RECORDS_PER_PAGE_INDIVIDUAL,
+        page * NO_OF_RECORDS_PER_PAGE_INDIVIDUAL +
+          NO_OF_RECORDS_PER_PAGE_INDIVIDUAL,
       ),
     [page, rows],
   );
@@ -83,10 +119,10 @@ const AppliedClientOverviews: React.FC = () => {
         id="applied-overview-status-tabs"
         className="status-tabs"
       >
-        <Tab eventKey="active" title={`Active (${ACTIVE_CLIENT_OVERVIEWS.length})`} />
+        <Tab eventKey="active" title={`Active (${activeRows.length})`} />
         <Tab
           eventKey="terminated"
-          title={`Terminated (${TERMINATED_CLIENT_OVERVIEWS.length})`}
+          title={`Terminated (${terminatedRows.length})`}
         />
       </Tabs>
       <CustomTable
