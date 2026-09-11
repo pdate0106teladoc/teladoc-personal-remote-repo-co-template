@@ -18,11 +18,11 @@ import type {
   ProgramOverviewFieldSection,
   ProgramOverviewSummary,
 } from "./programOverviewData";
-import { buildProgramOverviewContext } from "./programOverviewForm";
-import type {
-  ProgramOverviewEditField,
-  ProgramOverviewEditForm,
-} from "./programOverviewForm";
+import {
+  buildProgramOverviewContext,
+  type ProgramOverviewEditField,
+  type ProgramOverviewEditForm,
+} from "./form";
 import "@/pages/template/style/EditProgramOverviewDetail.scss";
 import "@/pages/template/style/ProgramOverviewDetail.scss";
 

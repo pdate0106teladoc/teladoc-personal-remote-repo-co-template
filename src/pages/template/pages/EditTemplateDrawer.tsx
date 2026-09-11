@@ -12,34 +12,24 @@ import ProgramOverviewDetail from "./ProgramOverviewDetail";
 import ProgramOverviews from "./ProgramOverviews";
 import {
   buildClientOverviewTemplateForm,
+  buildGroupTemplateForm,
+  buildOrganizationTemplateForm,
+  buildProgramOverviewEditForm,
   isClientOverviewTemplateFormComplete,
-} from "./clientOverviewForm";
+  isGroupTemplateFormComplete,
+  isOrganizationTemplateFormComplete,
+} from "./form";
 import type {
   ClientOverviewTemplateField,
   ClientOverviewTemplateForm,
-} from "./clientOverviewForm";
-import {
-  buildGroupTemplateForm,
-  isGroupTemplateFormComplete,
-} from "./groupForm";
-import type { GroupTemplateField, GroupTemplateForm } from "./groupForm";
-import {
-  buildOrganizationTemplateForm,
-  isOrganizationTemplateFormComplete,
-} from "./organizationForm";
-import type {
+  GroupTemplateField,
+  GroupTemplateForm,
   OrganizationTemplateField,
   OrganizationTemplateForm,
-} from "./organizationForm";
-import {
-  ALLIED_PROGRAM_OVERVIEWS,
-  type ProgramOverviewSummary,
-} from "./programOverviewData";
-import {
-  buildProgramOverviewEditForm,
-  type ProgramOverviewEditField,
-  type ProgramOverviewEditForm,
-} from "./programOverviewForm";
+  ProgramOverviewEditField,
+  ProgramOverviewEditForm,
+} from "./form";
+import { ALLIED_PROGRAM_OVERVIEWS, type ProgramOverviewSummary } from "./programOverviewData";
 import type { TemplateScope, TemplateSummary } from "./templateTypes";
 import "@/pages/template/style/EditClientOverviewTemplateDrawer.scss";
 

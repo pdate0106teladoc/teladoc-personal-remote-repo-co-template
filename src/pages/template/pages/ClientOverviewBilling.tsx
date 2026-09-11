@@ -11,7 +11,7 @@ import {
 import type {
   ClientOverviewTemplateField,
   ClientOverviewTemplateForm,
-} from "./clientOverviewForm";
+} from "./form";
 
 interface ClientOverviewBillingEditProps {
   form: ClientOverviewTemplateForm;

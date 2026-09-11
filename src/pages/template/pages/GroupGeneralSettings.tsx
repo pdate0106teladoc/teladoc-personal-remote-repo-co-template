@@ -7,7 +7,7 @@ import {
   SelectField,
   TextField,
 } from "./fields";
-import type { GroupTemplateField, GroupTemplateForm } from "./groupForm";
+import type { GroupTemplateField, GroupTemplateForm } from "./form";
 
 interface GroupGeneralSettingsEditProps {
   form: GroupTemplateForm;

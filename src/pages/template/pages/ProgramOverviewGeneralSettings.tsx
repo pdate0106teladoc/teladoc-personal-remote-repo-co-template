@@ -12,7 +12,7 @@ import type {
   ProgramOverviewContext,
   ProgramOverviewEditField,
   ProgramOverviewEditForm,
-} from "./programOverviewForm";
+} from "./form";
 
 interface ProgramOverviewGeneralSettingsProps {
   form: ProgramOverviewEditForm;

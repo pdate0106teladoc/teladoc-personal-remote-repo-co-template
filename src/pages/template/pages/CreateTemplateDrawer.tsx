@@ -10,25 +10,20 @@ import GroupGeneralSettings from "./GroupGeneralSettings";
 import OrganizationGeneralSettings from "./OrganizationGeneralSettings";
 import {
   buildNewClientOverviewTemplateForm,
+  buildNewGroupTemplateForm,
+  buildNewOrganizationTemplateForm,
+  isGroupTemplateFormComplete,
   isNewClientOverviewTemplateFormComplete,
-} from "./clientOverviewForm";
+  isOrganizationTemplateFormComplete,
+} from "./form";
 import type {
   ClientOverviewTemplateField,
   ClientOverviewTemplateForm,
-} from "./clientOverviewForm";
-import {
-  buildNewGroupTemplateForm,
-  isGroupTemplateFormComplete,
-} from "./groupForm";
-import type { GroupTemplateField, GroupTemplateForm } from "./groupForm";
-import {
-  buildNewOrganizationTemplateForm,
-  isOrganizationTemplateFormComplete,
-} from "./organizationForm";
-import type {
+  GroupTemplateField,
+  GroupTemplateForm,
   OrganizationTemplateField,
   OrganizationTemplateForm,
-} from "./organizationForm";
+} from "./form";
 import type { TemplateScope } from "./templateTypes";
 import "@/pages/template/style/EditClientOverviewTemplateDrawer.scss";
 import "@/pages/template/style/CreateClientOverviewTemplateDrawer.scss";

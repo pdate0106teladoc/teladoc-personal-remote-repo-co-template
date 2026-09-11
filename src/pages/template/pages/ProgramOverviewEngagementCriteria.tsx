@@ -3,7 +3,7 @@ import { EditSection, SelectField, TextField } from "./fields";
 import type {
   ProgramOverviewEditField,
   ProgramOverviewEditForm,
-} from "./programOverviewForm";
+} from "./form";
 
 interface ProgramOverviewEngagementCriteriaProps {
   form: ProgramOverviewEditForm;

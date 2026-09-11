@@ -12,7 +12,7 @@ import {
 import type {
   OrganizationTemplateField,
   OrganizationTemplateForm,
-} from "./organizationForm";
+} from "./form";
 
 interface OrganizationGeneralSettingsEditProps {
   form: OrganizationTemplateForm;

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import ProgramOverviewDetail from "./ProgramOverviewDetail";
-import { buildProgramOverviewEditForm } from "./programOverviewForm";
+import { buildProgramOverviewEditForm } from "./form";
 import type { ProgramOverviewSummary } from "@/pages/template/pages";
 
 vi.mock("@ucc/common-ui", () => ({

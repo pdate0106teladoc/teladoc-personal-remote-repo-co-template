@@ -3,7 +3,7 @@ import { EditSection, RadioField, SelectField, TextField } from "./fields";
 import type {
   ProgramOverviewEditField,
   ProgramOverviewEditForm,
-} from "./programOverviewForm";
+} from "./form";
 
 interface ProgramOverviewEligibilityProps {
   form: ProgramOverviewEditForm;

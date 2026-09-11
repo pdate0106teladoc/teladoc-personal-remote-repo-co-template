@@ -9,7 +9,7 @@ import {
 import type {
   ProgramOverviewEditField,
   ProgramOverviewEditForm,
-} from "./programOverviewForm";
+} from "./form";
 
 interface ProgramOverviewBillingProps {
   form: ProgramOverviewEditForm;

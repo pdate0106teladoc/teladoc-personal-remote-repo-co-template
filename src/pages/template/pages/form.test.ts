@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildClientOverviewTemplateForm,
   isClientOverviewTemplateFormComplete,
-} from "./clientOverviewForm";
+} from "./form";
 
 describe("isClientOverviewTemplateFormComplete", () => {
   it("is incomplete until every string field has a value", () => {
